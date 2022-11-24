@@ -96,7 +96,7 @@ public class LogInVentana {
 				if(Pattern.matches(erNombreUsu, nombreUsu) && Pattern.matches(erContrasenia, contrasenia)) {
 					//JOptionPane.showMessageDialog(null, "Bienvenido!");
 					//Comprobamos que el usuario esté registrado
-					//Da error, lo arreglo luego
+					//Da error, lo arreglo luego.
 					Usuario u = BD.obtenerDatosUsuario(con, nombreUsu);
 					if(u!=null) {
 						if(u.getPassword().equals(contrasenia))
