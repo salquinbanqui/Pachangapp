@@ -22,6 +22,7 @@ public class LogInVentana {
 	private JTextField textFieldNombreUsu;
 	private JPasswordField textFieldPass;
 	private BD triviaDB;
+	private String preueba;
 
 	/**
 	 * Launch the application.
