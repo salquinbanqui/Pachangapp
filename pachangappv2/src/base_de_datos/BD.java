@@ -11,7 +11,7 @@ import dominio.Usuario;
 public class BD {
 	
 	public static void main(String[] args) throws ClassNotFoundException {
-
+// rec
 		// Carga el sqlite-JDBC driver usando el cargador de clases
 		Class.forName("...");
 		//Class.forName("org.sqlite.JDBC");

@@ -3,41 +3,19 @@ package GUI;
 import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.JMenuBar;
 import javax.swing.JButton;
-import javax.swing.JMenu;
-import javax.swing.JMenuItem;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.GridBagLayout;
-import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.layout.RowSpec;
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
 import java.awt.CardLayout;
-import javax.swing.JTable;
-import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JScrollPane;
-import javax.swing.JTextField;
 import javax.swing.JLabel;
 import java.awt.Component;
-import javax.swing.JPopupMenu;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.sql.Connection;
 import java.awt.FlowLayout;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.ComponentOrientation;
 import javax.swing.UIManager;
-import javax.swing.table.DefaultTableModel;
-
-import java.awt.Rectangle;
+import java.awt.Insets;
 
 public class TriviaVentana {
 
@@ -86,12 +64,11 @@ public class TriviaVentana {
 		frmTriviafut.setTitle("TriviaFut");
 		frmTriviafut.setBounds(100, 100, 400, 600);
 		frmTriviafut.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frmTriviafut.getContentPane().setLayout(null);
 		frmTriviafut.setResizable(false);
+		frmTriviafut.getContentPane().setLayout(new BorderLayout(0, 0));
 		
 		JPanel panelGeneral = new JPanel();
-		panelGeneral.setBounds(0, 21, 384, 491);
-		frmTriviafut.getContentPane().add(panelGeneral);
+		frmTriviafut.getContentPane().add(panelGeneral, BorderLayout.CENTER);
 		panelGeneral.setLayout(new CardLayout(0, 0));
 		
 		JPanel panelTrivia = new JPanel();
@@ -115,8 +92,7 @@ public class TriviaVentana {
 		panelAjustes.add(lblNewLabel);
 		
 		JPanel panelTop = new JPanel();
-		panelTop.setBounds(2, 0, 382, 21);
-		frmTriviafut.getContentPane().add(panelTop);
+		frmTriviafut.getContentPane().add(panelTop, BorderLayout.NORTH);
 		panelTop.setLayout(new BorderLayout(0, 0));
 		
 		JLabel labelDinero = new JLabel("520💰");
@@ -129,42 +105,28 @@ public class TriviaVentana {
 		panelTop.add(labelNombre, BorderLayout.WEST);
 		
 		JPanel panelBot = new JPanel();
-		panelBot.setBounds(0, 512, 384, 50);
-		frmTriviafut.getContentPane().add(panelBot);
-		panelBot.setLayout(null);
-		
-		JPanel panelBotTrivia = new JPanel();
-		panelBotTrivia.setBounds(0, 0, 96, 50);
-		panelBot.add(panelBotTrivia);
-		panelBotTrivia.setLayout(new CardLayout(0, 0));
+		frmTriviafut.getContentPane().add(panelBot, BorderLayout.SOUTH);
 		
 		JButton btnTrivia = new JButton("Trivia");
-		panelBotTrivia.add(btnTrivia);
-		
-		JPanel panelBotCartas = new JPanel();
-		panelBotCartas.setBounds(96, 0, 96, 50);
-		panelBot.add(panelBotCartas);
-		panelBotCartas.setLayout(new CardLayout(0, 0));
+		btnTrivia.setMargin(new Insets(2, 22, 2, 22));
+		btnTrivia.setAlignmentX(Component.RIGHT_ALIGNMENT);
 		
 		JButton btnCartas = new JButton("Cartas");
-		panelBotCartas.add(btnCartas);
-		
-		JPanel panelBotTienda = new JPanel();
-		panelBotTienda.setBounds(192, 0, 96, 50);
-		panelBot.add(panelBotTienda);
-		panelBotTienda.setLayout(new CardLayout(0, 0));
+		btnCartas.setMargin(new Insets(2, 22, 2, 22));
 		
 		JButton btnTienda = new JButton("Tienda");
-		panelBotTienda.add(btnTienda);
+		btnTienda.setMargin(new Insets(2, 22, 2, 22));
 		
-		JPanel panelBotEquipo = new JPanel();
-		panelBotEquipo.setBounds(288, 0, 96, 50);
-		panelBot.add(panelBotEquipo);
-		panelBotEquipo.setLayout(new CardLayout(0, 0));
+		JButton btnEquipo = new JButton("Equipo");
+		btnEquipo.setMargin(new Insets(2, 22, 2, 22));
+		panelBot.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		panelBot.add(btnTrivia);
+		panelBot.add(btnCartas);
+		panelBot.add(btnTienda);
+		panelBot.add(btnEquipo);
 		
-		JButton btnAjustes = new JButton("Equipo");
-		panelBotEquipo.add(btnAjustes);
-		btnAjustes.addActionListener(new ActionListener() {
+		
+		btnEquipo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//borra el antiguo panel
 				panelGeneral.removeAll();
