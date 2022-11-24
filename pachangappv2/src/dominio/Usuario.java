@@ -9,7 +9,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-
+//comentario inofensivos
 public class Usuario implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private String nick;
