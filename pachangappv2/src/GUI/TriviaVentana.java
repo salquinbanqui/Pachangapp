@@ -3,44 +3,18 @@ package GUI;
 import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.JMenuBar;
 import javax.swing.JButton;
-import javax.swing.JMenu;
-import javax.swing.JMenuItem;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.GridBagLayout;
-import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.layout.RowSpec;
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
 import java.awt.CardLayout;
-import javax.swing.JTable;
-import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JScrollPane;
-import javax.swing.JTextField;
 import javax.swing.JLabel;
 import java.awt.Component;
-import javax.swing.JPopupMenu;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.sql.Connection;
 import java.awt.FlowLayout;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.ComponentOrientation;
 import javax.swing.UIManager;
-import javax.swing.table.DefaultTableModel;
-
-import java.awt.Rectangle;
-import javax.swing.JTextPane;
-import javax.swing.BoxLayout;
-import javax.swing.SpringLayout;
 import java.awt.Insets;
 
 public class TriviaVentana {
@@ -96,9 +70,6 @@ public class TriviaVentana {
 		JPanel panelGeneral = new JPanel();
 		frmTriviafut.getContentPane().add(panelGeneral, BorderLayout.CENTER);
 		panelGeneral.setLayout(new CardLayout(0, 0));
-		
-		JTextPane textPane = new JTextPane();
-		panelGeneral.add(textPane, "name_538759042669600");
 		
 		JPanel panelTrivia = new JPanel();
 		panelTrivia.setBackground(UIManager.getColor("Button.darkShadow"));
