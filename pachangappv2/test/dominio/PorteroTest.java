@@ -13,11 +13,12 @@ public class PorteroTest {
 	private Portero por;               
 	private String nombre = "Casillas";
 	private int puntos = 321;          
-	private int coste = 123;           
+	private int coste = 123;   
+	private String rutaFoto = "";
 	
 	@Before
 	public void setUp() throws Exception {
-		por = new Portero(nombre, puntos, coste);
+		por = new Portero(nombre, puntos, coste, rutaFoto);
 	}
 
 	@After

@@ -3,6 +3,7 @@ package GUI;
 import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -84,12 +85,12 @@ public class TriviaVentana {
 		JScrollPane panelTiendaScroll = new JScrollPane();
 		panelGeneral.add(panelTiendaScroll);
 		
-		JPanel panelAjustes = new JPanel();
-		panelAjustes.setBackground(UIManager.getColor("Button.darkShadow"));
-		panelGeneral.add(panelAjustes);
+		JPanel panelEquipo = new JPanel();
+		panelEquipo.setBackground(UIManager.getColor("Button.darkShadow"));
+		panelGeneral.add(panelEquipo);
 		
-		JLabel lblNewLabel = new JLabel("Equipo");
-		panelAjustes.add(lblNewLabel);
+		JLabel lblEquipo = new JLabel(new ImageIcon("C:\\Users\\aitor\\git\\Pachangapp\\pachangappv2\\imagenes\\neuer.gif"));
+		panelEquipo.add(lblEquipo);
 		
 		JPanel panelTop = new JPanel();
 		frmTriviafut.getContentPane().add(panelTop, BorderLayout.NORTH);
@@ -133,7 +134,7 @@ public class TriviaVentana {
 				panelGeneral.repaint();
 				panelGeneral.revalidate();
 				//pone el nuevo panel
-				panelGeneral.add(panelAjustes);
+				panelGeneral.add(panelEquipo);
 				panelGeneral.repaint();
 				panelGeneral.revalidate();
 				

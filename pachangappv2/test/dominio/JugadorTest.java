@@ -13,11 +13,12 @@ public class JugadorTest {
 		private String nombre = "Mbappe";
 		private int puntos = 321;
 		private int coste = 123;
+		private String rutaFoto = "";
 		
 	@Before
 	public void setUp() throws Exception {
 		
-		jug = new Jugador(nombre, puntos, coste);
+		jug = new Jugador(nombre, puntos, coste, rutaFoto);
 	}
 
 	@Test
