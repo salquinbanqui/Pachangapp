@@ -89,7 +89,9 @@ public class TriviaVentana {
 		panelEquipo.setBackground(UIManager.getColor("Button.darkShadow"));
 		panelGeneral.add(panelEquipo);
 		
-		JLabel lblEquipo = new JLabel(new ImageIcon("C:\\Users\\aitor\\git\\Pachangapp\\pachangappv2\\imagenes\\neuer.gif"));
+		//usar el local path para la foto, en vez del full path, ya mirare como hacerlo
+		//JLabel lblEquipo = new JLabel(new ImageIcon("C:\\Users\\aitor\\git\\Pachangapp\\pachangappv2\\imagenes\\neuer.gif"));
+		JLabel lblEquipo = new JLabel("");
 		panelEquipo.add(lblEquipo);
 		
 		JPanel panelTop = new JPanel();
