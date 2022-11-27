@@ -11,17 +11,17 @@ import dominioConHerencia.Jugador;
 
 public class CartaTest {
 	
-	private Jugador jug;
+	private Jugador car;
 	private String nombre = "Mbappe";
 	private int puntos = 321;
 	private int coste = 123;
-	private String rutaFoto = "";
+	private String rutaFoto = "imagenes/messi.gif";
 	
 
 
 	@Before
 	public void setUp() throws Exception {
-		jug = new Jugador(nombre, puntos, coste, rutaFoto);
+		car = new Jugador(nombre, puntos, coste, rutaFoto);
 	}
 
 	@After
@@ -31,35 +31,45 @@ public class CartaTest {
 	@Test
 	public void testGetNombre() {
 		
-		assertEquals(jug.getNombre(), "Mbappe");
+		assertEquals(car.getNombre(), "Mbappe");
 	}
 
 	@Test
 	public void testSetNombre() {
-		jug.setNombre("Benzema");
-		assertEquals(jug.getNombre(), "Benzema");
+		car.setNombre("Benzema");
+		assertEquals(car.getNombre(), "Benzema");
 	}
 
 	@Test
 	public void testGetPuntos() {
-		assertEquals(jug.getPuntos(), 321);
+		assertEquals(car.getPuntos(), 321);
 	}
 
 	@Test
 	public void testSetPuntos() {
-		jug.setPuntos(678);
-		assertEquals(jug.getPuntos(), 678);
+		car.setPuntos(678);
+		assertEquals(car.getPuntos(), 678);
 	}
 
 	@Test
 	public void testGetCoste() {
-		assertEquals(jug.getCoste(), 123);
+		assertEquals(car.getCoste(), 123);
 	}
 
 	@Test
 	public void testSetCoste() {
-		jug.setCoste(999);
-		assertEquals(jug.getCoste(), 999);
+		car.setCoste(999);
+		assertEquals(car.getCoste(), 999);
+	}
+	
+	@Test
+	public void testGetRutaFoto() {
+		assertEquals(car.getRutaFoto(), "imagenes/messi.gif");
+	}
+
+	@Test
+	public void testSetRutaFoto() {
+		car.setRutaFoto("imagenes/lewan.gif");
 	}
 
 }

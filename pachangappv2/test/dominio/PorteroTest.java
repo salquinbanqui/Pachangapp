@@ -57,5 +57,14 @@ public class PorteroTest {
 		por.setCoste(999);
 		assertEquals(por.getCoste(), 999);
 	}
+	
+	@Test
+	public void testGetRutaFoto() {
+		assertEquals(por.getRutaFoto(), "imagenes/messi.gif");
+	}
 
+	@Test
+	public void testSetRutaFoto() {
+		por.setRutaFoto("imagenes/lewan.gif");
+	}
 }

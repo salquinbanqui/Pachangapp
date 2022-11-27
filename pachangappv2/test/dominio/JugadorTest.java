@@ -54,5 +54,15 @@ public class JugadorTest {
 		jug.setCoste(999);
 		assertEquals(jug.getCoste(), 999);
 	}
+	
+	@Test
+	public void testGetRutaFoto() {
+		assertEquals(jug.getRutaFoto(), "imagenes/messi.gif");
+	}
+
+	@Test
+	public void testSetRutaFoto() {
+		jug.setRutaFoto("imagenes/lewan.gif");
+	}
 
 }
