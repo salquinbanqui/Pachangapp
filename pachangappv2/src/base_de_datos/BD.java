@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import dominio.Usuario;
+import dominioConHerencia.Jugador;
+import dominioConHerencia.Portero;
 
 public class BD {
 	
@@ -25,6 +27,14 @@ public class BD {
 
 			statement.executeUpdate("drop table if exists person");
 			statement.executeUpdate("create table person (id integer, name string)");
+			
+			
+			
+			//statement.executeUpdate("create table person (nick string, password string, nombre string, apellidos string, telefono string, fechaUltimoLogin string)");
+			////creo que así estaría mejor
+			
+			
+			
 			int res = statement.executeUpdate("insert into person values(1, 'leo')");
 			System.out.println( res );
 			res = statement.executeUpdate("insert into person values(2, 'yui')");
@@ -76,6 +86,11 @@ public class BD {
 		}
 	}
 	
+	
+	
+	////PARTE DE LEER INFO DE USUARIO
+	
+	
 	public static void crearTablaUsuario(Connection con) {
 		String sql = "CREATE TABLE IF NOT EXISTS Usuario (nick String, pass String, nombre String, apellido String, tlf String, fechaUltimoLogin String)";
 		try {
@@ -121,8 +136,108 @@ public class BD {
 		}
 		return u;
 	}
-	//// PARTE DE LEER INFO DE USUARIO
 	
+	
+	
+	//PARTE DE LEER INFO DE JUGADOR
+	
+
+	public static void crearTablaJugador(Connection con) {
+		String sql = "CREATE TABLE IF NOT EXISTS Jugador (nombre String, puntos String, coste String, rutaFoto String)";
+		try {
+			Statement st = con.createStatement();
+			st.executeUpdate(sql);
+			st.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public static void insertarJugador(Connection con, String nombre, String puntos, String coste, String rutaFoto) {
+		String sql = "INSERT INTO Usuario VALUES('"+nombre+"','"+puntos+"','"+coste+"','"+rutaFoto+"')";
+		try {
+			Statement st = con.createStatement();
+			st.executeUpdate(sql);
+			st.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public static Jugador obtenerDatosJugador(Connection con, String nombre) {
+		String sql = "SELECT * FROM Jugador WHERE nombre='"+nombre+"'";
+		Jugador j = null;
+		try {
+			Statement st = con.createStatement();
+			ResultSet rs = st.executeQuery(sql);
+			if(rs.next()) {
+				
+					
+				String n = rs.getString("nombre");
+				int p = Integer.parseInt(rs.getString("puntos"));
+				int c = Integer.parseInt(rs.getString("coste"));
+				String r = rs.getString("rutaFoto");
+			j = new Jugador(n, p, c, r);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return j;
+	}
+	
+	
+	
+	//PARTE DE LEER INFO DE PORTERO
+	
+	
+	public static void crearTablaPortero(Connection con) {
+		String sql = "CREATE TABLE IF NOT EXISTS Portero (nombre String, puntos String, coste String, rutaFoto String)";
+		try {
+			Statement st = con.createStatement();
+			st.executeUpdate(sql);
+			st.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public static void insertarPortero(Connection con, String nombre, String puntos, String coste, String rutaFoto) {
+		String sql = "INSERT INTO Usuario VALUES('"+nombre+"','"+puntos+"','"+coste+"','"+rutaFoto+"')";
+		try {
+			Statement st = con.createStatement();
+			st.executeUpdate(sql);
+			st.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public static Portero obtenerDatosPortero(Connection con, String nombre) {
+		String sql = "SELECT * FROM Jugador WHERE nombre='"+nombre+"'";
+		Portero p = null;
+		try {
+			Statement st = con.createStatement();
+			ResultSet rs = st.executeQuery(sql);
+			if(rs.next()) {
+				
+					
+				String n = rs.getString("nombre");
+				int pts = Integer.parseInt(rs.getString("puntos"));
+				int c = Integer.parseInt(rs.getString("coste"));
+				String r = rs.getString("rutaFoto");
+			p = new Portero(n, pts, c, r);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return p;
+	}
 
 
 }
