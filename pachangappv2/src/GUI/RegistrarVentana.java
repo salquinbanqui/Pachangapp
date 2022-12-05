@@ -117,7 +117,7 @@ public class RegistrarVentana {
 		
 		JLabel lblNewLabel = new JLabel("Registrar");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 18));
-		lblNewLabel.setBounds(150, 10, 100, 20);
+		lblNewLabel.setBounds(40, 10, 100, 20);
 		frame.getContentPane().add(lblNewLabel);
 		
 		JButton btnRegistrar = new JButton("Registrar");
@@ -127,14 +127,14 @@ public class RegistrarVentana {
 			public void actionPerformed(ActionEvent e) {
 				String erContrasenia = "[a-zA-Z0-9?¿!¡]{4,15}";	//expresion regular para la contraseña, entre 4 y 15 letras (mayusculas o minusculas) o numeros o ?¿!¡
 				//Ejemplos de contraseña válida: 000!!¿00, 0¿a0a0, A1??b3fq2T, abHc¿djp, po1s¡duebcisd5...
-				String erNombreUsu = "[a-zA-Z]";				//expresion regular para el nombre de usuario
+				String erNombreUsu = "[a-zA-Z]{1,15}";				//expresion regular para el nombre de usuario
 				String erTelefono = "[0-9]";
 				
-				String nick = lblNick.getText();
-				String contra = lblContra.getText();
-				String nombre = lblNombre.getText();
-				String apellido = lblApellido.getText();
-				String telefono = lblTelefono.getText();
+				String nick = textNick.getText();
+				String contra = textContra.getText();
+				String nombre = textNombre.getText();
+				String apellido = textApellido.getText();
+				String telefono = textTelefono.getText();
 				Date fecha = new Date();
 				String fechaActual = new SimpleDateFormat("dd-MM-yyyy").format(fecha);
 								
@@ -173,5 +173,17 @@ public class RegistrarVentana {
 		});
 		btnIniciarSesion.setBounds(65, 230, 120, 25);
 		frame.getContentPane().add(btnIniciarSesion);
+		
+		JLabel lblInfoNick = new JLabel("Solo debe contener letras");
+		lblInfoNick.setBounds(200, 26, 200, 14);
+		frame.getContentPane().add(lblInfoNick);
+		
+		JLabel lblInfoContra = new JLabel("Debe contener entre 4 y 15 caracteres");
+		lblInfoContra.setBounds(200, 66, 200, 14);
+		frame.getContentPane().add(lblInfoContra);
+		
+		JLabel lblInfoTelefono = new JLabel("Solo debe contener números");
+		lblInfoTelefono.setBounds(200, 186, 200, 14);
+		frame.getContentPane().add(lblInfoTelefono);
 	}
 }

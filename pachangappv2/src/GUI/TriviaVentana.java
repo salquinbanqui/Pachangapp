@@ -12,6 +12,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JLabel;
 import java.awt.Component;
 import java.awt.FlowLayout;
+import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.ComponentOrientation;
@@ -87,19 +89,61 @@ public class TriviaVentana {
 		
 		JPanel panelEquipo = new JPanel();
 		panelEquipo.setPreferredSize(new Dimension(10, 50));
-		panelEquipo.setBackground(UIManager.getColor("Button.darkShadow"));
+		//panelEquipo.setBackground(UIManager.getColor("Button.darkShadow"));
 		panelGeneral.add(panelEquipo);
-		panelEquipo.setLayout(new BorderLayout(0, 0));
+		panelEquipo.setLayout(new BorderLayout());
 		
-		//USAR EL LOCAL PATH PARA LA FOTO EN VEZ DEL FULL PATH
-		JLabel lblEquipo = new JLabel(new ImageIcon("C:\\Users\\aitor\\git\\Pachangapp\\pachangappv2\\imagenes\\lewan.gif"));
+		JPanel pCentroEquipo = new JPanel(new GridLayout(3, 3));
+
+		JLabel lblEquipo = new JLabel();
+		lblEquipo.setSize(102, 164);
+		ImageIcon im = new ImageIcon("imagenes\\lewan.gif");
+		ImageIcon imcd = new ImageIcon(im.getImage().getScaledInstance(lblEquipo.getWidth(), lblEquipo.getHeight(), Image.SCALE_DEFAULT));
+		lblEquipo.setIcon(imcd);
+		
+		JLabel lblEquipo2 = new JLabel();
+		lblEquipo2.setSize(102, 164);
+		ImageIcon im2 = new ImageIcon("imagenes\\messi.gif");
+		ImageIcon imcd2 = new ImageIcon(im2.getImage().getScaledInstance(lblEquipo2.getWidth(), lblEquipo2.getHeight(), Image.SCALE_DEFAULT));
+		lblEquipo2.setIcon(imcd2);
+		
+		JLabel lblEquipo3 = new JLabel();
+		lblEquipo3.setSize(102, 164);
+		ImageIcon im3 = new ImageIcon("imagenes\\neuer.gif");
+		ImageIcon imcd3 = new ImageIcon(im3.getImage().getScaledInstance(lblEquipo3.getWidth(), lblEquipo3.getHeight(), Image.SCALE_DEFAULT));
+		lblEquipo3.setIcon(imcd3);
+		
+		JLabel lblEquipo4 = new JLabel();
+		lblEquipo4.setSize(102, 164);
+		ImageIcon im4 = new ImageIcon("imagenes\\ronaldo.gif");
+		ImageIcon imcd4= new ImageIcon(im4.getImage().getScaledInstance(lblEquipo4.getWidth(), lblEquipo4.getHeight(), Image.SCALE_DEFAULT));
+		lblEquipo4.setIcon(imcd4);
+		
+		JLabel lblEquipo5 = new JLabel();
+		lblEquipo5.setSize(102, 164);
+		ImageIcon im5 = new ImageIcon("imagenes\\neuer.gif");
+		ImageIcon imcd5 = new ImageIcon(im5.getImage().getScaledInstance(lblEquipo5.getWidth(), lblEquipo5.getHeight(), Image.SCALE_DEFAULT));
+		lblEquipo5.setIcon(imcd5);
+		
+		//JLabel lblEquipo = new JLabel(new ImageIcon("imagenes\\lewan.gif"));
 		//JLabel lblEquipo = new JLabel("");
-		panelEquipo.add(lblEquipo);
+		pCentroEquipo.add(lblEquipo);
+		pCentroEquipo.add(new JPanel());
+		
+		pCentroEquipo.add(lblEquipo2);
+		pCentroEquipo.add(lblEquipo3);
+		pCentroEquipo.add(new JPanel());
+		pCentroEquipo.add(lblEquipo4);
+		pCentroEquipo.add(new JPanel());
+		pCentroEquipo.add(lblEquipo5);
+		
+		pCentroEquipo.add(new JPanel());
+		
 		
 		JPanel panelEquipoTop = new JPanel();
 		panelEquipoTop.setPreferredSize(new Dimension(10, 50));
 		panelEquipo.add(panelEquipoTop, BorderLayout.SOUTH);
-		
+		panelEquipo.add(pCentroEquipo, BorderLayout.CENTER);
 		JButton btnEquipoCargar = new JButton("Cargar Equipo");
 		btnEquipoCargar.setPreferredSize(new Dimension(160, 40));
 		panelEquipoTop.add(btnEquipoCargar);
