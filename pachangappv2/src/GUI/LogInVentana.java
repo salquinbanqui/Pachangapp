@@ -82,11 +82,21 @@ public class LogInVentana {
 		textFieldPass.setColumns(10);
 		
 		JButton btnRegistrar = new JButton("Registrar");
+		btnRegistrar.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				//ir a la ventana registrar
+				
+			}
+		});
 		btnRegistrar.setBounds(66, 195, 130, 30);
 		frame.getContentPane().add(btnRegistrar);
 		
 		JButton btnIniciarSes = new JButton("Iniciar sesion");
 		btnIniciarSes.addActionListener(new ActionListener() {
+			
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				String erContrasenia = "[a-zA-Z0-9?¿!¡]{4,15}";	//expresion regular para la contraseña, entre 4 y 15 letras (mayusculas o minusculas) o numeros o ?¿!¡
 				//Ejemplos de contraseña válida: 000!!¿00, 0¿a0a0, A1??b3fq2T, abHc¿djp, po1s¡duebcisd5...
@@ -105,7 +115,7 @@ public class LogInVentana {
 						else
 							JOptionPane.showMessageDialog(null, "La contraseña no es correcta", "ERROR", JOptionPane.ERROR_MESSAGE);
 					}else
-						JOptionPane.showMessageDialog(null, "No existe un registro asociado a ese DNI", "ERROR", JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(null, "El nombre de usuario no es correcto", "ERROR", JOptionPane.ERROR_MESSAGE);
 				}else {
 					JOptionPane.showMessageDialog(null, "Los datos no cumplen los requisitos", "ERROR", JOptionPane.ERROR_MESSAGE);
 				}
