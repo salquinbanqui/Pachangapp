@@ -20,7 +20,7 @@ public class Usuario implements Serializable {
 	private Date fechaUltimoLogin; //Formato: yyyy-MM-dd
 	private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 	private ArrayList<String> listaEmails;
-// hola
+
 	public String getNick() {
 		return nick;
 	}
