@@ -86,13 +86,27 @@ public class TriviaVentana {
 		panelGeneral.add(panelTiendaScroll);
 		
 		JPanel panelEquipo = new JPanel();
+		panelEquipo.setPreferredSize(new Dimension(10, 50));
 		panelEquipo.setBackground(UIManager.getColor("Button.darkShadow"));
 		panelGeneral.add(panelEquipo);
+		panelEquipo.setLayout(new BorderLayout(0, 0));
 		
-		//usar el local path para la foto, en vez del full path, ya mirare como hacerlo
-		//JLabel lblEquipo = new JLabel(new ImageIcon("C:\\Users\\aitor\\git\\Pachangapp\\pachangappv2\\imagenes\\neuer.gif"));
-		JLabel lblEquipo = new JLabel("");
+		//USAR EL LOCAL PATH PARA LA FOTO EN VEZ DEL FULL PATH
+		JLabel lblEquipo = new JLabel(new ImageIcon("C:\\Users\\aitor\\git\\Pachangapp\\pachangappv2\\imagenes\\lewan.gif"));
+		//JLabel lblEquipo = new JLabel("");
 		panelEquipo.add(lblEquipo);
+		
+		JPanel panelEquipoTop = new JPanel();
+		panelEquipoTop.setPreferredSize(new Dimension(10, 50));
+		panelEquipo.add(panelEquipoTop, BorderLayout.SOUTH);
+		
+		JButton btnEquipoCargar = new JButton("Cargar Equipo");
+		btnEquipoCargar.setPreferredSize(new Dimension(160, 40));
+		panelEquipoTop.add(btnEquipoCargar);
+		
+		JButton btnEquipoGuardar = new JButton("Guardar equipo");
+		btnEquipoGuardar.setPreferredSize(new Dimension(160, 40));
+		panelEquipoTop.add(btnEquipoGuardar);
 		
 		JPanel panelTop = new JPanel();
 		frmTriviafut.getContentPane().add(panelTop, BorderLayout.NORTH);
