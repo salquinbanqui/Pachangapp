@@ -16,6 +16,7 @@ import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.regex.Pattern;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -124,6 +125,11 @@ public class RegistrarVentana {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				String erContrasenia = "[a-zA-Z0-9?¿!¡]{4,15}";	//expresion regular para la contraseña, entre 4 y 15 letras (mayusculas o minusculas) o numeros o ?¿!¡
+				//Ejemplos de contraseña válida: 000!!¿00, 0¿a0a0, A1??b3fq2T, abHc¿djp, po1s¡duebcisd5...
+				String erNombreUsu = "[a-zA-Z]";				//expresion regular para el nombre de usuario
+				String erTelefono = "[0-9]";
+				
 				String nick = lblNick.getText();
 				String contra = lblContra.getText();
 				String nombre = lblNombre.getText();
@@ -131,19 +137,25 @@ public class RegistrarVentana {
 				String telefono = lblTelefono.getText();
 				Date fecha = new Date();
 				String fechaActual = new SimpleDateFormat("dd-MM-yyyy").format(fecha);
-				
-				//HABRIA QUE COMPROBAR QUE LOS DATOS SON CORRECTOS (QUE EL TELEFONO SON NUMEROS POR EJEMPLO)
-				
-				BD.insertarUsuario(con, nick, contra, nombre, apellido, telefono, fechaActual);
-				
-				//HABRIA QUE COMPROBAR QUE EL USUARIO SE HA CREADO CORRECTAMENTE
-				
-				JOptionPane.showMessageDialog(null, "Usuario registrado correctamente");
-				
-				frame.dispose();
-				LogInVentana.main(null);
-				
-				
+								
+				if(Pattern.matches(erNombreUsu, nick)) {
+					if(Pattern.matches(erContrasenia, contra)) {
+						if(Pattern.matches(erTelefono, telefono)) {
+							//inserta el usuario y te lleva a iniciar sesion
+							BD.insertarUsuario(con, nick, contra, nombre, apellido, telefono, fechaActual);
+							JOptionPane.showMessageDialog(null, "Usuario registrado correctamente");
+							frame.dispose();
+							LogInVentana.main(null);
+						}else {
+							JOptionPane.showMessageDialog(null, "El telefono solo deberia contener números", "ERROR", JOptionPane.ERROR_MESSAGE);
+						}
+					}else {
+						JOptionPane.showMessageDialog(null, "La contraseña debe tener mas de 4 pero menos de 15 caracteres", "ERROR", JOptionPane.ERROR_MESSAGE);
+					}
+				}else {
+					JOptionPane.showMessageDialog(null, "El nombre de usuario solo deberia contener letras", "ERROR", JOptionPane.ERROR_MESSAGE);
+				}
+
 			}
 		});
 		btnRegistrar.setBounds(260, 230, 120, 25);

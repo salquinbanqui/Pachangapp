@@ -86,7 +86,8 @@ public class LogInVentana {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				//ir a la ventana registrar
+				frame.dispose();
+				RegistrarVentana.main(null);
 				
 			}
 		});
@@ -100,7 +101,7 @@ public class LogInVentana {
 			public void actionPerformed(ActionEvent e) {
 				String erContrasenia = "[a-zA-Z0-9?¿!¡]{4,15}";	//expresion regular para la contraseña, entre 4 y 15 letras (mayusculas o minusculas) o numeros o ?¿!¡
 				//Ejemplos de contraseña válida: 000!!¿00, 0¿a0a0, A1??b3fq2T, abHc¿djp, po1s¡duebcisd5...
-				String erNombreUsu = "[a-zA-Z]";			//expresion regular para el nombre de usuario
+				String erNombreUsu = "[a-zA-Z]";				//expresion regular para el nombre de usuario
 				String nombreUsu = labelNombreUsu.getText();
 				String contrasenia = labelPass.getText();
 				
@@ -110,19 +111,22 @@ public class LogInVentana {
 					//Da error, lo arreglo luego
 					Usuario u = BD.obtenerDatosUsuario(con, nombreUsu);
 					if(u!=null) {
-						if(u.getPassword().equals(contrasenia))
+						if(u.getPassword().equals(contrasenia)) {
 							JOptionPane.showMessageDialog(null, "Bienvenido", "SESIÓN INICIADA", JOptionPane.INFORMATION_MESSAGE);
-						else
-							JOptionPane.showMessageDialog(null, "La contraseña no es correcta", "ERROR", JOptionPane.ERROR_MESSAGE);
-					}else
-						JOptionPane.showMessageDialog(null, "El nombre de usuario no es correcto", "ERROR", JOptionPane.ERROR_MESSAGE);
-				}else {
-					JOptionPane.showMessageDialog(null, "Los datos no cumplen los requisitos", "ERROR", JOptionPane.ERROR_MESSAGE);
-				}
-				
+							frame.dispose();
+							TriviaVentana.main(null);
+
+						}else {
+							JOptionPane.showMessageDialog(null, "La contraseña debe tener mas de 4 pero menos de 15 caracteres", "ERROR", JOptionPane.ERROR_MESSAGE);
+						}}else {
+							JOptionPane.showMessageDialog(null, "El nombre de usuario solo deberia contener letras", "ERROR", JOptionPane.ERROR_MESSAGE);
+						}}else {
+							JOptionPane.showMessageDialog(null, "Los datos no cumplen los requisitos", "ERROR", JOptionPane.ERROR_MESSAGE);
+						}
+
 				//labelNombreUsu.setText("");
 				//labelPass.setText("");
-				
+
 			}
 		});
 		btnIniciarSes.setBounds(238, 195, 130, 30);
