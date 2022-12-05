@@ -67,7 +67,7 @@ public class TriviaVentana {
 		frmTriviafut.setTitle("TriviaFut");
 		frmTriviafut.setBounds(100, 100, 400, 600);
 		frmTriviafut.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frmTriviafut.setResizable(false);
+		//frmTriviafut.setResizable(false);
 		frmTriviafut.getContentPane().setLayout(new BorderLayout(0, 0));
 		
 		JPanel panelGeneral = new JPanel();
@@ -93,64 +93,62 @@ public class TriviaVentana {
 		panelGeneral.add(panelEquipo);
 		panelEquipo.setLayout(new BorderLayout());
 		
-		JPanel pCentroEquipo = new JPanel(new GridLayout(3, 3));
+		JPanel panelEquipoCentro = new JPanel(new GridLayout(3, 3));
 
-		JLabel lblEquipo = new JLabel();
-		lblEquipo.setSize(102, 164);
+		JLabel lblEquipoDefensaArriba = new JLabel();
+		lblEquipoDefensaArriba.setSize(102, 164);
 		ImageIcon im = new ImageIcon("imagenes\\lewan.gif");
-		ImageIcon imcd = new ImageIcon(im.getImage().getScaledInstance(lblEquipo.getWidth(), lblEquipo.getHeight(), Image.SCALE_DEFAULT));
-		lblEquipo.setIcon(imcd);
+		ImageIcon imcd = new ImageIcon(im.getImage().getScaledInstance(lblEquipoDefensaArriba.getWidth(), lblEquipoDefensaArriba.getHeight(), Image.SCALE_DEFAULT));
+		lblEquipoDefensaArriba.setIcon(imcd);
 		
-		JLabel lblEquipo2 = new JLabel();
-		lblEquipo2.setSize(102, 164);
+		JLabel lblEquipoDelanteroArriba = new JLabel();
+		lblEquipoDelanteroArriba.setSize(102, 164);
 		ImageIcon im2 = new ImageIcon("imagenes\\messi.gif");
-		ImageIcon imcd2 = new ImageIcon(im2.getImage().getScaledInstance(lblEquipo2.getWidth(), lblEquipo2.getHeight(), Image.SCALE_DEFAULT));
-		lblEquipo2.setIcon(imcd2);
+		ImageIcon imcd2 = new ImageIcon(im2.getImage().getScaledInstance(lblEquipoDelanteroArriba.getWidth(), lblEquipoDelanteroArriba.getHeight(), Image.SCALE_DEFAULT));
+		lblEquipoDelanteroArriba.setIcon(imcd2);
 		
-		JLabel lblEquipo3 = new JLabel();
-		lblEquipo3.setSize(102, 164);
+		JLabel lblEquipoPortero = new JLabel();
+		lblEquipoPortero.setSize(102, 164);
 		ImageIcon im3 = new ImageIcon("imagenes\\neuer.gif");
-		ImageIcon imcd3 = new ImageIcon(im3.getImage().getScaledInstance(lblEquipo3.getWidth(), lblEquipo3.getHeight(), Image.SCALE_DEFAULT));
-		lblEquipo3.setIcon(imcd3);
+		ImageIcon imcd3 = new ImageIcon(im3.getImage().getScaledInstance(lblEquipoPortero.getWidth(), lblEquipoPortero.getHeight(), Image.SCALE_DEFAULT));
+		lblEquipoPortero.setIcon(imcd3);
 		
-		JLabel lblEquipo4 = new JLabel();
-		lblEquipo4.setSize(102, 164);
+		JLabel lblEquipoDelanteroDebajo = new JLabel();
+		lblEquipoDelanteroDebajo.setSize(102, 164);
 		ImageIcon im4 = new ImageIcon("imagenes\\ronaldo.gif");
-		ImageIcon imcd4= new ImageIcon(im4.getImage().getScaledInstance(lblEquipo4.getWidth(), lblEquipo4.getHeight(), Image.SCALE_DEFAULT));
-		lblEquipo4.setIcon(imcd4);
+		ImageIcon imcd4= new ImageIcon(im4.getImage().getScaledInstance(lblEquipoDelanteroDebajo.getWidth(), lblEquipoDelanteroDebajo.getHeight(), Image.SCALE_DEFAULT));
+		lblEquipoDelanteroDebajo.setIcon(imcd4);
 		
-		JLabel lblEquipo5 = new JLabel();
-		lblEquipo5.setSize(102, 164);
+		JLabel lblEquipoDefensaDebajo = new JLabel();
+		lblEquipoDefensaDebajo.setSize(102, 164);
 		ImageIcon im5 = new ImageIcon("imagenes\\neuer.gif");
-		ImageIcon imcd5 = new ImageIcon(im5.getImage().getScaledInstance(lblEquipo5.getWidth(), lblEquipo5.getHeight(), Image.SCALE_DEFAULT));
-		lblEquipo5.setIcon(imcd5);
+		ImageIcon imcd5 = new ImageIcon(im5.getImage().getScaledInstance(lblEquipoDefensaDebajo.getWidth(), lblEquipoDefensaDebajo.getHeight(), Image.SCALE_DEFAULT));
+		lblEquipoDefensaDebajo.setIcon(imcd5);
 		
-		//JLabel lblEquipo = new JLabel(new ImageIcon("imagenes\\lewan.gif"));
-		//JLabel lblEquipo = new JLabel("");
-		pCentroEquipo.add(lblEquipo);
-		pCentroEquipo.add(new JPanel());
+		panelEquipoCentro.add(new JPanel());
+		panelEquipoCentro.add(lblEquipoDefensaArriba);
+		panelEquipoCentro.add(lblEquipoDelanteroArriba);
+		panelEquipoCentro.add(lblEquipoPortero);
+		panelEquipoCentro.add(new JPanel());
+		panelEquipoCentro.add(new JPanel());
+		panelEquipoCentro.add(new JPanel());
+		panelEquipoCentro.add(lblEquipoDefensaDebajo);
+		panelEquipoCentro.add(lblEquipoDelanteroDebajo);
 		
-		pCentroEquipo.add(lblEquipo2);
-		pCentroEquipo.add(lblEquipo3);
-		pCentroEquipo.add(new JPanel());
-		pCentroEquipo.add(lblEquipo4);
-		pCentroEquipo.add(new JPanel());
-		pCentroEquipo.add(lblEquipo5);
-		
-		pCentroEquipo.add(new JPanel());
+
 		
 		
-		JPanel panelEquipoTop = new JPanel();
-		panelEquipoTop.setPreferredSize(new Dimension(10, 50));
-		panelEquipo.add(panelEquipoTop, BorderLayout.SOUTH);
-		panelEquipo.add(pCentroEquipo, BorderLayout.CENTER);
+		JPanel panelEquipoBot = new JPanel();
+		panelEquipoBot.setPreferredSize(new Dimension(10, 50));
+		panelEquipo.add(panelEquipoBot, BorderLayout.SOUTH);
+		panelEquipo.add(panelEquipoCentro, BorderLayout.CENTER);
 		JButton btnEquipoCargar = new JButton("Cargar Equipo");
 		btnEquipoCargar.setPreferredSize(new Dimension(160, 40));
-		panelEquipoTop.add(btnEquipoCargar);
+		panelEquipoBot.add(btnEquipoCargar);
 		
 		JButton btnEquipoGuardar = new JButton("Guardar equipo");
 		btnEquipoGuardar.setPreferredSize(new Dimension(160, 40));
-		panelEquipoTop.add(btnEquipoGuardar);
+		panelEquipoBot.add(btnEquipoGuardar);
 		
 		JPanel panelTop = new JPanel();
 		frmTriviafut.getContentPane().add(panelTop, BorderLayout.NORTH);
