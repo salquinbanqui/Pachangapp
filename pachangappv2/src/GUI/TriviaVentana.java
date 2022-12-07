@@ -20,7 +20,7 @@ import java.awt.ComponentOrientation;
 import javax.swing.UIManager;
 import java.awt.Insets;
 
-public class TriviaVentana {
+public class TriviaVentana extends JFrame {
 
 	private JFrame frmTriviafut;
 
@@ -32,7 +32,7 @@ public class TriviaVentana {
 			public void run() {
 				try {
 					TriviaVentana window = new TriviaVentana();
-					window.frmTriviafut.setVisible(true);
+					window.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -44,100 +44,126 @@ public class TriviaVentana {
 	 * Create the application.
 	 */
 	public TriviaVentana() {
-		initialize();
-	}
-
-	/**
-	 * Initialize the contents of the frame.
-	 */
-	private void initialize() {
-		
-		//Nos conectamos con la base de datos
-		//Connection con = BD.initBD("trivia.db");
-		//Creamos las tablas
-		//BD.crearTablas(con);
-		
-		
-		//private JTable tablaJugadores; //Aspecto gráfico
-		//private DefaultTableModel modeloJugadores; //La estructura de datos que contiene la información de la tabla
-		//private JScrollPane scrollTabla; //Scroll para la tabla
-				
-				
-		frmTriviafut = new JFrame();
-		frmTriviafut.setTitle("TriviaFut");
-		frmTriviafut.setBounds(100, 100, 400, 600);
-		frmTriviafut.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		//frmTriviafut.setResizable(false);
-		frmTriviafut.getContentPane().setLayout(new BorderLayout(0, 0));
-		
-		JPanel panelGeneral = new JPanel();
-		frmTriviafut.getContentPane().add(panelGeneral, BorderLayout.CENTER);
+		// initialize();
+		ImageIcon fondo = new ImageIcon("imagenes/fondo.jpg");
+		JPanel panelGeneral = new PanelConFondo(fondo.getImage());
 		panelGeneral.setLayout(new CardLayout(0, 0));
-		
+		getContentPane().add(panelGeneral, BorderLayout.CENTER);
+		setTitle("TriviaFut");
+		setBounds(100, 100, 400, 600);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+		// SECCIÓN DE TRIVIA
+
 		JPanel panelTrivia = new JPanel();
 		panelTrivia.setBackground(UIManager.getColor("Button.darkShadow"));
 		panelGeneral.add(panelTrivia);
-		
+
 		JLabel labelTrivia = new JLabel("Trivia");
 		panelTrivia.add(labelTrivia);
+
+		// SECCIÓN DE CARTAS
+
+		JPanel panelCartaJugador = new JPanel(new GridLayout(0, 2));
 		
-		JScrollPane panelCartasScroll = new JScrollPane();
+		JScrollPane panelCartasScroll = new JScrollPane(panelCartaJugador);
+		panelCartasScroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		panelGeneral.add(panelCartasScroll);
+
 		
-		JScrollPane panelTiendaScroll = new JScrollPane();
+		//SECCIÓN DE TIENDA
+		
+		JPanel panelTiendaJugador = new JPanel(new GridLayout(0, 2));
+		for(int i=0;i<50;i++) {
+			JLabel lblTiendaJugador = new JLabel();
+			//lblTiendaJugador.setSize(102, 164);
+			lblTiendaJugador.setSize(120, 193);
+			ImageIcon imTienda = new ImageIcon("imagenes/lewan.gif");
+			ImageIcon imcdTienda= new ImageIcon(imTienda.getImage().getScaledInstance(lblTiendaJugador.getWidth(), lblTiendaJugador.getHeight(), Image.SCALE_DEFAULT));
+			lblTiendaJugador.setIcon(imcdTienda);
+			JPanel p = new JPanel(new BorderLayout());
+			JPanel pw = new JPanel();
+			JLabel l = new JLabel("          ");
+			pw.add(l);
+			p.add(pw, BorderLayout.WEST);
+			p.add(lblTiendaJugador,BorderLayout.CENTER);
+			panelTiendaJugador.add(p);
+		}
+		JScrollPane panelTiendaScroll = new JScrollPane(panelTiendaJugador);
+		panelTiendaScroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		panelGeneral.add(panelTiendaScroll);
 		
+
+		// SECCIÓN DE EQUIPO
+
 		JPanel panelEquipo = new JPanel();
 		panelEquipo.setPreferredSize(new Dimension(10, 50));
-		//panelEquipo.setBackground(UIManager.getColor("Button.darkShadow"));
+		// panelEquipo.setBackground(UIManager.getColor("Button.darkShadow"));
 		panelGeneral.add(panelEquipo);
 		panelEquipo.setLayout(new BorderLayout());
-		
-		JPanel panelEquipoCentro = new JPanel(new GridLayout(3, 3));
 
-		JLabel lblEquipoDefensaArriba = new JLabel();
-		lblEquipoDefensaArriba.setSize(102, 164);
-		ImageIcon im = new ImageIcon("imagenes\\lewan.gif");
-		ImageIcon imcd = new ImageIcon(im.getImage().getScaledInstance(lblEquipoDefensaArriba.getWidth(), lblEquipoDefensaArriba.getHeight(), Image.SCALE_DEFAULT));
-		lblEquipoDefensaArriba.setIcon(imcd);
+		PanelConFondo panelEquipoCentro = new PanelConFondo(fondo.getImage());
+		panelEquipoCentro.setLayout(new GridLayout(3, 3));
 		
+		JLabel lblEquipoDefArriba = new JLabel();
+		lblEquipoDefArriba.setSize(102, 164);
+		ImageIcon im = new ImageIcon("imagenes\\lewan.gif");
+		ImageIcon imcd = new ImageIcon(im.getImage().getScaledInstance(lblEquipoDefArriba.getWidth(),
+				lblEquipoDefArriba.getHeight(), Image.SCALE_DEFAULT));
+		lblEquipoDefArriba.setIcon(imcd);
+
 		JLabel lblEquipoDelanteroArriba = new JLabel();
 		lblEquipoDelanteroArriba.setSize(102, 164);
 		ImageIcon im2 = new ImageIcon("imagenes\\messi.gif");
-		ImageIcon imcd2 = new ImageIcon(im2.getImage().getScaledInstance(lblEquipoDelanteroArriba.getWidth(), lblEquipoDelanteroArriba.getHeight(), Image.SCALE_DEFAULT));
+		ImageIcon imcd2 = new ImageIcon(im2.getImage().getScaledInstance(lblEquipoDelanteroArriba.getWidth(),
+				lblEquipoDelanteroArriba.getHeight(), Image.SCALE_DEFAULT));
 		lblEquipoDelanteroArriba.setIcon(imcd2);
-		
+
 		JLabel lblEquipoPortero = new JLabel();
 		lblEquipoPortero.setSize(102, 164);
 		ImageIcon im3 = new ImageIcon("imagenes\\neuer.gif");
-		ImageIcon imcd3 = new ImageIcon(im3.getImage().getScaledInstance(lblEquipoPortero.getWidth(), lblEquipoPortero.getHeight(), Image.SCALE_DEFAULT));
+		ImageIcon imcd3 = new ImageIcon(
+				im3.getImage().getScaledInstance(lblEquipoPortero.getWidth(), lblEquipoPortero.getHeight(), Image.SCALE_DEFAULT));
 		lblEquipoPortero.setIcon(imcd3);
-		
+
 		JLabel lblEquipoDelanteroDebajo = new JLabel();
 		lblEquipoDelanteroDebajo.setSize(102, 164);
 		ImageIcon im4 = new ImageIcon("imagenes\\ronaldo.gif");
-		ImageIcon imcd4= new ImageIcon(im4.getImage().getScaledInstance(lblEquipoDelanteroDebajo.getWidth(), lblEquipoDelanteroDebajo.getHeight(), Image.SCALE_DEFAULT));
+		ImageIcon imcd4 = new ImageIcon(
+				im4.getImage().getScaledInstance(lblEquipoDelanteroDebajo.getWidth(), lblEquipoDelanteroDebajo.getHeight(), Image.SCALE_DEFAULT));
 		lblEquipoDelanteroDebajo.setIcon(imcd4);
-		
+
 		JLabel lblEquipoDefensaDebajo = new JLabel();
 		lblEquipoDefensaDebajo.setSize(102, 164);
 		ImageIcon im5 = new ImageIcon("imagenes\\neuer.gif");
-		ImageIcon imcd5 = new ImageIcon(im5.getImage().getScaledInstance(lblEquipoDefensaDebajo.getWidth(), lblEquipoDefensaDebajo.getHeight(), Image.SCALE_DEFAULT));
+		ImageIcon imcd5 = new ImageIcon(
+				im5.getImage().getScaledInstance(lblEquipoDefensaDebajo.getWidth(), lblEquipoDefensaDebajo.getHeight(), Image.SCALE_DEFAULT));
 		lblEquipoDefensaDebajo.setIcon(imcd5);
+
+		JPanel p1 = new JPanel();
+		p1.setOpaque(false);
+		JPanel p2 = new JPanel();
+		p2.setOpaque(false);
+		JPanel p3 = new JPanel();
+		p3.setOpaque(false);
+		JPanel p4 = new JPanel();
+		p4.setOpaque(false);
 		
-		panelEquipoCentro.add(new JPanel());
-		panelEquipoCentro.add(lblEquipoDefensaArriba);
+		lblEquipoDefArriba.setOpaque(false);
+		lblEquipoDelanteroArriba.setOpaque(false);
+		lblEquipoPortero.setOpaque(false);
+		lblEquipoDelanteroDebajo.setOpaque(false);
+		lblEquipoDefensaDebajo.setOpaque(false);
+		panelEquipoCentro.add(p1);
+		panelEquipoCentro.add(lblEquipoDefArriba);
 		panelEquipoCentro.add(lblEquipoDelanteroArriba);
 		panelEquipoCentro.add(lblEquipoPortero);
-		panelEquipoCentro.add(new JPanel());
-		panelEquipoCentro.add(new JPanel());
-		panelEquipoCentro.add(new JPanel());
+		panelEquipoCentro.add(p2);
+		panelEquipoCentro.add(p3);
+		panelEquipoCentro.add(p4);
 		panelEquipoCentro.add(lblEquipoDefensaDebajo);
 		panelEquipoCentro.add(lblEquipoDelanteroDebajo);
-		
 
-		
-		
 		JPanel panelEquipoBot = new JPanel();
 		panelEquipoBot.setPreferredSize(new Dimension(10, 50));
 		panelEquipo.add(panelEquipoBot, BorderLayout.SOUTH);
@@ -145,37 +171,41 @@ public class TriviaVentana {
 		JButton btnEquipoCargar = new JButton("Cargar Equipo");
 		btnEquipoCargar.setPreferredSize(new Dimension(160, 40));
 		panelEquipoBot.add(btnEquipoCargar);
-		
+
 		JButton btnEquipoGuardar = new JButton("Guardar equipo");
 		btnEquipoGuardar.setPreferredSize(new Dimension(160, 40));
 		panelEquipoBot.add(btnEquipoGuardar);
 		
-		JPanel panelTop = new JPanel();
-		frmTriviafut.getContentPane().add(panelTop, BorderLayout.NORTH);
-		panelTop.setLayout(new BorderLayout(0, 0));
+		//PANEL TOP
 		
+		JPanel panelTop = new JPanel();
+		getContentPane().add(panelTop, BorderLayout.NORTH);
+		panelTop.setLayout(new BorderLayout(0, 0));
+
 		JLabel labelDinero = new JLabel("520💰");
 		labelDinero.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		labelDinero.setPreferredSize(new Dimension(150, 14));
 		panelTop.add(labelDinero, BorderLayout.EAST);
-		
+
 		JLabel labelNombre = new JLabel("javisito15");
 		labelNombre.setPreferredSize(new Dimension(150, 14));
 		panelTop.add(labelNombre, BorderLayout.WEST);
+
+		//PANEL BOT
 		
 		JPanel panelBot = new JPanel();
-		frmTriviafut.getContentPane().add(panelBot, BorderLayout.SOUTH);
-		
+		getContentPane().add(panelBot, BorderLayout.SOUTH);
+
 		JButton btnTrivia = new JButton("Trivia");
 		btnTrivia.setMargin(new Insets(2, 22, 2, 22));
 		btnTrivia.setAlignmentX(Component.RIGHT_ALIGNMENT);
-		
+
 		JButton btnCartas = new JButton("Cartas");
 		btnCartas.setMargin(new Insets(2, 22, 2, 22));
-		
+
 		JButton btnTienda = new JButton("Tienda");
 		btnTienda.setMargin(new Insets(2, 22, 2, 22));
-		
+
 		JButton btnEquipo = new JButton("Equipo");
 		btnEquipo.setMargin(new Insets(2, 22, 2, 22));
 		panelBot.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
@@ -183,98 +213,62 @@ public class TriviaVentana {
 		panelBot.add(btnCartas);
 		panelBot.add(btnTienda);
 		panelBot.add(btnEquipo);
-		
-		
+
 		btnEquipo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//borra el antiguo panel
+				// borra el antiguo panel
 				panelGeneral.removeAll();
 				panelGeneral.repaint();
 				panelGeneral.revalidate();
-				//pone el nuevo panel
+				// pone el nuevo panel
 				panelGeneral.add(panelEquipo);
 				panelGeneral.repaint();
 				panelGeneral.revalidate();
-				
+
 			}
 		});
 		btnTienda.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//borra el antiguo panel
+				// borra el antiguo panel
 				panelGeneral.removeAll();
 				panelGeneral.repaint();
 				panelGeneral.revalidate();
-				//pone el nuevo panel
+				// pone el nuevo panel
+				// panelGeneral.add(panelTiendaScroll);
 				panelGeneral.add(panelTiendaScroll);
 				panelGeneral.repaint();
 				panelGeneral.revalidate();
-				
+
 			}
 		});
 		btnCartas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//borra el antiguo panel
+				// borra el antiguo panel
 				panelGeneral.removeAll();
 				panelGeneral.repaint();
 				panelGeneral.revalidate();
-				//pone el nuevo panel
+				// pone el nuevo panel
 				panelGeneral.add(panelCartasScroll);
 				panelGeneral.repaint();
 				panelGeneral.revalidate();
-				
+
 			}
 		});
+		
 		btnTrivia.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//borra el antiguo panel
+				// borra el antiguo panel
 				panelGeneral.removeAll();
 				panelGeneral.repaint();
 				panelGeneral.revalidate();
-				//pone el nuevo panel
+				// pone el nuevo panel
 				panelGeneral.add(panelTrivia);
 				panelGeneral.repaint();
 				panelGeneral.revalidate();
-				
 			}
 		});
-		
-		
-		////IMPORTANTE LO DE ABAJO ES PARA LEER LOS DATOS DE LOS FUTBOLISTAS DEL BASE DE DATOS
-		//
-		//
-		////NO FUNCIONA PORQUE BASE DE DATOS, NO TENEMOS BASE DE DATOS, HAY QUE ACLARAR VARIAS COSAS DE COMO LO VAMOS
-		////A HACER ETC. PERO ESTA SERÍA LA BASE, Y ALGO SIMILAR TENDRÍA QUE HACERSE PARA LA COLECCION
-		//
-		//
-		////parte de la Tienda exclusivamente (tabla etc)
-		//
-		////1-Creo el modelo
-		//modeloJugadores = new DefaultTableModel();
-		//
-		////2-Añadimos la fila de títulos al modelo
-		//String [] columnas = {"FOTO","NOMBRE","PUNTOS", "ROL"};
-		//modeloJugadores.setColumnIdentifiers(columnas);
-		//
-		////3-Cargo el modelo con los datos de los jugadores de la BD
-		//ArrayList<Jugador> aJugadores = BDTrivia.obtenerListaPersonas(con); //Obtenemos la lista de Jugadores de la BBDD
-		//for(Jugador j: aJugadores) { //Recorro cada Jugador
-		//	String [] datos = {j.getFoto(),j.getNombre(),j.getPuntos(),j.getFoto()};
-		//	modeloJugadores.addRow(datos); //Añadimos al modelo de la tabla la persona
-		//}
-		////Le asignamos el modelo a la JTable
-		//tablaJugadores = new JTable(modeloJugadores);
-		//scrollTabla  = new JScrollPane(tablaJugadores);
-		////Añadir el scrollHorizontal
-		////scrollTabla.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-		////scrollTabla.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-		//scrollTabla.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-		//scrollTabla.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-		////Añado al panel el scroll que contiene la tabla
-		//contentPane.add(scrollTabla, BorderLayout.CENTER);
-		
-		
+
 	}
-		
-		
-	
+
+
 }
