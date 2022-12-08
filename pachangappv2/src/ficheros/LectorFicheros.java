@@ -18,10 +18,11 @@ public class LectorFicheros {
 		
 		int tempIdInt;
 		
+		Preguntas tempPre;
 		//es posible que esto de error ya que he puesto el path relativo
 		//pero en caso de que lo cambie al absoluto por si no me funcione cada
 		//cual tendria que cambiar el suyo en su ordenador
-		File f = new File("\\TriviaProyecto\\data\\preguntas.csv");
+		File f = new File("C:\\Users\\mlope\\git\\pachangappV2\\pachangappv2\\data\\preguntas.csv");
 		
 		try {
 			FileReader fr = new FileReader(f);
@@ -41,7 +42,7 @@ public class LectorFicheros {
 				
 				tempIdInt = Integer.parseInt(tempId);
 				
-				Preguntas tempPre = new Preguntas(tempIdInt, tempPregunta, tempRespA, tempRespB, tempRespC, tempRespD, tempRespCorr);
+				tempPre = new Preguntas(tempIdInt, tempPregunta, tempRespA, tempRespB, tempRespC, tempRespD, tempRespCorr);
 				System.out.println("añadido la pregunta :" + tempPre.toString());
 				preguntas.add(tempPre);
 			}
