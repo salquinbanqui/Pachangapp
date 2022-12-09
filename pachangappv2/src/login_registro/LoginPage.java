@@ -8,6 +8,8 @@ import java.util.*;
 
 import javax.swing.*;
 
+import quiz.Quiz;
+
 
 
 public class LoginPage implements ActionListener{
@@ -141,6 +143,7 @@ public class LoginPage implements ActionListener{
 					frame.dispose();
 					//Cambiar a la ventana del juego 
 					//WelcomePage welcomePage = new WelcomePage(userID);
+					Quiz quiz = new Quiz();	
 
 				}
 
