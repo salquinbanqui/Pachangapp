@@ -110,16 +110,16 @@ public class TriviaVentana extends JFrame {
 		JLabel lblEquipoDefArriba = new JLabel();
 		lblEquipoDefArriba.setSize(102, 164);
 		ImageIcon im = new ImageIcon("imagenes\\lewan.gif");
-		ImageIcon imcd = new ImageIcon(im.getImage().getScaledInstance(lblEquipoDefArriba.getWidth(),
-				lblEquipoDefArriba.getHeight(), Image.SCALE_DEFAULT));
+		ImageIcon imcd = new ImageIcon(
+				im.getImage().getScaledInstance(lblEquipoDefArriba.getWidth(), lblEquipoDefArriba.getHeight(), Image.SCALE_DEFAULT));
 		lblEquipoDefArriba.setIcon(imcd);
 		lblEquipoDefArriba.setOpaque(false);
 
 		JLabel lblEquipoDelanteroArriba = new JLabel();
 		lblEquipoDelanteroArriba.setSize(102, 164);
 		ImageIcon im2 = new ImageIcon("imagenes\\messi.gif");
-		ImageIcon imcd2 = new ImageIcon(im2.getImage().getScaledInstance(lblEquipoDelanteroArriba.getWidth(),
-				lblEquipoDelanteroArriba.getHeight(), Image.SCALE_DEFAULT));
+		ImageIcon imcd2 = new ImageIcon(
+				im2.getImage().getScaledInstance(lblEquipoDelanteroArriba.getWidth(), lblEquipoDelanteroArriba.getHeight(), Image.SCALE_DEFAULT));
 		lblEquipoDelanteroArriba.setIcon(imcd2);
 		lblEquipoDelanteroArriba.setOpaque(false);
 
