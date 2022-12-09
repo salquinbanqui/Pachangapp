@@ -44,7 +44,6 @@ public class TriviaVentana extends JFrame {
 	 * Create the application.
 	 */
 	public TriviaVentana() {
-		// initialize();
 		ImageIcon fondo = new ImageIcon("imagenes/fondo.jpg");
 		JPanel panelGeneral = new PanelConFondo(fondo.getImage());
 		panelGeneral.setLayout(new CardLayout(0, 0));
@@ -53,6 +52,7 @@ public class TriviaVentana extends JFrame {
 		setBounds(100, 100, 400, 600);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+		
 		// SECCIÓN DE TRIVIA
 
 		JPanel panelTrivia = new JPanel();
@@ -62,6 +62,7 @@ public class TriviaVentana extends JFrame {
 		JLabel labelTrivia = new JLabel("Trivia");
 		panelTrivia.add(labelTrivia);
 
+		
 		// SECCIÓN DE CARTAS
 
 		JPanel panelCartaJugador = new JPanel(new GridLayout(0, 2));
@@ -105,12 +106,14 @@ public class TriviaVentana extends JFrame {
 		PanelConFondo panelEquipoCentro = new PanelConFondo(fondo.getImage());
 		panelEquipoCentro.setLayout(new GridLayout(3, 3));
 		
+		//crea los labels de los jugadores del campo reescalados
 		JLabel lblEquipoDefArriba = new JLabel();
 		lblEquipoDefArriba.setSize(102, 164);
 		ImageIcon im = new ImageIcon("imagenes\\lewan.gif");
 		ImageIcon imcd = new ImageIcon(im.getImage().getScaledInstance(lblEquipoDefArriba.getWidth(),
 				lblEquipoDefArriba.getHeight(), Image.SCALE_DEFAULT));
 		lblEquipoDefArriba.setIcon(imcd);
+		lblEquipoDefArriba.setOpaque(false);
 
 		JLabel lblEquipoDelanteroArriba = new JLabel();
 		lblEquipoDelanteroArriba.setSize(102, 164);
@@ -118,6 +121,7 @@ public class TriviaVentana extends JFrame {
 		ImageIcon imcd2 = new ImageIcon(im2.getImage().getScaledInstance(lblEquipoDelanteroArriba.getWidth(),
 				lblEquipoDelanteroArriba.getHeight(), Image.SCALE_DEFAULT));
 		lblEquipoDelanteroArriba.setIcon(imcd2);
+		lblEquipoDelanteroArriba.setOpaque(false);
 
 		JLabel lblEquipoPortero = new JLabel();
 		lblEquipoPortero.setSize(102, 164);
@@ -125,6 +129,7 @@ public class TriviaVentana extends JFrame {
 		ImageIcon imcd3 = new ImageIcon(
 				im3.getImage().getScaledInstance(lblEquipoPortero.getWidth(), lblEquipoPortero.getHeight(), Image.SCALE_DEFAULT));
 		lblEquipoPortero.setIcon(imcd3);
+		lblEquipoPortero.setOpaque(false);
 
 		JLabel lblEquipoDelanteroDebajo = new JLabel();
 		lblEquipoDelanteroDebajo.setSize(102, 164);
@@ -132,6 +137,7 @@ public class TriviaVentana extends JFrame {
 		ImageIcon imcd4 = new ImageIcon(
 				im4.getImage().getScaledInstance(lblEquipoDelanteroDebajo.getWidth(), lblEquipoDelanteroDebajo.getHeight(), Image.SCALE_DEFAULT));
 		lblEquipoDelanteroDebajo.setIcon(imcd4);
+		lblEquipoDelanteroDebajo.setOpaque(false);
 
 		JLabel lblEquipoDefensaDebajo = new JLabel();
 		lblEquipoDefensaDebajo.setSize(102, 164);
@@ -139,7 +145,10 @@ public class TriviaVentana extends JFrame {
 		ImageIcon imcd5 = new ImageIcon(
 				im5.getImage().getScaledInstance(lblEquipoDefensaDebajo.getWidth(), lblEquipoDefensaDebajo.getHeight(), Image.SCALE_DEFAULT));
 		lblEquipoDefensaDebajo.setIcon(imcd5);
+		lblEquipoDefensaDebajo.setOpaque(false);
 
+		//crea los huecos vacios (tanto los jugadores como los huecos vacios
+		//tienen el setOpaque en false para que se vea el fondo
 		JPanel p1 = new JPanel();
 		p1.setOpaque(false);
 		JPanel p2 = new JPanel();
@@ -149,32 +158,49 @@ public class TriviaVentana extends JFrame {
 		JPanel p4 = new JPanel();
 		p4.setOpaque(false);
 		
-		lblEquipoDefArriba.setOpaque(false);
-		lblEquipoDelanteroArriba.setOpaque(false);
-		lblEquipoPortero.setOpaque(false);
-		lblEquipoDelanteroDebajo.setOpaque(false);
-		lblEquipoDefensaDebajo.setOpaque(false);
-		panelEquipoCentro.add(p1);
-		panelEquipoCentro.add(lblEquipoDefArriba);
-		panelEquipoCentro.add(lblEquipoDelanteroArriba);
-		panelEquipoCentro.add(lblEquipoPortero);
-		panelEquipoCentro.add(p2);
-		panelEquipoCentro.add(p3);
-		panelEquipoCentro.add(p4);
-		panelEquipoCentro.add(lblEquipoDefensaDebajo);
-		panelEquipoCentro.add(lblEquipoDelanteroDebajo);
+		
+		//inserta los jugadores en algunos grids, otros de quedan vacios
+		//NO ALTERAR EL ORDEN
+		panelEquipoCentro.add(p1); //VACIO, hueco: fila 1, columna 1
+		panelEquipoCentro.add(lblEquipoDefArriba); //hueco: fila 1, columna 2
+		panelEquipoCentro.add(lblEquipoDelanteroArriba); //hueco: fila 1, columna 3
+		panelEquipoCentro.add(lblEquipoPortero);//hueco: fila 2, columna 1
+		panelEquipoCentro.add(p2); //VACIO, hueco: fila 2, columna 2
+		panelEquipoCentro.add(p3); //VACIO, hueco: fila 2, columna 3
+		panelEquipoCentro.add(p4); //VACIO, hueco: fila 3, columna 1
+		panelEquipoCentro.add(lblEquipoDefensaDebajo);//hueco: fila 3, columna 2
+		panelEquipoCentro.add(lblEquipoDelanteroDebajo);//hueco: fila 3, columna 3
 
+		//panelEquipoBot
 		JPanel panelEquipoBot = new JPanel();
 		panelEquipoBot.setPreferredSize(new Dimension(10, 50));
 		panelEquipo.add(panelEquipoBot, BorderLayout.SOUTH);
 		panelEquipo.add(panelEquipoCentro, BorderLayout.CENTER);
+		
 		JButton btnEquipoCargar = new JButton("Cargar Equipo");
+		btnEquipoCargar.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
 		btnEquipoCargar.setPreferredSize(new Dimension(160, 40));
 		panelEquipoBot.add(btnEquipoCargar);
 
 		JButton btnEquipoGuardar = new JButton("Guardar equipo");
+		btnEquipoGuardar.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
 		btnEquipoGuardar.setPreferredSize(new Dimension(160, 40));
 		panelEquipoBot.add(btnEquipoGuardar);
+		
 		
 		//PANEL TOP
 		
@@ -191,6 +217,7 @@ public class TriviaVentana extends JFrame {
 		labelNombre.setPreferredSize(new Dimension(150, 14));
 		panelTop.add(labelNombre, BorderLayout.WEST);
 
+		
 		//PANEL BOT
 		
 		JPanel panelBot = new JPanel();
@@ -208,12 +235,14 @@ public class TriviaVentana extends JFrame {
 
 		JButton btnEquipo = new JButton("Equipo");
 		btnEquipo.setMargin(new Insets(2, 22, 2, 22));
+		
 		panelBot.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		panelBot.add(btnTrivia);
 		panelBot.add(btnCartas);
 		panelBot.add(btnTienda);
 		panelBot.add(btnEquipo);
 
+		//cambiar de sección dentro de TriviaVentana
 		btnEquipo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// borra el antiguo panel
