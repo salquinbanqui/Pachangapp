@@ -22,7 +22,9 @@ public class LectorFicheros {
 		//es posible que esto de error ya que he puesto el path relativo
 		//pero en caso de que lo cambie al absoluto por si no me funcione cada
 		//cual tendria que cambiar el suyo en su ordenador
-		File f = new File("C:\\Users\\mlope\\git\\pachangappV2\\pachangappv2\\data\\preguntas.csv");
+		//esta hecho para que tengas que meter tu el fichero pero se puede cambiar
+		//para que siempre sea el mismo
+		File f = new File(nomFichero);
 		
 		try {
 			FileReader fr = new FileReader(f);
