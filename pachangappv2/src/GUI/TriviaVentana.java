@@ -20,7 +20,7 @@ import java.awt.ComponentOrientation;
 import javax.swing.UIManager;
 import java.awt.Insets;
 
-public class TriviaVentana extends JFrame {
+public class TriviaVentana extends JFrame implements ActionListener {
 
 	private JFrame frmTriviafut;
 
@@ -297,6 +297,12 @@ public class TriviaVentana extends JFrame {
 			}
 		});
 
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 
 
