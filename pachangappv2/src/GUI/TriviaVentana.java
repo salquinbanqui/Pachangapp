@@ -7,6 +7,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.awt.CardLayout;
 import javax.swing.JScrollPane;
 import javax.swing.JLabel;
@@ -18,7 +21,11 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.ComponentOrientation;
 import javax.swing.UIManager;
+
+import dominioConHerencia.Jugador;
+
 import java.awt.Insets;
+import java.awt.Font;
 
 public class TriviaVentana extends JFrame implements ActionListener {
 
@@ -43,6 +50,7 @@ public class TriviaVentana extends JFrame implements ActionListener {
 	/**
 	 * Create the application.
 	 */
+	
 	public TriviaVentana() {
 		ImageIcon fondo = new ImageIcon("imagenes/fondo.jpg");
 		JPanel panelGeneral = new PanelConFondo(fondo.getImage());
@@ -178,6 +186,7 @@ public class TriviaVentana extends JFrame implements ActionListener {
 		panelEquipo.add(panelEquipoCentro, BorderLayout.CENTER);
 		
 		JButton btnEquipoCargar = new JButton("Cargar Equipo");
+		btnEquipoCargar.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		btnEquipoCargar.addActionListener(new ActionListener() {
 			
 			@Override
@@ -186,10 +195,12 @@ public class TriviaVentana extends JFrame implements ActionListener {
 				
 			}
 		});
-		btnEquipoCargar.setPreferredSize(new Dimension(160, 40));
+		btnEquipoCargar.setPreferredSize(new Dimension(120, 40));
 		panelEquipoBot.add(btnEquipoCargar);
 
+		
 		JButton btnEquipoGuardar = new JButton("Guardar equipo");
+		btnEquipoGuardar.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		btnEquipoGuardar.addActionListener(new ActionListener() {
 			
 			@Override
@@ -198,8 +209,28 @@ public class TriviaVentana extends JFrame implements ActionListener {
 				
 			}
 		});
-		btnEquipoGuardar.setPreferredSize(new Dimension(160, 40));
+		btnEquipoGuardar.setPreferredSize(new Dimension(120, 40));
 		panelEquipoBot.add(btnEquipoGuardar);
+		
+		
+		JButton btnEquipoMejor = new JButton("Mejor Equipo");
+		btnEquipoMejor.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		btnEquipoMejor.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				Jugador Messi = new Jugador("Messi", 96, 20, "url_de_la_carta");
+				Jugador Neuer = new Jugador("Neuer", 97, 25, "url_de_la_carta");
+				List<Jugador> listaJugadores = new ArrayList<>();
+				listaJugadores.add(Messi);
+				listaJugadores.add(Neuer);
+				mejorEquipoR(listaJugadores);
+				
+			}
+		});
+		btnEquipoMejor.setPreferredSize(new Dimension(120, 40));
+		panelEquipoBot.add(btnEquipoMejor);
 		
 		
 		//PANEL TOP
@@ -298,12 +329,31 @@ public class TriviaVentana extends JFrame implements ActionListener {
 		});
 
 	}
+	
+    public static String invertirReverse(String str) {
+    	StringBuffer builder = new StringBuffer(str);
+    	builder.reverse();
+    	return builder.toString();
+    }
+    
+	//un array de los jugadores comprados/disponibles por el usuario (que contenga minimo 1 portero y 4 jugadores)
+	//un array de 5 posiciones, en el que se guardara el nuevo equipo
+	//recorrer el array solo mirando los porteros y seleccionar el que tenga la puntuacion mas grande
+	//recorrer el array solo mirando los jugadores y seleccionar los 4 que tengan las puntuaciones mas altas
+	public static List<Jugador> mejorEquipoR(List<Jugador> listaJugadores) {
+		
+		
+		
+		return listaJugadores;
+	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		
 	}
+	
+	
 
 
 }
