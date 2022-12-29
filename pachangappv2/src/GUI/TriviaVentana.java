@@ -13,6 +13,8 @@ import java.util.List;
 import java.awt.CardLayout;
 import javax.swing.JScrollPane;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Component;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
@@ -26,6 +28,7 @@ import dominioConHerencia.Jugador;
 
 import java.awt.Insets;
 import java.awt.Font;
+import java.awt.Frame;
 
 public class TriviaVentana extends JFrame implements ActionListener {
 
@@ -222,10 +225,28 @@ public class TriviaVentana extends JFrame implements ActionListener {
 				// TODO Auto-generated method stub
 				Jugador Messi = new Jugador("Messi", 96, 20, "url_de_la_carta");
 				Jugador Neuer = new Jugador("Neuer", 97, 25, "url_de_la_carta");
+				Jugador a = new Jugador("a", 92, 20, "url_de_la_carta");
+				Jugador b = new Jugador("b", 93, 20, "url_de_la_carta");
+				Jugador c = new Jugador("c", 95, 20, "url_de_la_carta");
+				Jugador d = new Jugador("d", 94, 20, "url_de_la_carta");
 				List<Jugador> listaJugadores = new ArrayList<>();
 				listaJugadores.add(Messi);
 				listaJugadores.add(Neuer);
-				mejorEquipoR(listaJugadores);
+				listaJugadores.add(a);
+				listaJugadores.add(b);
+				listaJugadores.add(c);
+				listaJugadores.add(d);
+				List<Jugador> listaMejorEquipo = mejorEquipoR(listaJugadores);
+				String arrayMejorEquipo = "Portero: ";
+				int num = 1;
+				for (Jugador jugador : listaMejorEquipo) {
+					arrayMejorEquipo += jugador.getNombre();
+					arrayMejorEquipo += "\nJugador " + num + ": ";
+					num += 1;
+				}
+				arrayMejorEquipo = arrayMejorEquipo.substring(0, arrayMejorEquipo.length()-12); //elimina el string "\nJugador 5:"
+				JOptionPane.showMessageDialog(null, arrayMejorEquipo.toString(), "Equipo disponible con mayor valoración", 1);
+				
 				
 			}
 		});
@@ -341,10 +362,56 @@ public class TriviaVentana extends JFrame implements ActionListener {
 	//recorrer el array solo mirando los porteros y seleccionar el que tenga la puntuacion mas grande
 	//recorrer el array solo mirando los jugadores y seleccionar los 4 que tengan las puntuaciones mas altas
 	public static List<Jugador> mejorEquipoR(List<Jugador> listaJugadores) {
+		List<Jugador> mejoresJugadores = new ArrayList<>();
+		
+		System.out.println("Lista jugadores size: " + listaJugadores.size());
+		for (Jugador jugador : listaJugadores) {
+			System.out.println(jugador.getPuntos());
+		}
+		System.out.println("Mejores jugadores size: " + mejoresJugadores.size());
 		
 		
+		//caso base, si el array ya tiene 4 elementos
+		if(mejoresJugadores.size() >= 4) {
+			return mejoresJugadores;
+		}else { //caso recursivo
+			//listaJugadores.iterator().toString();
+			int num = 0;
+			Jugador jugadorMaxValoracion = null;
+			for (Jugador jugador : listaJugadores) {
+				if(jugador.getPuntos() > num) {
+					num = jugador.getPuntos();
+					System.out.println(num);
+					jugadorMaxValoracion = jugador;
+					System.out.println(jugadorMaxValoracion.getPuntos());
+				}
+			}
+			mejoresJugadores.add(jugadorMaxValoracion);
+			listaJugadores.remove(jugadorMaxValoracion);
+			System.out.println("Se ha añadido el jugador con mayor valoracion");
+			//numIteraciones -= 1;
+			mejorEquipoR(listaJugadores);
+			
+			System.out.println("Lista jugadores size: " + listaJugadores.size());
+			for (Jugador jugador : listaJugadores) {
+				System.out.println(jugador.getPuntos());
+			}
+			
+			System.out.println("Mejores jugadores size: " + mejoresJugadores.size());
+			for (Jugador jugador : mejoresJugadores) {
+				System.out.println(jugador.getPuntos());
+			}
+			
+			
+		}
+
 		
+		//listaJugadores.iterator().toString();		
+		
+		
+
 		return listaJugadores;
+		
 	}
 
 	@Override
