@@ -24,7 +24,9 @@ import java.awt.Dimension;
 import java.awt.ComponentOrientation;
 import javax.swing.UIManager;
 
+import dominioConHerencia.Carta;
 import dominioConHerencia.Jugador;
+import dominioConHerencia.Portero;
 
 import java.awt.Insets;
 import java.awt.Font;
@@ -222,29 +224,104 @@ public class TriviaVentana extends JFrame implements ActionListener {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
+				
+				//cuando nos funcione el inventario se cogera la lista de cartas de ahí,
+				//pero por ahora se crean los jugadores a mano
 				Jugador Messi = new Jugador("Messi", 96, 20, "url_de_la_carta");
-				Jugador Neuer = new Jugador("Neuer", 97, 25, "url_de_la_carta");
+				Portero Neuer = new Portero("Neuer", 97, 25, "url_de_la_carta");
+				Portero Otro = new Portero("Otro", 91, 25, "url_de_la_carta");
 				Jugador a = new Jugador("a", 92, 20, "url_de_la_carta");
 				Jugador b = new Jugador("b", 93, 20, "url_de_la_carta");
 				Jugador c = new Jugador("c", 95, 20, "url_de_la_carta");
 				Jugador d = new Jugador("d", 94, 20, "url_de_la_carta");
-				List<Jugador> listaJugadores = new ArrayList<>();
-				listaJugadores.add(Messi);
-				listaJugadores.add(Neuer);
-				listaJugadores.add(a);
-				listaJugadores.add(b);
-				listaJugadores.add(c);
-				listaJugadores.add(d);
-				List<Jugador> listaMejorEquipo = mejorEquipoR(listaJugadores);
+				
+				//creamos y añadimos las cartas a la lista
+				List<Carta> listaCartas = new ArrayList<>();
+				listaCartas.add(Messi);
+				listaCartas.add(Neuer);
+				listaCartas.add(Otro);
+				listaCartas.add(a);
+				listaCartas.add(b);
+				listaCartas.add(c);
+				listaCartas.add(d);
+				
+				//creamos una lista para almacenar los porteros y otra para los jugadores
+				List<Carta> listaJugador = new ArrayList<>();
+				List<Carta> listaPortero = new ArrayList<>();
+				
+				//separamos las cartas en porteros y jugadores para manipularlos por separado
+				for (Carta carta : listaCartas) {
+					if (carta.getClass().toString().equals("class dominioConHerencia.Jugador")) {
+						listaJugador.add(carta);
+					}else if (carta.getClass().toString().equals("class dominioConHerencia.Portero")) {
+						listaPortero.add(carta);
+					}
+				}
+				
+				//He dejado los comentarios para que entendais mejor la movida esta, cuando os ubiqueis los podeis quitar
+				System.out.println("portero size " + listaPortero.size());
+				System.out.println("jugador size " + listaJugador.size());
+				
+				for (Carta carta : listaPortero) {
+					System.out.println("Portero: " + carta.getNombre());
+				}
+				
+				for (Carta carta : listaJugador) {
+					System.out.println("Jugador: " + carta.getNombre());
+				}
+
+				//se crea la listaMejorEquipo, que ira almacenando las mejores cartas de cada posicion
+				List<Carta> listaMejorEquipo = new ArrayList<>();
+				
+				//se crea la listaTemporal, es una lista que usaremos para ir metiendo las mejores cartas en cada iteracion
+				List<Carta> listaTemporal = new ArrayList<>();
+				
+				//llamamos al metodo recursivo para hallar al portero con mayor valoración
+				listaPortero = mejorEquipoR(listaPortero, listaTemporal, 1);
+				System.out.println("size listaPortero: "+listaPortero.size());
+				System.out.println("size listaMejorequipo: "+listaMejorEquipo.size());
+				
+				//añadimos el mejor portero a la lista de mejor equipos
+				for (Carta carta : listaPortero) {
+					listaMejorEquipo.add(carta);
+					System.out.println("a listaMejorEquipo: "+carta.getNombre());
+				}
+				System.out.println("lista listaMejorequipo: "+listaMejorEquipo.size());
+				
+				System.out.println("size listaTemporal: "+listaTemporal.size());
+				
+				//vaciamos la lista temporal para volver a usarla en la llamada recursiva para los jugadores
+				listaTemporal.clear();
+				System.out.println("size listaTemporal, deberia ser 0: "+listaTemporal.size());
+				System.out.println("ahora toca lista rcursiva a Juador");
+				
+				//llamada recursiva para hallar a los 4 jugadores con mayor valoración
+				listaJugador = mejorEquipoR(listaJugador, listaTemporal, 4);
+				
+				//añadimos los mejores 4 jugadores a la lista de mejor equipo
+				for (Carta carta : listaJugador) {
+					listaMejorEquipo.add(carta);
+					System.out.println("a listaMejorEquipo: "+carta.getNombre());
+				}
+				
+				System.out.println("size listaMejorEquipo, deberia ser 5: "+listaMejorEquipo.size());
+				
+				//se vacia la listaTemporal porsiaca, no esestrictamente necesario
+				listaTemporal.clear();
+				
+				//se crea el array del mejor equipo disponible, con el mejor portero y los 4 mejores jugadores
 				String arrayMejorEquipo = "Portero: ";
 				int num = 1;
-				for (Jugador jugador : listaMejorEquipo) {
+				for (Carta jugador : listaMejorEquipo) {
 					arrayMejorEquipo += jugador.getNombre();
 					arrayMejorEquipo += "\nJugador " + num + ": ";
 					num += 1;
 				}
-				arrayMejorEquipo = arrayMejorEquipo.substring(0, arrayMejorEquipo.length()-12); //elimina el string "\nJugador 5:"
+				
+				//se elimina el string "\nJugador 5:"
+				arrayMejorEquipo = arrayMejorEquipo.substring(0, arrayMejorEquipo.length()-12);
+				
+				//se crea el JOptionPane displayeando el mejor equipo disponible
 				JOptionPane.showMessageDialog(null, arrayMejorEquipo.toString(), "Equipo disponible con mayor valoración", 1);
 				
 				
@@ -357,60 +434,58 @@ public class TriviaVentana extends JFrame implements ActionListener {
     	return builder.toString();
     }
     
-	//un array de los jugadores comprados/disponibles por el usuario (que contenga minimo 1 portero y 4 jugadores)
-	//un array de 5 posiciones, en el que se guardara el nuevo equipo
-	//recorrer el array solo mirando los porteros y seleccionar el que tenga la puntuacion mas grande
-	//recorrer el array solo mirando los jugadores y seleccionar los 4 que tengan las puntuaciones mas altas
-	public static List<Jugador> mejorEquipoR(List<Jugador> listaJugadores) {
-		List<Jugador> mejoresJugadores = new ArrayList<>();
-		
-		System.out.println("Lista jugadores size: " + listaJugadores.size());
-		for (Jugador jugador : listaJugadores) {
-			System.out.println(jugador.getPuntos());
+	
+    
+    
+    
+    
+    //listaCartas: una lista que contiene todas las cartas de un tipoconcreto (Portero o Jugador) que tiene el usuario
+    //mejoresCartasRec: una lista donde se guardan las mejores "numStop" cartas contenidas en listaCartas
+    //numStop: un int que representa el numero de cartas que deberian estar almacenadas en la lista mejoresCartasRec
+	public static List<Carta> mejorEquipoR(List<Carta> listaCartas, List<Carta> mejoresCartasRec, int numStop) {
+		 
+		//los prints es para entender mejor el proceso, se pueden borrar sin problema
+		System.out.println("Lista cartas size: " + listaCartas.size());
+		for (Carta carta : listaCartas) {
+			System.out.println(carta.getPuntos());
 		}
-		System.out.println("Mejores jugadores size: " + mejoresJugadores.size());
+		System.out.println("Mejores cartas size: " + mejoresCartasRec.size());
 		
 		
-		//caso base, si el array ya tiene 4 elementos
-		if(mejoresJugadores.size() >= 4) {
-			return mejoresJugadores;
-		}else { //caso recursivo
-			//listaJugadores.iterator().toString();
+		//caso base, si la lista ya tiene los elementos que se piden por parametro return mejoresCartasRec
+		if(mejoresCartasRec.size() == numStop) {
+			
+			System.out.println("despues de esto deberia acabar, ns pq sigue");
+			
+			//NO ENTINEDO PORQUE EL METODO NO ACABA AL LLEGAR A ESTE RETURN, YA LO MIRARÉ
+			return mejoresCartasRec;
+			
+		}else { //caso recursivo, si la lista tiene menos elementos de los que se piden por parametro
 			int num = 0;
-			Jugador jugadorMaxValoracion = null;
-			for (Jugador jugador : listaJugadores) {
+			
+			
+			//se elige la carta con mayor valoracion de la lista listaCartas
+			Carta jugadorMaxValoracion = null;
+			for (Carta jugador : listaCartas) {
 				if(jugador.getPuntos() > num) {
 					num = jugador.getPuntos();
-					System.out.println(num);
 					jugadorMaxValoracion = jugador;
-					System.out.println(jugadorMaxValoracion.getPuntos());
+					System.out.println("puntos del jugador max valoracion: " + jugadorMaxValoracion.getPuntos());
 				}
 			}
-			mejoresJugadores.add(jugadorMaxValoracion);
-			listaJugadores.remove(jugadorMaxValoracion);
-			System.out.println("Se ha añadido el jugador con mayor valoracion");
-			//numIteraciones -= 1;
-			mejorEquipoR(listaJugadores);
 			
-			System.out.println("Lista jugadores size: " + listaJugadores.size());
-			for (Jugador jugador : listaJugadores) {
-				System.out.println(jugador.getPuntos());
-			}
+			//se añade la carta con mayor valoracion en la lista mejoresCartasRec y se elimina de listaCartas
+			mejoresCartasRec.add(jugadorMaxValoracion);
+			System.out.println("se ha añadido " + jugadorMaxValoracion.getNombre());
+			listaCartas.remove(jugadorMaxValoracion);
 			
-			System.out.println("Mejores jugadores size: " + mejoresJugadores.size());
-			for (Jugador jugador : mejoresJugadores) {
-				System.out.println(jugador.getPuntos());
-			}
+			//se repite el proceso de forma recursiva hasta que el tamaño de cartas almacenadas en mejoresCartasRec sea el especificado por parametro
+			mejorEquipoR(listaCartas, mejoresCartasRec, numStop);
 			
 			
 		}
-
-		
-		//listaJugadores.iterator().toString();		
-		
-		
-
-		return listaJugadores;
+		System.out.println("hola");
+		return mejoresCartasRec;
 		
 	}
 
