@@ -7,6 +7,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -127,6 +129,70 @@ public class TriviaVentana extends JFrame implements ActionListener {
 				im.getImage().getScaledInstance(lblEquipoDefArriba.getWidth(), lblEquipoDefArriba.getHeight(), Image.SCALE_DEFAULT));
 		lblEquipoDefArriba.setIcon(imcd);
 		lblEquipoDefArriba.setOpaque(false);
+		lblEquipoDefArriba.addMouseListener(new MouseListener() {
+			
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				//cuando nos funcione el inventario se cogera la lista de cartas de ahí,
+				//pero por ahora se crean los jugadores a mano
+				Jugador Messi = new Jugador("Messi", 96, 20, "url_de_la_carta");
+				Portero Neuer = new Portero("Neuer", 97, 25, "url_de_la_carta");
+				Portero Otro = new Portero("Otro", 91, 25, "url_de_la_carta");
+				Jugador a = new Jugador("a", 92, 20, "url_de_la_carta");
+				Jugador b = new Jugador("b", 93, 20, "url_de_la_carta");
+				Jugador c = new Jugador("c", 95, 20, "url_de_la_carta");
+				Jugador d = new Jugador("d", 94, 20, "url_de_la_carta");
+				
+				//creamos y añadimos las cartas a la lista
+				//cuando tengamos bien hecho el inventario esto no hará falta
+				List<Jugador> cartasDisponibles = new ArrayList<>();
+				cartasDisponibles.add(Messi);
+				cartasDisponibles.add(a);
+				cartasDisponibles.add(b);
+				cartasDisponibles.add(c);
+				cartasDisponibles.add(d);
+
+				//creamos una lista para almacenar los jugadores
+				List<Jugador> jugadoresDisponibles = new ArrayList<>();
+				
+				//separamos las cartas y nos quedamos solo con los jugadores
+				for (Jugador carta : cartasDisponibles) {
+					if (carta.getClass().toString().equals("class dominioConHerencia.Jugador")) {
+						jugadoresDisponibles.add(carta);
+					}
+				}
+				//FALTARÍA CREAR EL JOPTIONPANE O UNA VENTANA NUEVA PARA PODER ELEGIR EL JUGADOR QUE SE QUIERA COLOCAR
+				//HAY QUE RECORRER LA LISTA DEL INVENTARIO PARA IR COLOCANDO LOS JUGADORES (TODOS MENOS LOS QUE YA ESTEN
+				//COLOCADOS EN EL CAMPO YA) Y QUE AL SELECCIONARLO SE REEMPLACE POR EL JUGADOR QUE ESTE EN EL MOMENTO
+				
+			}
+		});
+
 
 		JLabel lblEquipoDelanteroArriba = new JLabel();
 		lblEquipoDelanteroArriba.setSize(102, 164);
@@ -258,7 +324,7 @@ public class TriviaVentana extends JFrame implements ActionListener {
 					}
 				}
 				
-				//He dejado los comentarios para que entendais mejor la movida esta, cuando os ubiqueis los podeis quitar
+				//He dejado los comentarios para que se entienda mejor la movida esta, cuando os ubiqueis los podeis quitar
 				System.out.println("portero size " + listaPortero.size());
 				System.out.println("jugador size " + listaJugador.size());
 				
