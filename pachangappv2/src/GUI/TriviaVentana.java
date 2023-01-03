@@ -9,6 +9,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -277,6 +280,48 @@ public class TriviaVentana extends JFrame implements ActionListener {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
+				
+				try {
+					//Crear un documento en blanco
+					//PrintWriter pw = new PrintWriter("Personas.txt");
+					//Crear un documento para añadir al final
+					PrintWriter pw = new PrintWriter(new FileOutputStream("Personas.txt", true));
+
+
+					ArrayList<Carta> cartasFichero = new ArrayList<>();
+					
+					//Escribir en el documento los jugadores que contiene la alineacion
+					
+					
+					
+					//fila 1
+					String p1 = (String) panelEquipoCentro.getValueAt(0, 0);
+					String Portero = (String) panelEquipoCentro.getValueAt(0, 1);
+					String p2 = (String) panelEquipoCentro.getValueAt(0, 2);
+					
+					//fila 2
+					String DefArriba = (String) panelEquipoCentro.getValueAt(1, 0);
+					String p3 = (String) panelEquipoCentro.getValueAt(1, 1);
+					String DefensaDebajo = (String) panelEquipoCentro.getValueAt(1, 2);
+					
+					//fila 2
+					String DelanteroArriba = (String) panelEquipoCentro.getValueAt(2, 0);
+					String p4 = (String) panelEquipoCentro.getValueAt(2, 1);
+					String DelanteroDebajo = (String) panelEquipoCentro.getValueAt(2, 2);
+					
+					
+					//Escribo los datos en el documento
+					pw.println(Portero+" "+DefArriba+" "+DefensaDebajo+" "+DelanteroArriba+" "+DelanteroDebajo);
+					
+					
+					
+					//Cerrar el fichero
+					pw.flush();
+					pw.close();
+				} catch (FileNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				
 			}
 		});
