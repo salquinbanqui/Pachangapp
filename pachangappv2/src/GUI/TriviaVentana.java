@@ -264,8 +264,9 @@ public class TriviaVentana extends JFrame implements ActionListener {
 		
 		JButton btnEquipoCargar = new JButton("Cargar Equipo");
 		btnEquipoCargar.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		/*
 		btnEquipoCargar.addActionListener(new ActionListener() {
-			/*
+			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
@@ -321,8 +322,8 @@ public class TriviaVentana extends JFrame implements ActionListener {
 				//5- Añado el scroll que contiene la tabla a la ventana
 				contentPane.add(scrollTablaAlumnos, BorderLayout.CENTER);
 				
-			}*/
-		});
+			}
+		});*/
 		btnEquipoCargar.setPreferredSize(new Dimension(120, 40));
 		panelEquipoBot.add(btnEquipoCargar);
 
