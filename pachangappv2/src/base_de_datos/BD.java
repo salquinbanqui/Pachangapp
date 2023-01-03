@@ -1,11 +1,20 @@
 package base_de_datos;
 
+import java.awt.BorderLayout;
+import java.awt.GridLayout;
+import java.awt.Image;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+
+import GUI.TriviaVentana;
 import dominio.Usuario;
 import dominioConHerencia.Jugador;
 import dominioConHerencia.Portero;
@@ -239,5 +248,72 @@ public class BD {
 		return p;
 	}
 
+	//devolver lista cartas de inventario (cartas)
+	
+	
+	
+	//NO FUNCIONA, SON PRUEBAS PARA GUARDAR LAS CARTAS EN BASE DE DATOS.
+	/*
+	public static Portero guardarCartas(Connection con) {
+		
+		
+		 for (int i = 0; i < panelCartaJugador.getRowCount(); i++) {
+			 System.out.println("Registro número: "+i);
+			 System.out.println("ID: "+TablaDatos.getValueAt(i, 0));
+			 System.out.println("NOMBRE: "+TablaDatos.getValueAt(i, 1));
+			 System.out.println("TELÉFONO: "+TablaDatos.getValueAt(i, 2));
+			 }
+		
+		panelCartaJugador
+		
+		
+		JPanel panelTiendaJugador = new JPanel(new GridLayout(0, 2));
+		for(int i=0;i<50;i++) {
+			JLabel lblTiendaJugador = new JLabel();
+			//lblTiendaJugador.setSize(102, 164);
+			lblTiendaJugador.setSize(120, 193);
+			ImageIcon imTienda = new ImageIcon("imagenes/lewan.gif");
+			ImageIcon imcdTienda= new ImageIcon(imTienda.getImage().getScaledInstance(lblTiendaJugador.getWidth(), lblTiendaJugador.getHeight(), Image.SCALE_DEFAULT));
+			lblTiendaJugador.setIcon(imcdTienda);
+			JPanel p = new JPanel(new BorderLayout());
+			JPanel pw = new JPanel();
+			JLabel l = new JLabel("          ");
+			pw.add(l);
+			p.add(pw, BorderLayout.WEST);
+			p.add(lblTiendaJugador,BorderLayout.CENTER);
+			panelTiendaJugador.add(p);
+		}
+		JScrollPane panelTiendaScroll = new JScrollPane(panelTiendaJugador);
+		panelTiendaScroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		panelGeneral.add(panelTiendaScroll);
+		
+		
+		
+		
+		
+		
+		
+		
+		String sql = "SELECT * FROM Jugador WHERE nombre='"+nombre+"'";
+		Portero p = null;
+		try {
+			Statement st = con.createStatement();
+			ResultSet rs = st.executeQuery(sql);
+			if(rs.next()) {
+				
+					
+				String n = rs.getString("nombre");
+				int pts = Integer.parseInt(rs.getString("puntos"));
+				int c = Integer.parseInt(rs.getString("coste"));
+				String r = rs.getString("rutaFoto");
+			p = new Portero(n, pts, c, r);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return p;
+	}*/
+	
 
 }
