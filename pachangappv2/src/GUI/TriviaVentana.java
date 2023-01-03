@@ -28,6 +28,7 @@ import java.awt.Dimension;
 import java.awt.ComponentOrientation;
 import javax.swing.UIManager;
 
+import base_de_datos.BD;
 import dominioConHerencia.Carta;
 import dominioConHerencia.Jugador;
 import dominioConHerencia.Portero;
@@ -264,12 +265,22 @@ public class TriviaVentana extends JFrame implements ActionListener {
 		
 		JButton btnEquipoCargar = new JButton("Cargar Equipo");
 		btnEquipoCargar.setFont(new Font("Tahoma", Font.PLAIN, 10));
-		/*
+		
 		btnEquipoCargar.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
+				
+				/*
+				try {
+					BD.cargarJugadores(null);
+				}
+				*/
+				
+				
+				
+				/*
 				try {
 					BufferedReader br = new BufferedReader(new FileReader("Personas.csv")); //Hemos abierto el fichero
 					String linea = br.readLine(); //Leo la línea de títulos del fichero

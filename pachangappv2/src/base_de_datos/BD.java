@@ -248,9 +248,66 @@ public class BD {
 		return p;
 	}
 
+	public static void cargarJugadores(Connection con) {
+		
+		
+
+		
+		
+		String sql = "INSERT INTO Jugador values ('Messi', 96, 30, 'imagenes/messi.gif');";
+		try {
+			Statement st = con.createStatement();
+			ResultSet rs = st.executeQuery(sql);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		sql = "INSERT INTO Portero values ('Neuer', 97, 10, 'imagenes/Neuer.gif');";
+		try {
+			Statement st = con.createStatement();
+			ResultSet rs = st.executeQuery(sql);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		sql = "INSERT INTO Portero values Lewan = new Jugador('a', 99, 15, 'imagenes/lewan.gif');";
+		try {
+			Statement st = con.createStatement();
+			ResultSet rs = st.executeQuery(sql);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		sql = "INSERT INTO Jugador values ('Neymar', 92, 25, 'imagenes/neymar.gif');";
+		try {
+			Statement st = con.createStatement();
+			ResultSet rs = st.executeQuery(sql);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		sql = "INSERT INTO Jugador values ('Gavi', 86, 17, 'imagenes/gavi.png');";
+		try {
+			Statement st = con.createStatement();
+			ResultSet rs = st.executeQuery(sql);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+	}
+	
+	
+	
+	
+	
+	
 	//devolver lista cartas de inventario (cartas)
-	
-	
 	
 	//NO FUNCIONA, SON PRUEBAS PARA GUARDAR LAS CARTAS EN BASE DE DATOS.
 	/*
