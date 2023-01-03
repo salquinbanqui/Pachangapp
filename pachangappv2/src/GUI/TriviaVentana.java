@@ -265,12 +265,63 @@ public class TriviaVentana extends JFrame implements ActionListener {
 		JButton btnEquipoCargar = new JButton("Cargar Equipo");
 		btnEquipoCargar.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		btnEquipoCargar.addActionListener(new ActionListener() {
-			
+			/*
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
+				try {
+					BufferedReader br = new BufferedReader(new FileReader("Personas.csv")); //Hemos abierto el fichero
+					String linea = br.readLine(); //Leo la línea de títulos del fichero
+					String [] titulos = linea.split(";");
+					//Leemos la línea del fichero
+					linea = br.readLine();
+					if(linea != null) { //solo sera una linea asi que no me hace falta hacer un while
+						//Tratamos la línea
+						//linea = Portero;DefArriba;DefensaDebajo;DelanteroArriba;DelanteroDebajo
+						//Dividimos la línea en columnas
+						String [] datos = linea.split(";");
+												
+						//fila 1
+						
+						
+						
+						panelEquipoCentro[0][2] = (Portero)datos[0];
+						
+						
+						
+						
+						String p1 = (String) panelEquipoCentro.getValueAt(0, 0);
+						String Portero = (String) panelEquipoCentro.getValueAt(0, 1);
+						String p2 = (String) panelEquipoCentro.getValueAt(0, 2);
+						
+						//fila 2
+						String DefArriba = (String) panelEquipoCentro.getValueAt(1, 0);
+						String p3 = (String) panelEquipoCentro.getValueAt(1, 1);
+						String DefensaDebajo = (String) panelEquipoCentro.getValueAt(1, 2);
+						
+						//fila 2
+						String DelanteroArriba = (String) panelEquipoCentro.getValueAt(2, 0);
+						String p4 = (String) panelEquipoCentro.getValueAt(2, 1);
+						String DelanteroDebajo = (String) panelEquipoCentro.getValueAt(2, 2);
+						
+					}
+					br.close();
+				} catch (FileNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				
-			}
+				//3- Creo la JTable a partir del modelo
+				tablaAlumnos = new JTable(modeloAlumnos);
+				//4- Le añado el scroll a la tabla
+				scrollTablaAlumnos = new JScrollPane(tablaAlumnos);
+				//5- Añado el scroll que contiene la tabla a la ventana
+				contentPane.add(scrollTablaAlumnos, BorderLayout.CENTER);
+				
+			}*/
 		});
 		btnEquipoCargar.setPreferredSize(new Dimension(120, 40));
 		panelEquipoBot.add(btnEquipoCargar);
