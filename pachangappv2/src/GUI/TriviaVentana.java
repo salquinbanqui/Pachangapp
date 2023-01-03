@@ -1,3 +1,5 @@
+//comentario para que a aitor le funcione
+
 package GUI;
 
 import java.awt.EventQueue;
@@ -440,6 +442,7 @@ public class TriviaVentana extends JFrame implements ActionListener {
 						listaPortero.add(carta);
 					}
 				}
+				
 				
 				//He dejado los comentarios para que se entienda mejor la movida esta, cuando os ubiqueis los podeis quitar
 				System.out.println("portero size " + listaPortero.size());
