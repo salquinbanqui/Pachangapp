@@ -189,7 +189,8 @@ public class TriviaVentana extends JFrame implements ActionListener {
 						jugadoresDisponibles.add(carta);
 					}
 				}
-				//FALTARÍA CREAR EL JOPTIONPANE O UNA VENTANA NUEVA PARA PODER ELEGIR EL JUGADOR QUE SE QUIERA COLOCAR
+				
+				//FALTARÍA CREAR EL UNA VENTANA NUEVA PARA PODER ELEGIR EL JUGADOR QUE SE QUIERA COLOCAR
 				//HAY QUE RECORRER LA LISTA DEL INVENTARIO PARA IR COLOCANDO LOS JUGADORES (TODOS MENOS LOS QUE YA ESTEN
 				//COLOCADOS EN EL CAMPO YA) Y QUE AL SELECCIONARLO SE REEMPLACE POR EL JUGADOR QUE ESTE EN EL MOMENTO
 				
@@ -295,23 +296,23 @@ public class TriviaVentana extends JFrame implements ActionListener {
 					
 					
 					//fila 1
-					String p1 = (String) panelEquipoCentro.getValueAt(0, 0);
-					String Portero = (String) panelEquipoCentro.getValueAt(0, 1);
-					String p2 = (String) panelEquipoCentro.getValueAt(0, 2);
-					
-					//fila 2
-					String DefArriba = (String) panelEquipoCentro.getValueAt(1, 0);
-					String p3 = (String) panelEquipoCentro.getValueAt(1, 1);
-					String DefensaDebajo = (String) panelEquipoCentro.getValueAt(1, 2);
-					
-					//fila 2
-					String DelanteroArriba = (String) panelEquipoCentro.getValueAt(2, 0);
-					String p4 = (String) panelEquipoCentro.getValueAt(2, 1);
-					String DelanteroDebajo = (String) panelEquipoCentro.getValueAt(2, 2);
+//					String p1 = (String) panelEquipoCentro.getValueAt(0, 0);
+//					String Portero = (String) panelEquipoCentro.getValueAt(0, 1);
+//					String p2 = (String) panelEquipoCentro.getValueAt(0, 2);
+//					
+//					//fila 2
+//					String DefArriba = (String) panelEquipoCentro.getValueAt(1, 0);
+//					String p3 = (String) panelEquipoCentro.getValueAt(1, 1);
+//					String DefensaDebajo = (String) panelEquipoCentro.getValueAt(1, 2);
+//					
+//					//fila 2
+//					String DelanteroArriba = (String) panelEquipoCentro.getValueAt(2, 0);
+//					String p4 = (String) panelEquipoCentro.getValueAt(2, 1);
+//					String DelanteroDebajo = (String) panelEquipoCentro.getValueAt(2, 2);
 					
 					
 					//Escribo los datos en el documento
-					pw.println(Portero+" "+DefArriba+" "+DefensaDebajo+" "+DelanteroArriba+" "+DelanteroDebajo);
+//					pw.println(Portero+" "+DefArriba+" "+DefensaDebajo+" "+DelanteroArriba+" "+DelanteroDebajo);
 					
 					
 					
