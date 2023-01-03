@@ -266,13 +266,15 @@ public class TriviaVentana extends JFrame implements ActionListener {
 		JButton btnEquipoCargar = new JButton("Cargar Equipo");
 		btnEquipoCargar.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		
+		
+		/*
 		btnEquipoCargar.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				
-				/*
+				
 				try {
 					BD.cargarJugadores(null);
 				}
