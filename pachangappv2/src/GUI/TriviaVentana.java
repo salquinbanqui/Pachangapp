@@ -13,7 +13,6 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.awt.CardLayout;
 import javax.swing.JScrollPane;
@@ -81,7 +80,7 @@ public class TriviaVentana extends JFrame implements ActionListener {
 		panelTrivia.add(labelTrivia);
 
 		
-		// SECCIÓN DE CARTAS
+		// SECCIÓN DE CARTAS (INVENTARIO)
 
 		JPanel panelCartaJugador = new JPanel(new GridLayout(0, 2));
 		
@@ -189,6 +188,9 @@ public class TriviaVentana extends JFrame implements ActionListener {
 						jugadoresDisponibles.add(carta);
 					}
 				}
+				
+				//SeleccionarEquipoCarta.listaJugadoresInventario(jugadoresDisponibles);
+				
 				
 				//FALTARÍA CREAR EL UNA VENTANA NUEVA PARA PODER ELEGIR EL JUGADOR QUE SE QUIERA COLOCAR
 				//HAY QUE RECORRER LA LISTA DEL INVENTARIO PARA IR COLOCANDO LOS JUGADORES (TODOS MENOS LOS QUE YA ESTEN
@@ -600,12 +602,43 @@ public class TriviaVentana extends JFrame implements ActionListener {
 		return mejoresCartasRec;
 		
 	}
+	
+	public static List<Carta> listaCartasInventario(){
+		List<Carta> arrayCartasInventario = new ArrayList<>();
+		
+		//aqui habria que recorrer el inventario y añadir todas las cartas a este array, y luego devolverlo
+		//este metodo se usaria para rellenar la ventana "SeleccionarEquipoCarta"
+		
+		
+		//voy a rellenarlo a mano para hacer las pruebas
+		Jugador Messi = new Jugador("Messi", 96, 20, "imagenes/messi.gif");
+		Portero Neuer = new Portero("Neuer", 97, 25, "imagenes/Neuer.gif");
+		Portero Otro = new Portero("Otro", 91, 25, "imagenes/lewan.gif");
+		Jugador a = new Jugador("a", 92, 20, "imagenes/lewan.gif");
+		Jugador b = new Jugador("b", 93, 20, "imagenes/lewan.gif");
+		Jugador c = new Jugador("c", 95, 20, "imagenes/lewan.gif");
+		Jugador d = new Jugador("d", 94, 20, "imagenes/lewan.gif");
+		
+
+		arrayCartasInventario.add(Messi);
+		arrayCartasInventario.add(Neuer);
+		arrayCartasInventario.add(Otro);
+		arrayCartasInventario.add(a);
+		arrayCartasInventario.add(b);
+		arrayCartasInventario.add(c);
+		arrayCartasInventario.add(d);
+		
+		return arrayCartasInventario;
+		
+	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		
 	}
+	
+	
 	
 	
 
