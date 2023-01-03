@@ -5,7 +5,9 @@ import java.util.ArrayList;
 
 public class LectorFicheros {
 	
-	public static void leerCSV(ArrayList<Preguntas>preguntas, String nomFichero) throws IOException {
+	public static ArrayList leerCSV(ArrayList<Preguntas> listPreguntas, String nomFichero) throws IOException {
+		
+		listPreguntas.clear();
 		
 		String delimiter = ",";
 		String tempId = null;
@@ -46,14 +48,17 @@ public class LectorFicheros {
 				
 				tempPre = new Preguntas(tempIdInt, tempPregunta, tempRespA, tempRespB, tempRespC, tempRespD, tempRespCorr);
 				System.out.println("añadido la pregunta :" + tempPre.toString());
-				preguntas.add(tempPre);
+				listPreguntas.add(tempPre);
 			}
 			
 			br.close();
+			
+			return listPreguntas;
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return listPreguntas;
 	}
 	
 	/*private static void leerRecursoNormal( BufferedReader br ) throws IOException {
