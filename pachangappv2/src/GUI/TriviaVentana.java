@@ -1,5 +1,3 @@
-//comentario para que a aitor le funcione
-
 package GUI;
 
 import java.awt.EventQueue;
