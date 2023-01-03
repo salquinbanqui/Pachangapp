@@ -28,6 +28,7 @@ import java.awt.Dimension;
 import java.awt.ComponentOrientation;
 import javax.swing.UIManager;
 
+import base_de_datos.BD;
 import dominioConHerencia.Carta;
 import dominioConHerencia.Jugador;
 import dominioConHerencia.Portero;
@@ -268,12 +269,24 @@ public class TriviaVentana extends JFrame implements ActionListener {
 		
 		JButton btnEquipoCargar = new JButton("Cargar Equipo");
 		btnEquipoCargar.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		
+		
 		/*
 		btnEquipoCargar.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
+				
+				
+				try {
+					BD.cargarJugadores(null);
+				}
+				*/
+				
+				
+				
+				/*
 				try {
 					BufferedReader br = new BufferedReader(new FileReader("Personas.csv")); //Hemos abierto el fichero
 					String linea = br.readLine(); //Leo la línea de títulos del fichero
@@ -604,7 +617,24 @@ public class TriviaVentana extends JFrame implements ActionListener {
     	return builder.toString();
     }
     
-	
+    
+    // NO FUNCIONA, SERIA LA BASE PARA SACAR LAS COSAS DE panelCartaJugador Y METERLO EN BASE DE DATOS
+    
+    /*
+    public static ArrayList<Carta> hacerInventario(){
+    	ArrayList<Carta> inventario = new ArrayList<Carta>();
+    	
+    	for (int i = 0; i < panelCartaJugador.getRowCount(); i++) {
+			 System.out.println("Registro número: "+i);
+			 System.out.println("ID: "+TablaDatos.getValueAt(i, 0));
+			 System.out.println("NOMBRE: "+TablaDatos.getValueAt(i, 1));
+			 System.out.println("TELÉFONO: "+TablaDatos.getValueAt(i, 2));
+			 }
+    	
+    	return inventario;
+    }
+    
+    */
     
     
     
