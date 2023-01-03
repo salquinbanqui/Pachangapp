@@ -188,7 +188,11 @@ public class TriviaVentana extends JFrame implements ActionListener {
 						jugadoresDisponibles.add(carta);
 					}
 				}
-				
+
+				//panelGeneral.setVisible(false);
+				SeleccionarEquipoCarta.main(null);
+				SeleccionarEquipoCarta.listaJugadoresInventario(jugadoresDisponibles);
+
 				//SeleccionarEquipoCarta.listaJugadoresInventario(jugadoresDisponibles);
 				
 				

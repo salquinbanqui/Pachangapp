@@ -1,6 +1,7 @@
 package GUI;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.EventQueue;
 
 import javax.swing.ImageIcon;
@@ -15,6 +16,8 @@ import dominioConHerencia.Portero;
 
 import java.awt.GridLayout;
 import java.awt.Image;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,8 +53,9 @@ public class SeleccionarEquipoCarta {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 300, 450);
+		frame.setBounds(500, 100, 300, 450);
 		frame.setResizable(false);
+		frame.setTitle("Selecciona una carta");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		List<Jugador> listaJugadores = new ArrayList<Jugador>();
@@ -82,6 +86,8 @@ public class SeleccionarEquipoCarta {
 
 		
 		JPanel panelSeleccionarCarta = new JPanel(new GridLayout(0, 2));
+		List<Carta> hola = new ArrayList<>();
+		
 		for (Carta carta : listaCartasInventario) {
 			JLabel lblTiendaJugador = new JLabel();
 			lblTiendaJugador.setSize(102, 164);
@@ -91,6 +97,39 @@ public class SeleccionarEquipoCarta {
 			lblTiendaJugador.setIcon(imcdTienda);
 			JPanel p = new JPanel(new BorderLayout());
 			JPanel pw = new JPanel();
+			p.addMouseListener(new MouseListener() {
+				
+				@Override
+				public void mouseReleased(MouseEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void mousePressed(MouseEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void mouseExited(MouseEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void mouseEntered(MouseEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					System.out.println(carta.getNombre());
+					hola.add(carta);
+					System.out.println(hola.size());
+				}
+			});
 			p.add(pw, BorderLayout.WEST);
 			p.add(lblTiendaJugador,BorderLayout.CENTER);
 			panelSeleccionarCarta.add(p);
@@ -101,8 +140,16 @@ public class SeleccionarEquipoCarta {
 		frame.getContentPane().add(panelTiendaScroll);
 		
 		
+
+
+		//System.out.println(panelSeleccionarCarta.getComponents().toString());
 		//public static void cartaSeleccionada() {
 			
+		//}
+		
+		//for (Carta carta2 : hola) {
+		//	System.out.println(carta2.getNombre());
+		//	System.out.println("aqui andomio");
 		//}
 		
 		
@@ -140,10 +187,11 @@ public class SeleccionarEquipoCarta {
 	}
 	
 	//hay que hacerlo estatic o algo para que se le pueda llamar desde TriviaVentana
-	public void listaJugadoresInventario(List<Jugador> listaJugadoresInventario) {
+	public static Jugador listaJugadoresInventario(List<Jugador> listaJugadoresInventario){
+		List<Jugador> hola = new ArrayList<>();
 		
 		JPanel panelSeleccionarCarta = new JPanel(new GridLayout(0, 2));
-		for (Carta carta : listaJugadoresInventario) {
+		for (Jugador carta : listaJugadoresInventario) {
 			JLabel lblTiendaJugador = new JLabel();
 			lblTiendaJugador.setSize(102, 164);
 			//lblTiendaJugador.setSize(120, 193);
@@ -152,15 +200,52 @@ public class SeleccionarEquipoCarta {
 			lblTiendaJugador.setIcon(imcdTienda);
 			JPanel p = new JPanel(new BorderLayout());
 			JPanel pw = new JPanel();
+			p.addMouseListener(new MouseListener() {
+				
+				@Override
+				public void mouseReleased(MouseEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void mousePressed(MouseEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void mouseExited(MouseEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void mouseEntered(MouseEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					System.out.println(carta.getNombre());
+					hola.add(carta);
+					System.out.println(hola.size());
+				}
+			});
 			p.add(pw, BorderLayout.WEST);
 			p.add(lblTiendaJugador,BorderLayout.CENTER);
 			panelSeleccionarCarta.add(p);
 		}
-		frame.getContentPane().setLayout(new BorderLayout(0, 0));
+		//frame.getContentPane().setLayout(new BorderLayout(0, 0));
 		JScrollPane panelTiendaScroll = new JScrollPane(panelSeleccionarCarta);
 		panelTiendaScroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-		frame.getContentPane().add(panelTiendaScroll);
-				
+		//frame.getContentPane().add(panelTiendaScroll);
+		
+		
+		System.out.println(hola.get(0));
+		return hola.get(0);
+		
 	}
 	
 	//hay que hacerlo estatic o algo para que se le pueda llamar desde TriviaVentana
