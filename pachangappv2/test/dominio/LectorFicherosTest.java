@@ -34,8 +34,10 @@ public class LectorFicherosTest {
 		Preguntas p = new Preguntas(1,"Cuando tuvo lugar la primera Copa Mundial de Futbol?"
 				,"A- En 1920","B- En 1930","C- En 1940","D- En 1950","B");
 		
+		
+		
 		try {
-			f.leerCSV(arPreguntas, fichero);
+			arPreguntas = f.leerCSV(arPreguntas, fichero);
 			
 			assertEquals(arPreguntas.size(), 12);
 			assertEquals(arPreguntas.get(0).getPregunta(), p.getPregunta());
