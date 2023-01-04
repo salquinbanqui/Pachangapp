@@ -32,6 +32,8 @@ import base_de_datos.BD;
 import dominioConHerencia.Carta;
 import dominioConHerencia.Jugador;
 import dominioConHerencia.Portero;
+import login_registro.RegistrarVentana;
+import quiz.Quiz;
 
 import java.awt.Insets;
 import java.awt.Font;
@@ -44,18 +46,18 @@ public class TriviaVentana extends JFrame implements ActionListener {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					TriviaVentana window = new TriviaVentana();
-					window.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					TriviaVentana window = new TriviaVentana();
+//					window.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
 
 	/**
 	 * Create the application.
@@ -79,7 +81,8 @@ public class TriviaVentana extends JFrame implements ActionListener {
 
 		JLabel labelTrivia = new JLabel("Trivia");
 		panelTrivia.add(labelTrivia);
-
+		
+	
 		
 		// SECCIÓN DE CARTAS (INVENTARIO)
 
@@ -537,8 +540,18 @@ public class TriviaVentana extends JFrame implements ActionListener {
 		getContentPane().add(panelBot, BorderLayout.SOUTH);
 
 		JButton btnTrivia = new JButton("Trivia");
+		btnTrivia.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Quiz quiz = new Quiz();
+				frmTriviafut.dispose();
+				
+			}
+		});
 		btnTrivia.setMargin(new Insets(2, 22, 2, 22));
 		btnTrivia.setAlignmentX(Component.RIGHT_ALIGNMENT);
+		
 
 		JButton btnCartas = new JButton("Cartas");
 		btnCartas.setMargin(new Insets(2, 22, 2, 22));

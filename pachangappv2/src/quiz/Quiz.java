@@ -6,6 +6,8 @@ import java.awt.*;
 
 import javax.swing.*;
 
+import GUI.TriviaVentana;
+
 
 
 public class Quiz implements ActionListener{
@@ -116,7 +118,35 @@ public class Quiz implements ActionListener{
 			}
 
 		});
+	
+	Timer timer2 = new Timer(1000, new ActionListener() {
 
+		@Override
+
+		public void actionPerformed(ActionEvent e) {
+
+			seconds--;
+
+			seconds_left.setText(String.valueOf(seconds));
+
+			if(seconds<=0) {
+				seconds = 1000;
+				frame.dispose();
+				EventQueue.invokeLater(new Runnable() {
+					public void run() {
+						try {
+							TriviaVentana window = new TriviaVentana();
+							window.setVisible(true);
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
+				});
+			}
+
+			}
+
+		});
 	
 
 	public Quiz() {
@@ -357,7 +387,12 @@ public class Quiz implements ActionListener{
 
 		if(index>=total_questions) {
 
-			results();
+			try {
+				results();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 
 		}
 
@@ -533,7 +568,7 @@ public class Quiz implements ActionListener{
 
 	}
 
-	public void results(){
+	public void results() throws InterruptedException{
 
 		
 
@@ -574,7 +609,26 @@ public class Quiz implements ActionListener{
 		frame.add(number_right);
 
 		frame.add(percentage);
-
+		
+		timer2.start();
+		
+			
+		//Thread.sleep(1000);
+		
+		//Thread t = new Thread() {
+	     //   public void run() {
+	    //       synchronized(lock) {
+	    //            while (frame.isVisible())
+	    //                try {
+	    //                    lock.wait();
+	    //                } catch (InterruptedException e) {
+	    //                    e.printStackTrace();
+	    //                }
+	    //            System.out.println("Working now");
+	    //        }
+	    //    }
+	    //};
+	    //t.start();
 		
 
 	}

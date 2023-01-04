@@ -118,7 +118,7 @@ public class LogInVentana {
 						if(u.getPassword().equals(contrasenia)) {
 							JOptionPane.showMessageDialog(null, "Bienvenido", "SESIÓN INICIADA", JOptionPane.INFORMATION_MESSAGE);
 							frame.dispose();
-							TriviaVentana.main(null);
+						//	TriviaVentana.main(null);
 
 						}else {
 							JOptionPane.showMessageDialog(null, "La contraseña debe tener mas de 4 pero menos de 15 caracteres", "ERROR", JOptionPane.ERROR_MESSAGE);
@@ -132,7 +132,8 @@ public class LogInVentana {
 				//labelPass.setText("");
 
 			}
-		});
+		}); 
+		
 		btnIniciarSes.setBounds(238, 195, 130, 30);
 		frame.getContentPane().add(btnIniciarSes);
 		

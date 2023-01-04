@@ -4,7 +4,7 @@ import java.util.HashMap;
 public class IDandPasswords {
 
 
-
+//BD falta
 	HashMap<String,String> logininfo = new HashMap<String,String>();
 
 	
