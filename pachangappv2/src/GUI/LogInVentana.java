@@ -16,6 +16,7 @@ import javax.swing.JTextField;
 
 import base_de_datos.BD;
 import dominio.Usuario;
+import login_registro.RegistrarVentana;
 
 public class LogInVentana {
 

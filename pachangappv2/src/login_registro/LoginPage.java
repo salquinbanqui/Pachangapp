@@ -88,6 +88,19 @@ public class LoginPage implements ActionListener{
 
 		resetButton.addActionListener(this);
 
+		JButton btnRegistrar = new JButton("Registrar");
+		btnRegistrar.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				frame.dispose();
+				RegistrarVentana.main(null);
+				
+			}
+		});
+		btnRegistrar.setBounds(125, 230, 200, 25);
+		frame.getContentPane().add(btnRegistrar);
+		
 		
 
 		frame.add(userIDLabel);
