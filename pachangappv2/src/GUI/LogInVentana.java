@@ -4,6 +4,7 @@ import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
+import java.util.HashMap;
 import java.util.regex.Pattern;
 
 import javax.swing.JFrame;
@@ -22,6 +23,7 @@ public class LogInVentana {
 	private JTextField textFieldNombreUsu;
 	private JPasswordField textFieldPass;
 	private BD triviaDB;
+	
 
 	/**
 	 * Launch the application.
@@ -55,8 +57,9 @@ public class LogInVentana {
 		Connection con = BD.initBD("DBTrivia.db");
 		//Creamos las tablas
 		//BD.crearTablas(con);
+		HashMap<String,String> logininfo = new HashMap<String,String>();
 				
-				
+		
 		frame = new JFrame();
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

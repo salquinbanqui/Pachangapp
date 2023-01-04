@@ -5,9 +5,13 @@ import java.awt.*;
 import java.awt.event.*;
 
 import java.util.*;
+import java.util.regex.Pattern;
 
 import javax.swing.*;
 
+import GUI.TriviaVentana;
+import base_de_datos.BD;
+import dominio.Usuario;
 import quiz.Quiz;
 
 
@@ -33,8 +37,12 @@ public class LoginPage implements ActionListener{
 	JLabel messageLabel = new JLabel();
 
 	HashMap<String,String> logininfo = new HashMap<String,String>();
-
 	
+	JLabel lblExplicaNombreUsu = new JLabel("Solo usar letras");
+	//lblExplicaNombreUsu.setBounds(210, 25, 150, 14);
+	//frame.getContentPane().add(lblExplicaNombreUsu);
+	JLabel lblExplicaContra = new JLabel("Mínimo 4 caractéres");
+
 
 	LoginPage(HashMap<String,String> loginInfoOriginal){
 
@@ -48,7 +56,11 @@ public class LoginPage implements ActionListener{
 
 		userPasswordLabel.setBounds(50,150,75,25);
 
+		lblExplicaNombreUsu.setBounds(120,70,100,25);
+		frame.getContentPane().add(lblExplicaNombreUsu);
 		
+		lblExplicaContra.setBounds(120,125,150,25);
+		frame.getContentPane().add(lblExplicaContra);
 
 		messageLabel.setBounds(125,250,250,35);
 
@@ -110,7 +122,33 @@ public class LoginPage implements ActionListener{
 
 	public void actionPerformed(ActionEvent e) {
 
+		String erContrasenia = "[a-zA-Z0-9?¿!¡]{4,15}";	//expresion regular para la contraseña, entre 4 y 15 letras (mayusculas o minusculas) o numeros o ?¿!¡
+		//Ejemplos de contraseña válida: 000!!¿00, 0¿a0a0, A1??b3fq2T, abHc¿djp, po1s¡duebcisd5...
+		String erNombreUsu = "[a-zA-Z]";				//expresion regular para el nombre de usuario
+		String nombreUsu = userIDField.getText();
+		String contrasenia = userPasswordField.getText();
 		
+		if(Pattern.matches(erNombreUsu, nombreUsu) && Pattern.matches(erContrasenia, contrasenia)) {
+			//JOptionPane.showMessageDialog(null, "Bienvenido!");
+			//Comprobamos que el usuario esté registrado
+			//Da error, lo arreglo luego
+			//Usuario u = BD.obtenerDatosUsuario(con, nombreUsu);
+			//if(u!=null) {
+			//	if(u.getPassword().equals(contrasenia)) {
+			//		JOptionPane.showMessageDialog(null, "Bienvenido", "SESIÓN INICIADA", JOptionPane.INFORMATION_MESSAGE);
+			//		frame.dispose();
+			//		TriviaVentana.main(null);
+
+			//	}else {
+			//		JOptionPane.showMessageDialog(null, "La contraseña debe tener mas de 4 pero menos de 15 caracteres", "ERROR", JOptionPane.ERROR_MESSAGE);
+			//	}}else {
+			//		JOptionPane.showMessageDialog(null, "El nombre de usuario solo deberia contener letras", "ERROR", JOptionPane.ERROR_MESSAGE);
+			//	}}else {
+			//		JOptionPane.showMessageDialog(null, "Los datos no cumplen los requisitos", "ERROR", JOptionPane.ERROR_MESSAGE);
+				}
+
+		//labelNombreUsu.setText("");
+		//labelPass.setText("");
 
 		if(e.getSource()==resetButton) {
 
