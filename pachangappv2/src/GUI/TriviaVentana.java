@@ -207,16 +207,7 @@ public class TriviaVentana extends JFrame implements ActionListener {
 				//creamos una lista para almacenar los jugadores
 				HashSet<Jugador> jugadoresDisponibles = new HashSet<>();
 				jugadoresDisponibles.addAll(BD.cargarJugadores(con));
-				System.out.println(jugadoresDisponibles.size());
-				
-				//separamos las cartas y nos quedamos solo con los jugadores
-				
-				/*for (Jugador carta : cartasDisponibles) {
-					if (carta.getClass().toString().equals("class dominioConHerencia.Jugador")) {
-						jugadoresDisponibles.add(carta);
-					}
-				}
-				*/
+				//System.out.println(jugadoresDisponibles.size());
 				
 				JComboBox<Jugador> combo = new JComboBox<>();
 				

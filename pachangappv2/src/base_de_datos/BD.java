@@ -211,6 +211,7 @@ public class BD {
 	public static Set<Jugador> cargarJugadores(Connection con){
 		String sql = "SELECT * FROM Carta";
 		HashSet<Jugador> jugadorSet = new HashSet<>();
+		Jugador c = null;
 		try {
 			Statement st = con.createStatement();
 			ResultSet rs = st.executeQuery(sql);
@@ -222,8 +223,13 @@ public class BD {
 				Integer puntos = Integer.parseInt(rs.getString("puntos"));
 				Integer coste = Integer.parseInt(rs.getString("coste"));
 				String rutaFoto = rs.getString("rutaFoto");
+				boolean esPortero = rs.getBoolean("esPortero");
 				
-				Jugador c = new Jugador(nombre, puntos, coste, rutaFoto);
+				if ( esPortero == false ) { 
+					c = new Jugador(nombre, puntos, coste, rutaFoto);
+				}
+				
+				c = new Jugador(nombre, puntos, coste, rutaFoto);
 				jugadorSet.add(c);
 			}
 			rs.close();
@@ -239,6 +245,7 @@ public class BD {
 	public static Set<Portero> cargarPorteros(Connection con){
 		String sql = "SELECT * FROM Carta";
 		HashSet<Portero> porteroSet = new HashSet<>();
+		Portero c = null;
 		try {
 			Statement st = con.createStatement();
 			ResultSet rs = st.executeQuery(sql);
@@ -247,8 +254,13 @@ public class BD {
 				Integer puntos = Integer.parseInt(rs.getString("puntos"));
 				Integer coste = Integer.parseInt(rs.getString("coste"));
 				String rutaFoto = rs.getString("rutaFoto");
+				boolean esPortero = rs.getBoolean("esPortero");
 				
-				Portero c = new Portero(nombre, puntos, coste, rutaFoto);
+				if ( esPortero == true ) { 
+					c = new Portero(nombre, puntos, coste, rutaFoto);
+				}
+				
+				c = new Portero(nombre, puntos, coste, rutaFoto);
 				porteroSet.add(c);
 			}
 			rs.close();
