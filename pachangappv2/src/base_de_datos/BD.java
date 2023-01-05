@@ -19,6 +19,7 @@ import javax.swing.JScrollPane;
 import GUI.TriviaVentana;
 import dominio.Usuario;
 import dominioConHerencia.Carta;
+import dominioConHerencia.Jugador;
 import dominioConHerencia.Portero;
 import dominioConHerencia.Portero;
 
@@ -178,9 +179,9 @@ public class BD {
 		}
 	}
 	
-	public static Portero obtenerDatosJugador(Connection con, String nombre) {
+	public static Jugador obtenerDatosJugador(Connection con, String nombre) {
 		String sql = "SELECT * FROM Jugador WHERE nombre='"+nombre+"'";
-		Portero j = null;
+		Jugador j = null;
 		try {
 			Statement st = con.createStatement();
 			ResultSet rs = st.executeQuery(sql);
@@ -191,7 +192,7 @@ public class BD {
 				int p = Integer.parseInt(rs.getString("puntos"));
 				int c = Integer.parseInt(rs.getString("coste"));
 				String r = rs.getString("rutaFoto");
-			j = new Portero(n, p, c, r);
+			j = new Jugador(n, p, c, r);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -218,7 +219,7 @@ public class BD {
 	}
 	
 	public static void insertarPortero(Connection con, String nombre, String puntos, String coste, String rutaFoto) {
-		String sql = "INSERT INTO Usuario VALUES('"+nombre+"','"+puntos+"','"+coste+"','"+rutaFoto+"')";
+		String sql = "INSERT INTO Carta VALUES('"+nombre+"','"+puntos+"','"+coste+"','"+rutaFoto+"',TRUE)";
 		try {
 			Statement st = con.createStatement();
 			st.executeUpdate(sql);
@@ -251,52 +252,138 @@ public class BD {
 		return p;
 	}
 
-	public static void cargarJugadores(Connection con) {
-		
-		
+	public static void cargarCartas(Connection con) {
 
-		
-		
-		String sql = "INSERT INTO Jugador values ('Messi', 96, 30, 'imagenes/messi.gif');";
+		String sql = "INSERT INTO Jugador values ('Lewan', 99, 16, 'imagenes/lewan.gif');";
 		try {
 			Statement st = con.createStatement();
-			ResultSet rs = st.executeQuery(sql);
+			st.executeUpdate(sql);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		sql = "INSERT INTO Portero values ('Neuer', 97, 10, 'imagenes/Neuer.gif');";
+		sql = "INSERT INTO Jugador values ('Ronaldo', 98, 14, 'imagenes/ronaldo.gif');";
 		try {
 			Statement st = con.createStatement();
-			ResultSet rs = st.executeQuery(sql);
+			st.executeUpdate(sql);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		sql = "INSERT INTO Portero values Lewan = new Jugador('a', 99, 15, 'imagenes/lewan.gif');";
+		sql = "INSERT INTO Portero values ('Neuer', 97, 12, 'imagenes/Neuer.gif');";
 		try {
 			Statement st = con.createStatement();
-			ResultSet rs = st.executeQuery(sql);
+			st.executeUpdate(sql);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		sql = "INSERT INTO Jugador values ('Neymar', 92, 25, 'imagenes/neymar.gif');";
+		sql = "INSERT INTO Jugador values ('Mbappe', 97, 12, 'imagenes/mbappe.gif');";
 		try {
 			Statement st = con.createStatement();
-			ResultSet rs = st.executeQuery(sql);
+			st.executeUpdate(sql);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		sql = "INSERT INTO Jugador values ('Gavi', 86, 17, 'imagenes/gavi.png');";
+		sql = "INSERT INTO Portero values ('Casillas', 96, 10, 'imagenes/casillas.gif');";
 		try {
 			Statement st = con.createStatement();
-			ResultSet rs = st.executeQuery(sql);
+			st.executeUpdate(sql);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		sql = "INSERT INTO Jugador values ('Messi', 96, 10, 'imagenes/messi.gif');";
+		try {
+			Statement st = con.createStatement();
+			st.executeUpdate(sql);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		sql = "INSERT INTO Jugador values ('Ramos', 96, 8, 'imagenes/ramos.gif');";
+		try {
+			Statement st = con.createStatement();
+			st.executeUpdate(sql);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		sql = "INSERT INTO Jugador values ('Chiellini', 95, 8, 'imagenes/chiellini.gif');";
+		try {
+			Statement st = con.createStatement();
+			st.executeUpdate(sql);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		sql = "INSERT INTO Jugador values ('Modric', 92, 6, 'imagenes/modric.gif');";
+		try {
+			Statement st = con.createStatement();
+			st.executeUpdate(sql);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		sql = "INSERT INTO Jugador values ('Neymar', 92, 6, 'imagenes/neymar.gif');";
+		try {
+			Statement st = con.createStatement();
+			st.executeUpdate(sql);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		sql = "INSERT INTO Jugador values ('Pique', 92, 1, 'imagenes/pique.gif');";
+		try {
+			Statement st = con.createStatement();
+			st.executeUpdate(sql);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		sql = "INSERT INTO Jugador values ('Salah', 92, 1, 'imagenes/salah.gif');";
+		try {
+			Statement st = con.createStatement();
+			st.executeUpdate(sql);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		sql = "INSERT INTO Portero values ('Buffon', 89, 1, 'imagenes/buffon.gif');";
+		try {
+			Statement st = con.createStatement();
+			st.executeUpdate(sql);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		sql = "INSERT INTO Jugador values ('Koke', 85, 1, 'imagenes/koke.gif');";
+		try {
+			Statement st = con.createStatement();
+			st.executeUpdate(sql);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		sql = "INSERT INTO Jugador values ('Haland', 82, 1, 'imagenes/haland.gif');";
+		try {
+			Statement st = con.createStatement();
+			st.executeUpdate(sql);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -330,7 +417,9 @@ public class BD {
 		return jugadorSet;
 		
 	}
-		
+	
+	//comentario para que le funcione a aitor
+	
 	
 	public Set<Portero> sacarPorteros(Connection con){
 		String sql = "SELECT * FROM Jugador";
