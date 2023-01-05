@@ -18,7 +18,9 @@ import java.io.PrintWriter;
 import java.net.Inet4Address;
 import java.sql.Connection;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.awt.CardLayout;
 import javax.swing.JScrollPane;
 import javax.swing.JLabel;
@@ -183,6 +185,7 @@ public class TriviaVentana extends JFrame implements ActionListener {
 				
 				//cuando nos funcione el inventario se cogera la lista de cartas de ahí,
 				//pero por ahora se crean los jugadores a mano
+				/*
 				Jugador Messi = new Jugador("Messi", 96, 20, "imagenes/messi.gif");
 				Portero Neuer = new Portero("Neuer", 97, 25, "imagenes/Neuer.gif");
 				Portero Otro = new Portero("Otro", 91, 25, "imagenes/lewan.gif");
@@ -199,16 +202,20 @@ public class TriviaVentana extends JFrame implements ActionListener {
 				cartasDisponibles.add(b);
 				cartasDisponibles.add(c);
 				cartasDisponibles.add(d);
+				*/
 
 				//creamos una lista para almacenar los jugadores
 				List<Jugador> jugadoresDisponibles = new ArrayList<>();
+				//HashSet<Jugador> jugadoresDisponibles2 = HashSet<>();
 				
 				//separamos las cartas y nos quedamos solo con los jugadores
-				for (Jugador carta : cartasDisponibles) {
+				
+				/*for (Jugador carta : cartasDisponibles) {
 					if (carta.getClass().toString().equals("class dominioConHerencia.Jugador")) {
 						jugadoresDisponibles.add(carta);
 					}
 				}
+				*/
 				
 				JComboBox<Jugador> combo = new JComboBox<>();
 				
