@@ -19,17 +19,15 @@ import javax.swing.JScrollPane;
 import GUI.TriviaVentana;
 import dominio.Usuario;
 import dominioConHerencia.Carta;
-import dominioConHerencia.Jugador;
 import dominioConHerencia.Portero;
 import dominioConHerencia.Portero;
 
 public class BD {
 	
-	/*
 	public static void main(String[] args) throws ClassNotFoundException {
 // rec
 		// Carga el sqlite-JDBC driver usando el cargador de clases
-		Class.forName("org.sqlite.JDBC");
+		Class.forName("...");
 		//Class.forName("org.sqlite.JDBC");
 
 		Connection connection = null;
@@ -71,7 +69,6 @@ public class BD {
 			}
 		}
 	}
-	*/
 	
 	public static Connection initBD(String nombreBD) {
 		Connection con = null;
@@ -181,9 +178,9 @@ public class BD {
 		}
 	}
 	
-	public static Jugador obtenerDatosJugador(Connection con, String nombre) {
+	public static Portero obtenerDatosJugador(Connection con, String nombre) {
 		String sql = "SELECT * FROM Jugador WHERE nombre='"+nombre+"'";
-		Jugador j = null;
+		Portero j = null;
 		try {
 			Statement st = con.createStatement();
 			ResultSet rs = st.executeQuery(sql);
@@ -194,7 +191,7 @@ public class BD {
 				int p = Integer.parseInt(rs.getString("puntos"));
 				int c = Integer.parseInt(rs.getString("coste"));
 				String r = rs.getString("rutaFoto");
-			j = new Jugador(n, p, c, r);
+			j = new Portero(n, p, c, r);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -233,7 +230,7 @@ public class BD {
 	}
 	
 	public static Portero obtenerDatosPortero(Connection con, String nombre) {
-		String sql = "SELECT * FROM Portero WHERE nombre='"+nombre+"'";
+		String sql = "SELECT * FROM Jugador WHERE nombre='"+nombre+"'";
 		Portero p = null;
 		try {
 			Statement st = con.createStatement();
@@ -253,155 +250,53 @@ public class BD {
 		}
 		return p;
 	}
-	
-	//cuidao
-	public static void cargarCartas(Connection con) {
 
-		String sql = "INSERT INTO Jugador values ('Lewan', 99, 16, 'imagenes/lewan.gif');";
-		try {
-			Statement st = con.createStatement();
-			st.executeUpdate(sql);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	public static void cargarJugadores(Connection con) {
 		
-		sql = "INSERT INTO Jugador values ('Ronaldo', 98, 14, 'imagenes/ronaldo.gif');";
-		try {
-			Statement st = con.createStatement();
-			st.executeUpdate(sql);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		sql = "INSERT INTO Portero values ('Neuer', 97, 12, 'imagenes/Neuer.gif');";
-		try {
-			Statement st = con.createStatement();
-			st.executeUpdate(sql);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		sql = "INSERT INTO Jugador values ('Mbappe', 97, 12, 'imagenes/mbappe.gif');";
-		try {
-			Statement st = con.createStatement();
-			st.executeUpdate(sql);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		sql = "INSERT INTO Portero values ('Casillas', 96, 10, 'imagenes/casillas.gif');";
-		try {
-			Statement st = con.createStatement();
-			st.executeUpdate(sql);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		sql = "INSERT INTO Jugador values ('Messi', 96, 10, 'imagenes/messi.gif');";
-		try {
-			Statement st = con.createStatement();
-			st.executeUpdate(sql);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		sql = "INSERT INTO Jugador values ('Ramos', 96, 8, 'imagenes/ramos.gif');";
-		try {
-			Statement st = con.createStatement();
-			st.executeUpdate(sql);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		sql = "INSERT INTO Jugador values ('Chiellini', 95, 8, 'imagenes/chiellini.gif');";
-		try {
-			Statement st = con.createStatement();
-			st.executeUpdate(sql);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		sql = "INSERT INTO Jugador values ('Modric', 92, 6, 'imagenes/modric.gif');";
-		try {
-			Statement st = con.createStatement();
-			st.executeUpdate(sql);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		sql = "INSERT INTO Jugador values ('Neymar', 92, 6, 'imagenes/neymar.gif');";
-		try {
-			Statement st = con.createStatement();
-			st.executeUpdate(sql);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		sql = "INSERT INTO Jugador values ('Pique', 92, 1, 'imagenes/pique.gif');";
-		try {
-			Statement st = con.createStatement();
-			st.executeUpdate(sql);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		sql = "INSERT INTO Jugador values ('Salah', 92, 1, 'imagenes/salah.gif');";
-		try {
-			Statement st = con.createStatement();
-			st.executeUpdate(sql);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		sql = "INSERT INTO Portero values ('Buffon', 89, 1, 'imagenes/buffon.gif');";
-		try {
-			Statement st = con.createStatement();
-			st.executeUpdate(sql);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		sql = "INSERT INTO Jugador values ('Koke', 85, 1, 'imagenes/koke.gif');";
-		try {
-			Statement st = con.createStatement();
-			st.executeUpdate(sql);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		sql = "INSERT INTO Jugador values ('Haland', 82, 1, 'imagenes/haland.gif');";
-		try {
-			Statement st = con.createStatement();
-			st.executeUpdate(sql);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		
 
 		
-
 		
-
+		String sql = "INSERT INTO Jugador values ('Messi', 96, 30, 'imagenes/messi.gif');";
+		try {
+			Statement st = con.createStatement();
+			ResultSet rs = st.executeQuery(sql);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		sql = "INSERT INTO Portero values ('Neuer', 97, 10, 'imagenes/Neuer.gif');";
+		try {
+			Statement st = con.createStatement();
+			ResultSet rs = st.executeQuery(sql);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		sql = "INSERT INTO Portero values Lewan = new Jugador('a', 99, 15, 'imagenes/lewan.gif');";
+		try {
+			Statement st = con.createStatement();
+			ResultSet rs = st.executeQuery(sql);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		sql = "INSERT INTO Jugador values ('Neymar', 92, 25, 'imagenes/neymar.gif');";
+		try {
+			Statement st = con.createStatement();
+			ResultSet rs = st.executeQuery(sql);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		sql = "INSERT INTO Jugador values ('Gavi', 86, 17, 'imagenes/gavi.png');";
 		try {
 			Statement st = con.createStatement();
-			st.executeUpdate(sql);
+			ResultSet rs = st.executeQuery(sql);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -411,9 +306,9 @@ public class BD {
 	}
 	
 	
-	public Set<Jugador> sacarJugadores(Connection con){
+	public Set<Portero> sacarJugadores(Connection con){
 		String sql = "SELECT * FROM Jugador";
-		HashSet<Jugador> jugadorSet = new HashSet<>();
+		HashSet<Portero> jugadorSet = new HashSet<>();
 		try {
 			Statement st = con.createStatement();
 			ResultSet rs = st.executeQuery(sql);
@@ -423,7 +318,7 @@ public class BD {
 				Integer coste = Integer.parseInt(rs.getString("coste"));
 				String rutaFoto = rs.getString("rutaFoto");
 				
-				Jugador c = new Jugador(nombre, puntos, coste, rutaFoto);
+				Portero c = new Portero(nombre, puntos, coste, rutaFoto);
 				jugadorSet.add(c);
 			}
 			rs.close();
@@ -435,6 +330,8 @@ public class BD {
 		return jugadorSet;
 		
 	}
+	
+	//comentario para que le funcione a aitor
 	
 	
 	public Set<Portero> sacarPorteros(Connection con){
