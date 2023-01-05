@@ -151,6 +151,111 @@ public class BD {
 	}
 	
 	
+	//PARTE DE CARTAS
+	
+	public static void crearTablaCartas(Connection con) {
+		String sql = "CREATE TABLE IF NOT EXISTS Carta (nombre String, puntos String, coste String, rutaFoto String)";
+		try {
+			Statement st = con.createStatement();
+			st.executeUpdate(sql);
+			st.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public static void insertarCarta(Connection con, String nombre, String puntos, String coste, String rutaFoto) {
+		String sql = "INSERT INTO Carta VALUES('"+nombre+"','"+puntos+"','"+coste+"','"+rutaFoto+"')";
+		try {
+			Statement st = con.createStatement();
+			st.executeUpdate(sql);
+			st.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public static Carta obtenerDatosCarta(Connection con, String nombre) {
+		String sql = "SELECT * FROM Carta WHERE nombre='"+nombre+"'";
+		Carta c = null;
+		try {
+			Statement st = con.createStatement();
+			ResultSet rs = st.executeQuery(sql);
+			if(rs.next()) {
+				String nom = rs.getString("nombre");
+				int puntos = Integer.parseInt(rs.getString("puntos"));
+				int coste = Integer.parseInt(rs.getString("coste"));
+				String rutaF = rs.getString("rutaFoto");
+				
+				//estoy bastante seguro de que en base de datos el primer elemento es 1, no 0
+				if (rs.getString(5) == "TRUE" /*|| rs.getString(5) != null*/) { 
+					c = new Jugador(nom, puntos, coste, rutaF);
+				}else {
+					c = new Portero(nom, puntos, coste, rutaF);
+				}
+
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return c;
+	}
+	
+	public Set<Jugador> sacarJugadores(Connection con){
+		String sql = "SELECT * FROM Carta";
+		HashSet<Jugador> jugadorSet = new HashSet<>();
+		try {
+			Statement st = con.createStatement();
+			ResultSet rs = st.executeQuery(sql);
+			while(rs.next()) {
+				if (rs.getString(5) == "TRUE") {
+					
+				}
+				String nombre = rs.getString("nombre");
+				Integer puntos = Integer.parseInt(rs.getString("puntos"));
+				Integer coste = Integer.parseInt(rs.getString("coste"));
+				String rutaFoto = rs.getString("rutaFoto");
+				
+				Jugador c = new Jugador(nombre, puntos, coste, rutaFoto);
+				jugadorSet.add(c);
+			}
+			rs.close();
+			st.close();
+		}catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return jugadorSet;
+		
+	}	
+	
+	public Set<Portero> sacarPorteros(Connection con){
+		String sql = "SELECT * FROM Carta";
+		HashSet<Portero> porteroSet = new HashSet<>();
+		try {
+			Statement st = con.createStatement();
+			ResultSet rs = st.executeQuery(sql);
+			while(rs.next()) {
+				String nombre = rs.getString("nombre");
+				Integer puntos = Integer.parseInt(rs.getString("puntos"));
+				Integer coste = Integer.parseInt(rs.getString("coste"));
+				String rutaFoto = rs.getString("rutaFoto");
+				
+				Portero c = new Portero(nombre, puntos, coste, rutaFoto);
+				porteroSet.add(c);
+			}
+			rs.close();
+			st.close();
+		}catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return porteroSet;
+		
+	}
 	
 	//PARTE DE LEER INFO DE JUGADOR
 	
@@ -393,58 +498,7 @@ public class BD {
 	}
 	
 	
-	public Set<Portero> sacarJugadores(Connection con){
-		String sql = "SELECT * FROM Jugador";
-		HashSet<Portero> jugadorSet = new HashSet<>();
-		try {
-			Statement st = con.createStatement();
-			ResultSet rs = st.executeQuery(sql);
-			while(rs.next()) {
-				String nombre = rs.getString("nombre");
-				Integer puntos = Integer.parseInt(rs.getString("puntos"));
-				Integer coste = Integer.parseInt(rs.getString("coste"));
-				String rutaFoto = rs.getString("rutaFoto");
-				
-				Portero c = new Portero(nombre, puntos, coste, rutaFoto);
-				jugadorSet.add(c);
-			}
-			rs.close();
-			st.close();
-		}catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}
-		return jugadorSet;
-		
-	}
-	
-	//comentario para que le funcione a aitor
-	
-	
-	public Set<Portero> sacarPorteros(Connection con){
-		String sql = "SELECT * FROM Jugador";
-		HashSet<Portero> porteroSet = new HashSet<>();
-		try {
-			Statement st = con.createStatement();
-			ResultSet rs = st.executeQuery(sql);
-			while(rs.next()) {
-				String nombre = rs.getString("nombre");
-				Integer puntos = Integer.parseInt(rs.getString("puntos"));
-				Integer coste = Integer.parseInt(rs.getString("coste"));
-				String rutaFoto = rs.getString("rutaFoto");
-				
-				Portero c = new Portero(nombre, puntos, coste, rutaFoto);
-				porteroSet.add(c);
-			}
-			rs.close();
-			st.close();
-		}catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}
-		return porteroSet;
-		
-	}
+
 	
 	
 	
