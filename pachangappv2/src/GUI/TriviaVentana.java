@@ -205,8 +205,9 @@ public class TriviaVentana extends JFrame implements ActionListener {
 				*/
 
 				//creamos una lista para almacenar los jugadores
-				List<Jugador> jugadoresDisponibles = new ArrayList<>();
-				//HashSet<Jugador> jugadoresDisponibles2 = HashSet<>();
+				HashSet<Jugador> jugadoresDisponibles = new HashSet<>();
+				jugadoresDisponibles.addAll(BD.cargarJugadores(con));
+				System.out.println(jugadoresDisponibles.size());
 				
 				//separamos las cartas y nos quedamos solo con los jugadores
 				
