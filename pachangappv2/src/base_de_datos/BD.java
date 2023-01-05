@@ -330,9 +330,7 @@ public class BD {
 		return jugadorSet;
 		
 	}
-	
-	//comentario para que le funcione a aitor
-	
+		
 	
 	public Set<Portero> sacarPorteros(Connection con){
 		String sql = "SELECT * FROM Jugador";
