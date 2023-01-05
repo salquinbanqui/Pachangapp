@@ -8,6 +8,10 @@ public class Portero extends Carta {
 	}
 
 
+	@Override
+	public String toString() {
+		return nombre + ", " + puntos;
+	}
 
 	
 }

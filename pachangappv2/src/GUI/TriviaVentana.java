@@ -5,6 +5,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -46,18 +48,18 @@ public class TriviaVentana extends JFrame implements ActionListener {
 	/**
 	 * Launch the application.
 	 */
-//	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					TriviaVentana window = new TriviaVentana();
-//					window.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//	}
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					TriviaVentana window = new TriviaVentana();
+					window.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
 
 	/**
 	 * Create the application.
@@ -164,6 +166,10 @@ public class TriviaVentana extends JFrame implements ActionListener {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
+				
+				System.out.println(im.getImage());
+				System.out.println(imcd.getImage());
+				
 				//cuando nos funcione el inventario se cogera la lista de cartas de ahí,
 				//pero por ahora se crean los jugadores a mano
 				Jugador Messi = new Jugador("Messi", 96, 20, "url_de_la_carta");
@@ -192,10 +198,33 @@ public class TriviaVentana extends JFrame implements ActionListener {
 						jugadoresDisponibles.add(carta);
 					}
 				}
+				
+				JComboBox<Jugador> combo = new JComboBox<>();
+				
+				for (Jugador jugador : jugadoresDisponibles) {
+					combo.addItem(jugador);
+				}
+				
+				JOptionPane.showMessageDialog(null, combo, "Reservas", JOptionPane.QUESTION_MESSAGE);
+				
+				
+				for (Jugador jugador : jugadoresDisponibles) {
+					if (combo.getSelectedItem().toString().equals(jugador.toString())) {
+						//esto no se hasta que punto esta bien o que, hay que hacer que la ruta de la ft del jugador cambie
+						//una vez hecho esto ya debería estar
+						System.out.println("hola3");
+						ImageIcon img = new ImageIcon(jugador.getRutaFoto());
+						im.setImage(img.getImage());
+						System.out.println("hola");
+						System.out.println(im.getImage());
+						System.out.println(imcd.getImage());
+						panelEquipoCentro.repaint();
+					}
+				}
 
 				//panelGeneral.setVisible(false);
-				SeleccionarEquipoCarta.main(null);
-				SeleccionarEquipoCarta.listaJugadoresInventario(jugadoresDisponibles);
+				//SeleccionarEquipoCarta.main(null);
+				//SeleccionarEquipoCarta.listaJugadoresInventario(jugadoresDisponibles);
 
 				//SeleccionarEquipoCarta.listaJugadoresInventario(jugadoresDisponibles);
 				

@@ -7,6 +7,14 @@ public class Jugador extends Carta {
 		// TODO Auto-generated constructor stub
 	}
 
+	@Override
+	public String toString() {
+		return nombre + ", " + puntos;
+	}
+	
+	
+	
+	
 
 
 }
