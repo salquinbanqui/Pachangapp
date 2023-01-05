@@ -18,8 +18,11 @@ import java.io.PrintWriter;
 import java.net.Inet4Address;
 import java.sql.Connection;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.awt.CardLayout;
 import javax.swing.JScrollPane;
@@ -146,6 +149,10 @@ public class TriviaVentana extends JFrame implements ActionListener {
 		PanelConFondo panelEquipoCentro = new PanelConFondo(fondo.getImage());
 		panelEquipoCentro.setLayout(new GridLayout(3, 3));
 		
+		
+		
+		Map<String, Carta> mapaAlineacion = new HashMap<>();
+		
 		//crea los labels de los jugadores del campo reescalados
 		JLabel lblEquipoDefArriba = new JLabel();
 		lblEquipoDefArriba.setSize(102, 164);
@@ -183,31 +190,10 @@ public class TriviaVentana extends JFrame implements ActionListener {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
-				//cuando nos funcione el inventario se cogera la lista de cartas de ahí,
-				//pero por ahora se crean los jugadores a mano
-				/*
-				Jugador Messi = new Jugador("Messi", 96, 20, "imagenes/messi.gif");
-				Portero Neuer = new Portero("Neuer", 97, 25, "imagenes/Neuer.gif");
-				Portero Otro = new Portero("Otro", 91, 25, "imagenes/lewan.gif");
-				Jugador a = new Jugador("a", 92, 20, "imagenes/lewan.gif");
-				Jugador b = new Jugador("b", 93, 20, "imagenes/lewan.gif");
-				Jugador c = new Jugador("c", 95, 20, "imagenes/lewan.gif");
-				Jugador d = new Jugador("d", 94, 20, "imagenes/lewan.gif");
-				
-				//creamos y añadimos las cartas a la lista
-				//cuando tengamos bien hecho el inventario esto no hará falta
-				List<Jugador> cartasDisponibles = new ArrayList<>();
-				cartasDisponibles.add(Messi);
-				cartasDisponibles.add(a);
-				cartasDisponibles.add(b);
-				cartasDisponibles.add(c);
-				cartasDisponibles.add(d);
-				*/
-
+			
 				//creamos una lista para almacenar los jugadores
 				HashSet<Jugador> jugadoresDisponibles = new HashSet<>();
 				jugadoresDisponibles.addAll(BD.cargarJugadores(con));
-				//System.out.println(jugadoresDisponibles.size());
 				
 				JComboBox<Jugador> combo = new JComboBox<>();
 				
@@ -220,34 +206,26 @@ public class TriviaVentana extends JFrame implements ActionListener {
 				
 				for (Jugador jugador : jugadoresDisponibles) {
 					if (combo.getSelectedItem().toString().equals(jugador.toString())) {
-						//esto no se hasta que punto esta bien o que, hay que hacer que la ruta de la ft del jugador cambie
-						//una vez hecho esto ya debería estar
+
 						lblEquipoDefArriba.setSize(102, 164);
 						ImageIcon img = new ImageIcon(jugador.getRutaFoto());
-						//im.setImage(img.getImage());
+
 
 						ImageIcon imgcd = new ImageIcon(img.getImage().getScaledInstance(lblEquipoDefArriba.getWidth(), lblEquipoDefArriba.getHeight(), Image.SCALE_DEFAULT));
 						
 						lblEquipoDefArriba.setIcon(imgcd);
 					
+						mapaAlineacion.put(lblEquipoDefArriba.getName(), jugador);
 
 					}
 				}
-
-				//panelGeneral.setVisible(false);
-				//SeleccionarEquipoCarta.main(null);
-				//SeleccionarEquipoCarta.listaJugadoresInventario(jugadoresDisponibles);
-
-				//SeleccionarEquipoCarta.listaJugadoresInventario(jugadoresDisponibles);
 				
-				
-				//FALTARÍA CREAR EL UNA VENTANA NUEVA PARA PODER ELEGIR EL JUGADOR QUE SE QUIERA COLOCAR
-				//HAY QUE RECORRER LA LISTA DEL INVENTARIO PARA IR COLOCANDO LOS JUGADORES (TODOS MENOS LOS QUE YA ESTEN
-				//COLOCADOS EN EL CAMPO YA) Y QUE AL SELECCIONARLO SE REEMPLACE POR EL JUGADOR QUE ESTE EN EL MOMENTO
+
 				
 			}
 		});
 
+		
 
 		JLabel lblEquipoDelanteroArriba = new JLabel();
 		lblEquipoDelanteroArriba.setSize(102, 164);
@@ -256,6 +234,69 @@ public class TriviaVentana extends JFrame implements ActionListener {
 				im2.getImage().getScaledInstance(lblEquipoDelanteroArriba.getWidth(), lblEquipoDelanteroArriba.getHeight(), Image.SCALE_DEFAULT));
 		lblEquipoDelanteroArriba.setIcon(imcd2);
 		lblEquipoDelanteroArriba.setOpaque(false);
+		lblEquipoDelanteroArriba.addMouseListener(new MouseListener() {
+			
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+			
+				//creamos una lista para almacenar los jugadores
+				HashSet<Jugador> jugadoresDisponibles = new HashSet<>();
+				jugadoresDisponibles.addAll(BD.cargarJugadores(con));
+				
+				JComboBox<Jugador> combo = new JComboBox<>();
+				
+				for (Jugador jugador : jugadoresDisponibles) {
+					combo.addItem(jugador);
+				}
+				
+				JOptionPane.showMessageDialog(null, combo, "Reservas", JOptionPane.QUESTION_MESSAGE);
+				
+				
+				for (Jugador jugador : jugadoresDisponibles) {
+					if (combo.getSelectedItem().toString().equals(jugador.toString())) {
+
+						lblEquipoDelanteroArriba.setSize(102, 164);
+						ImageIcon img = new ImageIcon(jugador.getRutaFoto());
+
+
+						ImageIcon imgcd = new ImageIcon(img.getImage().getScaledInstance(lblEquipoDelanteroArriba.getWidth(), lblEquipoDelanteroArriba.getHeight(), Image.SCALE_DEFAULT));
+						
+						lblEquipoDelanteroArriba.setIcon(imgcd);
+					
+						mapaAlineacion.put(lblEquipoDelanteroArriba.getName(), jugador);
+
+					}
+				}
+				
+
+				
+			}
+		});
 
 		JLabel lblEquipoPortero = new JLabel();
 		lblEquipoPortero.setSize(102, 164);
@@ -264,6 +305,69 @@ public class TriviaVentana extends JFrame implements ActionListener {
 				im3.getImage().getScaledInstance(lblEquipoPortero.getWidth(), lblEquipoPortero.getHeight(), Image.SCALE_DEFAULT));
 		lblEquipoPortero.setIcon(imcd3);
 		lblEquipoPortero.setOpaque(false);
+		lblEquipoPortero.addMouseListener(new MouseListener() {
+			
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+			
+				//creamos una lista para almacenar los porteros
+				HashSet<Portero> porterosDisponibles = new HashSet<>();
+				porterosDisponibles.addAll(BD.cargarPorteros(con));
+				
+				JComboBox<Portero> combo = new JComboBox<>();
+				
+				for (Portero portero : porterosDisponibles) {
+					combo.addItem(portero);
+				}
+				
+				JOptionPane.showMessageDialog(null, combo, "Reservas", JOptionPane.QUESTION_MESSAGE);
+				
+				
+				for (Portero portero : porterosDisponibles) {
+					if (combo.getSelectedItem().toString().equals(portero.toString())) {
+
+						lblEquipoPortero.setSize(102, 164);
+						ImageIcon img = new ImageIcon(portero.getRutaFoto());
+
+
+						ImageIcon imgcd = new ImageIcon(img.getImage().getScaledInstance(lblEquipoPortero.getWidth(), lblEquipoPortero.getHeight(), Image.SCALE_DEFAULT));
+						
+						lblEquipoPortero.setIcon(imgcd);
+					
+						mapaAlineacion.put(lblEquipoPortero.getName(), portero);
+
+					}
+				}
+				
+
+				
+			}
+		});
 		
 		System.out.println(im3.getDescription().toString());
 
@@ -274,6 +378,69 @@ public class TriviaVentana extends JFrame implements ActionListener {
 				im4.getImage().getScaledInstance(lblEquipoDelanteroDebajo.getWidth(), lblEquipoDelanteroDebajo.getHeight(), Image.SCALE_DEFAULT));
 		lblEquipoDelanteroDebajo.setIcon(imcd4);
 		lblEquipoDelanteroDebajo.setOpaque(false);
+		lblEquipoDelanteroDebajo.addMouseListener(new MouseListener() {
+			
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+			
+				//creamos una lista para almacenar los jugadores
+				HashSet<Jugador> jugadoresDisponibles = new HashSet<>();
+				jugadoresDisponibles.addAll(BD.cargarJugadores(con));
+				
+				JComboBox<Jugador> combo = new JComboBox<>();
+				
+				for (Jugador jugador : jugadoresDisponibles) {
+					combo.addItem(jugador);
+				}
+				
+				JOptionPane.showMessageDialog(null, combo, "Reservas", JOptionPane.QUESTION_MESSAGE);
+				
+				
+				for (Jugador jugador : jugadoresDisponibles) {
+					if (combo.getSelectedItem().toString().equals(jugador.toString())) {
+
+						lblEquipoDelanteroDebajo.setSize(102, 164);
+						ImageIcon img = new ImageIcon(jugador.getRutaFoto());
+
+
+						ImageIcon imgcd = new ImageIcon(img.getImage().getScaledInstance(lblEquipoDelanteroDebajo.getWidth(), lblEquipoDelanteroDebajo.getHeight(), Image.SCALE_DEFAULT));
+						
+						lblEquipoDelanteroDebajo.setIcon(imgcd);
+					
+						mapaAlineacion.put(lblEquipoDelanteroDebajo.getName(), jugador);
+
+					}
+				}
+				
+
+				
+			}
+		});
 
 		JLabel lblEquipoDefensaDebajo = new JLabel();
 		lblEquipoDefensaDebajo.setSize(102, 164);
@@ -282,8 +449,75 @@ public class TriviaVentana extends JFrame implements ActionListener {
 				im5.getImage().getScaledInstance(lblEquipoDefensaDebajo.getWidth(), lblEquipoDefensaDebajo.getHeight(), Image.SCALE_DEFAULT));
 		lblEquipoDefensaDebajo.setIcon(imcd5);
 		lblEquipoDefensaDebajo.setOpaque(false);
+		lblEquipoDefensaDebajo.addMouseListener(new MouseListener() {
+			
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+			
+				//creamos una lista para almacenar los jugadores
+				HashSet<Jugador> jugadoresDisponibles = new HashSet<>();
+				jugadoresDisponibles.addAll(BD.cargarJugadores(con));
+				
+				JComboBox<Jugador> combo = new JComboBox<>();
+				
+				for (Jugador jugador : jugadoresDisponibles) {
+					combo.addItem(jugador);
+				}
+				
+				JOptionPane.showMessageDialog(null, combo, "Reservas", JOptionPane.QUESTION_MESSAGE);
+				
+				
+				for (Jugador jugador : jugadoresDisponibles) {
+					if (combo.getSelectedItem().toString().equals(jugador.toString())) {
+
+						lblEquipoDefensaDebajo.setSize(102, 164);
+						ImageIcon img = new ImageIcon(jugador.getRutaFoto());
+
+
+						ImageIcon imgcd = new ImageIcon(img.getImage().getScaledInstance(lblEquipoDefensaDebajo.getWidth(), lblEquipoDefensaDebajo.getHeight(), Image.SCALE_DEFAULT));
+						
+						lblEquipoDefensaDebajo.setIcon(imgcd);
+					
+						mapaAlineacion.put(lblEquipoDefensaDebajo.getName(), jugador);
+
+					}
+				}
+				
+
+				
+			}
+		});
 		
-		//Map<Carta> mapaAlineacion = new HashMap<>();
+		
+		
+		
+		
+		
 
 		//crea los huecos vacios (tanto los jugadores como los huecos vacios
 		//tienen el setOpaque en false para que se vea el fondo
