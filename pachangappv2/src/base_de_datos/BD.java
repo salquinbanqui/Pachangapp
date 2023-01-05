@@ -25,10 +25,11 @@ import dominioConHerencia.Portero;
 
 public class BD {
 	
+	/*
 	public static void main(String[] args) throws ClassNotFoundException {
 // rec
 		// Carga el sqlite-JDBC driver usando el cargador de clases
-		Class.forName("...");
+		Class.forName("org.sqlite.JDBC");
 		//Class.forName("org.sqlite.JDBC");
 
 		Connection connection = null;
@@ -70,6 +71,7 @@ public class BD {
 			}
 		}
 	}
+	*/
 	
 	public static Connection initBD(String nombreBD) {
 		Connection con = null;

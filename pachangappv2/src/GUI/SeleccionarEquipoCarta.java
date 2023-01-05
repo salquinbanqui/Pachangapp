@@ -10,6 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
+import base_de_datos.BD;
 import dominioConHerencia.Carta;
 import dominioConHerencia.Jugador;
 import dominioConHerencia.Portero;
@@ -18,6 +19,7 @@ import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 
