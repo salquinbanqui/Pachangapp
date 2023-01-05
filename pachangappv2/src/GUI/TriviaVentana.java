@@ -3,6 +3,7 @@ package GUI;
 import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -14,6 +15,7 @@ import java.awt.event.MouseListener;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.PrintWriter;
+import java.net.Inet4Address;
 import java.util.ArrayList;
 import java.util.List;
 import java.awt.CardLayout;
@@ -132,6 +134,8 @@ public class TriviaVentana extends JFrame implements ActionListener {
 		//crea los labels de los jugadores del campo reescalados
 		JLabel lblEquipoDefArriba = new JLabel();
 		lblEquipoDefArriba.setSize(102, 164);
+		System.out.println("w = " + lblEquipoDefArriba.getWidth());
+		System.out.println("h = " + lblEquipoDefArriba.getHeight());
 		ImageIcon im = new ImageIcon("imagenes\\lewan.gif");
 		ImageIcon imcd = new ImageIcon(
 				im.getImage().getScaledInstance(lblEquipoDefArriba.getWidth(), lblEquipoDefArriba.getHeight(), Image.SCALE_DEFAULT));
@@ -166,19 +170,15 @@ public class TriviaVentana extends JFrame implements ActionListener {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
-				
-				System.out.println(im.getImage());
-				System.out.println(imcd.getImage());
-				
 				//cuando nos funcione el inventario se cogera la lista de cartas de ahí,
 				//pero por ahora se crean los jugadores a mano
-				Jugador Messi = new Jugador("Messi", 96, 20, "imagenes\\messi.gif");
-				Portero Neuer = new Portero("Neuer", 97, 25, "url_de_la_carta");
-				Portero Otro = new Portero("Otro", 91, 25, "url_de_la_carta");
-				Jugador a = new Jugador("a", 92, 20, "url_de_la_carta");
-				Jugador b = new Jugador("b", 93, 20, "url_de_la_carta");
-				Jugador c = new Jugador("c", 95, 20, "url_de_la_carta");
-				Jugador d = new Jugador("d", 94, 20, "url_de_la_carta");
+				Jugador Messi = new Jugador("Messi", 96, 20, "imagenes/messi.gif");
+				Portero Neuer = new Portero("Neuer", 97, 25, "imagenes/Neuer.gif");
+				Portero Otro = new Portero("Otro", 91, 25, "imagenes/lewan.gif");
+				Jugador a = new Jugador("a", 92, 20, "imagenes/lewan.gif");
+				Jugador b = new Jugador("b", 93, 20, "imagenes/lewan.gif");
+				Jugador c = new Jugador("c", 95, 20, "imagenes/lewan.gif");
+				Jugador d = new Jugador("d", 94, 20, "imagenes/lewan.gif");
 				
 				//creamos y añadimos las cartas a la lista
 				//cuando tengamos bien hecho el inventario esto no hará falta
@@ -213,16 +213,24 @@ public class TriviaVentana extends JFrame implements ActionListener {
 						//esto no se hasta que punto esta bien o que, hay que hacer que la ruta de la ft del jugador cambie
 						//una vez hecho esto ya debería estar
 						System.out.println("hola3");
+						lblEquipoDefArriba.setSize(102, 164);
 						ImageIcon img = new ImageIcon(jugador.getRutaFoto());
 						//im.setImage(img.getImage());
+						System.out.println("w = " + lblEquipoDefArriba.getWidth());
+						System.out.println("h = " + lblEquipoDefArriba.getHeight());
+						System.out.println(img.getIconHeight());
+						System.out.println(img.getIconWidth());
+
+						ImageIcon imgcd = new ImageIcon(img.getImage().getScaledInstance(lblEquipoDefArriba.getWidth(), lblEquipoDefArriba.getHeight(), Image.SCALE_DEFAULT));
 						
-						//ImageIcon imgcd = img.getImage().getScaledInstance(lblEquipoDefArriba.getWidth(), lblEquipoDefArriba.getHeight(), Image.SCALE_DEFAULT);
-						lblEquipoDefArriba.setIcon(img);
+						System.out.println(img.getIconHeight());
+						System.out.println(img.getIconWidth());
+						
+						System.out.println(img.getClass());
+						
+						lblEquipoDefArriba.setIcon(imgcd);
 					
-						System.out.println("hola");
-						System.out.println(im.getImage());
-						System.out.println(imcd.getImage());
-						panelEquipoCentro.repaint();
+
 					}
 				}
 
