@@ -188,9 +188,9 @@ public class BD {
 				int puntos = Integer.parseInt(rs.getString("puntos"));
 				int coste = Integer.parseInt(rs.getString("coste"));
 				String rutaF = rs.getString("rutaFoto");
+				boolean esPortero = rs.getBoolean("esPortero");
 				
-				//estoy bastante seguro de que en base de datos el primer elemento es 1, no 0
-				if (rs.getString(5) == "TRUE" /*|| rs.getString(5) != null*/) { 
+				if ( esPortero == false ) { 
 					c = new Jugador(nom, puntos, coste, rutaF);
 				}else {
 					c = new Portero(nom, puntos, coste, rutaF);
@@ -211,7 +211,7 @@ public class BD {
 			Statement st = con.createStatement();
 			ResultSet rs = st.executeQuery(sql);
 			while(rs.next()) {
-				if (rs.getString(5) == "TRUE") {
+				if (rs.getString(5) == "FALSE") {
 					
 				}
 				String nombre = rs.getString("nombre");
@@ -259,7 +259,7 @@ public class BD {
 	
 	//PARTE DE LEER INFO DE JUGADOR
 	
-
+	/*
 	public static void crearTablaJugador(Connection con) {
 		String sql = "CREATE TABLE IF NOT EXISTS Jugador (nombre String, puntos String, coste String, rutaFoto String)";
 		try {
@@ -356,10 +356,11 @@ public class BD {
 		}
 		return p;
 	}
+	*/
 
 	public static void cargarCartas(Connection con) {
 
-		String sql = "INSERT INTO Jugador values ('Lewan', 99, 16, 'imagenes/lewan.gif');";
+		String sql = "INSERT INTO Carta values ('Lewan', 99, 16, 'imagenes//lewan.gif', 'FALSE');";
 		try {
 			Statement st = con.createStatement();
 			st.executeUpdate(sql);
@@ -368,7 +369,7 @@ public class BD {
 			e.printStackTrace();
 		}
 		
-		sql = "INSERT INTO Jugador values ('Ronaldo', 98, 14, 'imagenes/ronaldo.gif');";
+		sql = "INSERT INTO Carta values ('Ronaldo', 98, 14, 'imagenes//ronaldo.gif', 'FALSE');";
 		try {
 			Statement st = con.createStatement();
 			st.executeUpdate(sql);
@@ -377,7 +378,7 @@ public class BD {
 			e.printStackTrace();
 		}
 		
-		sql = "INSERT INTO Portero values ('Neuer', 97, 12, 'imagenes/Neuer.gif');";
+		sql = "INSERT INTO Carta values ('Neuer', 97, 12, 'imagenes//Neuer.gif', 'TRUE');";
 		try {
 			Statement st = con.createStatement();
 			st.executeUpdate(sql);
@@ -386,7 +387,7 @@ public class BD {
 			e.printStackTrace();
 		}
 		
-		sql = "INSERT INTO Jugador values ('Mbappe', 97, 12, 'imagenes/mbappe.gif');";
+		sql = "INSERT INTO Carta values ('Mbappe', 97, 12, 'imagenes//mbappe.gif', 'FALSE');";
 		try {
 			Statement st = con.createStatement();
 			st.executeUpdate(sql);
@@ -395,7 +396,7 @@ public class BD {
 			e.printStackTrace();
 		}
 		
-		sql = "INSERT INTO Portero values ('Casillas', 96, 10, 'imagenes/casillas.gif');";
+		sql = "INSERT INTO Carta values ('Casillas', 96, 10, 'imagenes//casillas.gif', 'TRUE');";
 		try {
 			Statement st = con.createStatement();
 			st.executeUpdate(sql);
@@ -404,7 +405,7 @@ public class BD {
 			e.printStackTrace();
 		}
 		
-		sql = "INSERT INTO Jugador values ('Messi', 96, 10, 'imagenes/messi.gif');";
+		sql = "INSERT INTO Carta values ('Messi', 96, 10, 'imagenes//messi.gif', 'FALSE');";
 		try {
 			Statement st = con.createStatement();
 			st.executeUpdate(sql);
@@ -413,7 +414,7 @@ public class BD {
 			e.printStackTrace();
 		}
 		
-		sql = "INSERT INTO Jugador values ('Ramos', 96, 8, 'imagenes/ramos.gif');";
+		sql = "INSERT INTO Carta values ('Ramos', 96, 8, 'imagenes//ramos.gif', 'FALSE');";
 		try {
 			Statement st = con.createStatement();
 			st.executeUpdate(sql);
@@ -422,7 +423,7 @@ public class BD {
 			e.printStackTrace();
 		}
 		
-		sql = "INSERT INTO Jugador values ('Chiellini', 95, 8, 'imagenes/chiellini.gif');";
+		sql = "INSERT INTO Carta values ('Chiellini', 95, 8, 'imagenes//chiellini.gif', 'FALSE');";
 		try {
 			Statement st = con.createStatement();
 			st.executeUpdate(sql);
@@ -431,7 +432,7 @@ public class BD {
 			e.printStackTrace();
 		}
 		
-		sql = "INSERT INTO Jugador values ('Modric', 92, 6, 'imagenes/modric.gif');";
+		sql = "INSERT INTO Carta values ('Modric', 92, 6, 'imagenes//modric.gif', 'FALSE');";
 		try {
 			Statement st = con.createStatement();
 			st.executeUpdate(sql);
@@ -440,7 +441,7 @@ public class BD {
 			e.printStackTrace();
 		}
 		
-		sql = "INSERT INTO Jugador values ('Neymar', 92, 6, 'imagenes/neymar.gif');";
+		sql = "INSERT INTO Carta values ('Neymar', 92, 6, 'imagenes//neymar.gif', 'FALSE');";
 		try {
 			Statement st = con.createStatement();
 			st.executeUpdate(sql);
@@ -449,7 +450,7 @@ public class BD {
 			e.printStackTrace();
 		}
 		
-		sql = "INSERT INTO Jugador values ('Pique', 92, 1, 'imagenes/pique.gif');";
+		sql = "INSERT INTO Carta values ('Pique', 92, 1, 'imagenes//pique.gif', 'FALSE');";
 		try {
 			Statement st = con.createStatement();
 			st.executeUpdate(sql);
@@ -458,7 +459,7 @@ public class BD {
 			e.printStackTrace();
 		}
 		
-		sql = "INSERT INTO Jugador values ('Salah', 92, 1, 'imagenes/salah.gif');";
+		sql = "INSERT INTO Carta values ('Salah', 92, 1, 'imagenes//salah.gif', 'FALSE');";
 		try {
 			Statement st = con.createStatement();
 			st.executeUpdate(sql);
@@ -467,7 +468,7 @@ public class BD {
 			e.printStackTrace();
 		}
 		
-		sql = "INSERT INTO Portero values ('Buffon', 89, 1, 'imagenes/buffon.gif');";
+		sql = "INSERT INTO Carta values ('Buffon', 89, 1, 'imagenes//buffon.gif', 'TRUE');";
 		try {
 			Statement st = con.createStatement();
 			st.executeUpdate(sql);
@@ -476,7 +477,7 @@ public class BD {
 			e.printStackTrace();
 		}
 		
-		sql = "INSERT INTO Jugador values ('Koke', 85, 1, 'imagenes/koke.gif');";
+		sql = "INSERT INTO Carta values ('Koke', 85, 1, 'imagenes//koke.gif', 'FALSE');";
 		try {
 			Statement st = con.createStatement();
 			st.executeUpdate(sql);
@@ -485,7 +486,7 @@ public class BD {
 			e.printStackTrace();
 		}
 		
-		sql = "INSERT INTO Jugador values ('Haland', 82, 1, 'imagenes/haland.gif');";
+		sql = "INSERT INTO Carta values ('Haland', 82, 1, 'imagenes//haland.gif', 'FALSE');";
 		try {
 			Statement st = con.createStatement();
 			st.executeUpdate(sql);

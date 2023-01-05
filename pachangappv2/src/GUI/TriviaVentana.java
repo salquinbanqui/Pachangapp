@@ -75,9 +75,9 @@ public class TriviaVentana extends JFrame implements ActionListener {
 		//BD.crearTablaJugador(con);
 		//BD.crearTablaPortero(con);
 		BD.crearTablaUsuario(con);
-		BD.cargarCartas(con);
-		Jugador porte = BD.obtenerDatosJugador(con, "Salah");
-		System.out.println(porte);
+		//BD.cargarCartas(con);
+		Jugador cart = (Jugador) BD.obtenerDatosCarta(con, "Salah");
+		System.out.println(cart);
 		
 		
 		
