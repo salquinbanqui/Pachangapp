@@ -587,7 +587,7 @@ public class TriviaVentana extends JFrame implements ActionListener {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				Quiz quiz = new Quiz();
-				//frmTriviafut.dispose();
+				frmTriviafut.dispose();
 				
 			}
 		});
