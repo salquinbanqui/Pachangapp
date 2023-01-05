@@ -8,7 +8,9 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.swing.ImageIcon;
@@ -204,7 +206,9 @@ public class BD {
 		return c;
 	}
 	
-	public Set<Jugador> sacarJugadores(Connection con){
+	//PARA METER EN VENTANACARTA
+	
+	public Set<Jugador> cargarJugadores(Connection con){
 		String sql = "SELECT * FROM Carta";
 		HashSet<Jugador> jugadorSet = new HashSet<>();
 		try {
@@ -232,7 +236,7 @@ public class BD {
 		
 	}	
 	
-	public Set<Portero> sacarPorteros(Connection con){
+	public Set<Portero> cargarPorteros(Connection con){
 		String sql = "SELECT * FROM Carta";
 		HashSet<Portero> porteroSet = new HashSet<>();
 		try {
@@ -256,6 +260,81 @@ public class BD {
 		return porteroSet;
 		
 	}
+	
+	
+	public Set<Carta> cargarCartas(Connection con){
+		String sql = "SELECT * FROM Carta";
+		HashSet<Carta> cartaSet = new HashSet<>();
+		try {
+			Statement st = con.createStatement();
+			ResultSet rs = st.executeQuery(sql);
+			Carta c = null;
+			while(rs.next()) {
+				String nombre = rs.getString("nombre");
+				Integer puntos = Integer.parseInt(rs.getString("puntos"));
+				Integer coste = Integer.parseInt(rs.getString("coste"));
+				String rutaFoto = rs.getString("rutaFoto");
+				
+				boolean esPortero = rs.getBoolean("esPortero");
+				
+				if ( esPortero == false ) { 
+					c = new Jugador(nombre, puntos, coste, rutaFoto);
+				}else {
+					c = new Portero(nombre, puntos, coste, rutaFoto);
+				}
+				cartaSet.add(c);
+			}
+			rs.close();
+			st.close();
+		}catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return cartaSet;
+		
+	}
+	
+	//PARA METER Y SACAR ALINEACION
+	
+	
+	public List<Carta> cargarAlineacion(Connection con){
+		String sql = "SELECT * FROM Alineacion";
+		List<Carta> listaCarta = new ArrayList<>();
+
+		try {
+			Statement st = con.createStatement();
+			ResultSet rs = st.executeQuery(sql);
+			Carta c = null;
+			while(rs.next()) {
+				String nombre = rs.getString("nombre");
+				Integer puntos = Integer.parseInt(rs.getString("puntos"));
+				Integer coste = Integer.parseInt(rs.getString("coste"));
+				String rutaFoto = rs.getString("rutaFoto");
+				
+				boolean esPortero = rs.getBoolean("esPortero");
+				
+				if ( esPortero == false ) { 
+					c = new Jugador(nombre, puntos, coste, rutaFoto);
+				}else {
+					c = new Portero(nombre, puntos, coste, rutaFoto);
+				}
+				
+				listaCarta.add(c);
+			}
+			rs.close();
+			st.close();
+		}catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+
+		
+		return listaCarta;
+		
+	}
+
+	
+	
 	
 	//PARTE DE LEER INFO DE JUGADOR
 	
@@ -358,7 +437,7 @@ public class BD {
 	}
 	*/
 
-	public static void cargarCartas(Connection con) {
+	public static void cargarCartasInicial(Connection con) {
 
 		String sql = "INSERT INTO Carta values ('Lewan', 99, 16, 'imagenes//lewan.gif', 'FALSE');";
 		try {
