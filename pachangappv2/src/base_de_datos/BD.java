@@ -19,6 +19,7 @@ import javax.swing.JScrollPane;
 import GUI.TriviaVentana;
 import dominio.Usuario;
 import dominioConHerencia.Carta;
+import dominioConHerencia.Jugador;
 import dominioConHerencia.Portero;
 import dominioConHerencia.Portero;
 
@@ -178,9 +179,9 @@ public class BD {
 		}
 	}
 	
-	public static Portero obtenerDatosJugador(Connection con, String nombre) {
+	public static Jugador obtenerDatosJugador(Connection con, String nombre) {
 		String sql = "SELECT * FROM Jugador WHERE nombre='"+nombre+"'";
-		Portero j = null;
+		Jugador j = null;
 		try {
 			Statement st = con.createStatement();
 			ResultSet rs = st.executeQuery(sql);
@@ -191,7 +192,7 @@ public class BD {
 				int p = Integer.parseInt(rs.getString("puntos"));
 				int c = Integer.parseInt(rs.getString("coste"));
 				String r = rs.getString("rutaFoto");
-			j = new Portero(n, p, c, r);
+			j = new Jugador(n, p, c, r);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -230,7 +231,7 @@ public class BD {
 	}
 	
 	public static Portero obtenerDatosPortero(Connection con, String nombre) {
-		String sql = "SELECT * FROM Jugador WHERE nombre='"+nombre+"'";
+		String sql = "SELECT * FROM Portero WHERE nombre='"+nombre+"'";
 		Portero p = null;
 		try {
 			Statement st = con.createStatement();
@@ -250,13 +251,10 @@ public class BD {
 		}
 		return p;
 	}
+	
+	//cuidao
+	public static void cargarCartas(Connection con) {
 
-	public static void cargarJugadores(Connection con) {
-		
-		
-
-		
-		
 		String sql = "INSERT INTO Jugador values ('Messi', 96, 30, 'imagenes/messi.gif');";
 		try {
 			Statement st = con.createStatement();
@@ -306,9 +304,9 @@ public class BD {
 	}
 	
 	
-	public Set<Portero> sacarJugadores(Connection con){
+	public Set<Jugador> sacarJugadores(Connection con){
 		String sql = "SELECT * FROM Jugador";
-		HashSet<Portero> jugadorSet = new HashSet<>();
+		HashSet<Jugador> jugadorSet = new HashSet<>();
 		try {
 			Statement st = con.createStatement();
 			ResultSet rs = st.executeQuery(sql);
@@ -318,7 +316,7 @@ public class BD {
 				Integer coste = Integer.parseInt(rs.getString("coste"));
 				String rutaFoto = rs.getString("rutaFoto");
 				
-				Portero c = new Portero(nombre, puntos, coste, rutaFoto);
+				Jugador c = new Jugador(nombre, puntos, coste, rutaFoto);
 				jugadorSet.add(c);
 			}
 			rs.close();
