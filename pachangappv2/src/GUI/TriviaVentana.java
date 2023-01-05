@@ -692,6 +692,7 @@ public class TriviaVentana extends JFrame implements ActionListener {
 				
 				//cuando nos funcione el inventario se cogera la lista de cartas de ahí,
 				//pero por ahora se crean los jugadores a mano
+				/*
 				Jugador Messi = new Jugador("Messi", 96, 20, "url_de_la_carta");
 				Portero Neuer = new Portero("Neuer", 97, 25, "url_de_la_carta");
 				Portero Otro = new Portero("Otro", 91, 25, "url_de_la_carta");
@@ -709,20 +710,16 @@ public class TriviaVentana extends JFrame implements ActionListener {
 				listaCartas.add(b);
 				listaCartas.add(c);
 				listaCartas.add(d);
-				
-				//creamos una lista para almacenar los porteros y otra para los jugadores
-				List<Carta> listaJugador = new ArrayList<>();
+				*/
 				List<Carta> listaPortero = new ArrayList<>();
+				listaPortero.addAll(BD.cargarPorteros(con));
 				
-				//separamos las cartas en porteros y jugadores para manipularlos por separado
-				for (Carta carta : listaCartas) {
-					if (carta.getClass().toString().equals("class dominioConHerencia.Jugador")) {
-						listaJugador.add(carta);
-					}else if (carta.getClass().toString().equals("class dominioConHerencia.Portero")) {
-						listaPortero.add(carta);
-					}
-				}
+				List<Carta> listaJugador = new ArrayList<>();
+				listaJugador.addAll(BD.cargarJugadores(con));
 				
+				System.out.println(listaPortero.size());
+				//System.out.println("el portero" + listaPortero.get(0).getNombre());
+				System.out.println(listaJugador.size());
 				
 				//He dejado los comentarios para que se entienda mejor la movida esta, cuando os ubiqueis los podeis quitar
 				System.out.println("portero size " + listaPortero.size());

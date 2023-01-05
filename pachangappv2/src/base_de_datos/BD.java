@@ -224,12 +224,12 @@ public class BD {
 				Integer coste = Integer.parseInt(rs.getString("coste"));
 				String rutaFoto = rs.getString("rutaFoto");
 				boolean esPortero = rs.getBoolean("esPortero");
+				System.out.println("esPortero jug = " + esPortero);	//todo el false
 				
 				if ( esPortero == false ) { 
 					c = new Jugador(nombre, puntos, coste, rutaFoto);
 				}
 				
-				c = new Jugador(nombre, puntos, coste, rutaFoto);
 				jugadorSet.add(c);
 			}
 			rs.close();
@@ -256,11 +256,11 @@ public class BD {
 				String rutaFoto = rs.getString("rutaFoto");
 				boolean esPortero = rs.getBoolean("esPortero");
 				
+				System.out.println("esPortero port = " + esPortero); //todo el false
+				
 				if ( esPortero == true ) { 
 					c = new Portero(nombre, puntos, coste, rutaFoto);
 				}
-				
-				c = new Portero(nombre, puntos, coste, rutaFoto);
 				porteroSet.add(c);
 			}
 			rs.close();
