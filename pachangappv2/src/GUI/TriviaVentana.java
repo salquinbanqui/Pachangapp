@@ -272,6 +272,8 @@ public class TriviaVentana extends JFrame implements ActionListener {
 				im3.getImage().getScaledInstance(lblEquipoPortero.getWidth(), lblEquipoPortero.getHeight(), Image.SCALE_DEFAULT));
 		lblEquipoPortero.setIcon(imcd3);
 		lblEquipoPortero.setOpaque(false);
+		
+		System.out.println(im3.getDescription().toString());
 
 		JLabel lblEquipoDelanteroDebajo = new JLabel();
 		lblEquipoDelanteroDebajo.setSize(102, 164);
@@ -288,6 +290,8 @@ public class TriviaVentana extends JFrame implements ActionListener {
 				im5.getImage().getScaledInstance(lblEquipoDefensaDebajo.getWidth(), lblEquipoDefensaDebajo.getHeight(), Image.SCALE_DEFAULT));
 		lblEquipoDefensaDebajo.setIcon(imcd5);
 		lblEquipoDefensaDebajo.setOpaque(false);
+		
+		//Map<Carta> mapaAlineacion = new HashMap<>();
 
 		//crea los huecos vacios (tanto los jugadores como los huecos vacios
 		//tienen el setOpaque en false para que se vea el fondo
