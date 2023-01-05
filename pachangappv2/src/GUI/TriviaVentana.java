@@ -172,7 +172,7 @@ public class TriviaVentana extends JFrame implements ActionListener {
 				
 				//cuando nos funcione el inventario se cogera la lista de cartas de ahí,
 				//pero por ahora se crean los jugadores a mano
-				Jugador Messi = new Jugador("Messi", 96, 20, "url_de_la_carta");
+				Jugador Messi = new Jugador("Messi", 96, 20, "imagenes\\messi.gif");
 				Portero Neuer = new Portero("Neuer", 97, 25, "url_de_la_carta");
 				Portero Otro = new Portero("Otro", 91, 25, "url_de_la_carta");
 				Jugador a = new Jugador("a", 92, 20, "url_de_la_carta");
@@ -214,7 +214,11 @@ public class TriviaVentana extends JFrame implements ActionListener {
 						//una vez hecho esto ya debería estar
 						System.out.println("hola3");
 						ImageIcon img = new ImageIcon(jugador.getRutaFoto());
-						im.setImage(img.getImage());
+						//im.setImage(img.getImage());
+						
+						//ImageIcon imgcd = img.getImage().getScaledInstance(lblEquipoDefArriba.getWidth(), lblEquipoDefArriba.getHeight(), Image.SCALE_DEFAULT);
+						lblEquipoDefArriba.setIcon(img);
+					
 						System.out.println("hola");
 						System.out.println(im.getImage());
 						System.out.println(imcd.getImage());
