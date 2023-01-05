@@ -257,46 +257,151 @@ public class BD {
 	//cuidao
 	public static void cargarCartas(Connection con) {
 
-		String sql = "INSERT INTO Jugador values ('Messi', 96, 30, 'imagenes/messi.gif');";
+		String sql = "INSERT INTO Jugador values ('Lewan', 99, 16, 'imagenes/lewan.gif');";
 		try {
 			Statement st = con.createStatement();
-			ResultSet rs = st.executeQuery(sql);
+			st.executeUpdate(sql);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		sql = "INSERT INTO Portero values ('Neuer', 97, 10, 'imagenes/Neuer.gif');";
+		sql = "INSERT INTO Jugador values ('Ronaldo', 98, 14, 'imagenes/ronaldo.gif');";
 		try {
 			Statement st = con.createStatement();
-			ResultSet rs = st.executeQuery(sql);
+			st.executeUpdate(sql);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		sql = "INSERT INTO Portero values Lewan = new Jugador('a', 99, 15, 'imagenes/lewan.gif');";
+		sql = "INSERT INTO Portero values ('Neuer', 97, 12, 'imagenes/Neuer.gif');";
 		try {
 			Statement st = con.createStatement();
-			ResultSet rs = st.executeQuery(sql);
+			st.executeUpdate(sql);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		sql = "INSERT INTO Jugador values ('Neymar', 92, 25, 'imagenes/neymar.gif');";
+		sql = "INSERT INTO Jugador values ('Mbappe', 97, 12, 'imagenes/mbappe.gif');";
 		try {
 			Statement st = con.createStatement();
-			ResultSet rs = st.executeQuery(sql);
+			st.executeUpdate(sql);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		sql = "INSERT INTO Portero values ('Casillas', 96, 10, 'imagenes/casillas.gif');";
+		try {
+			Statement st = con.createStatement();
+			st.executeUpdate(sql);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		sql = "INSERT INTO Jugador values ('Messi', 96, 10, 'imagenes/messi.gif');";
+		try {
+			Statement st = con.createStatement();
+			st.executeUpdate(sql);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		sql = "INSERT INTO Jugador values ('Ramos', 96, 8, 'imagenes/ramos.gif');";
+		try {
+			Statement st = con.createStatement();
+			st.executeUpdate(sql);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		sql = "INSERT INTO Jugador values ('Chiellini', 95, 8, 'imagenes/chiellini.gif');";
+		try {
+			Statement st = con.createStatement();
+			st.executeUpdate(sql);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		sql = "INSERT INTO Jugador values ('Modric', 92, 6, 'imagenes/modric.gif');";
+		try {
+			Statement st = con.createStatement();
+			st.executeUpdate(sql);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		sql = "INSERT INTO Jugador values ('Neymar', 92, 6, 'imagenes/neymar.gif');";
+		try {
+			Statement st = con.createStatement();
+			st.executeUpdate(sql);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		sql = "INSERT INTO Jugador values ('Pique', 92, 1, 'imagenes/pique.gif');";
+		try {
+			Statement st = con.createStatement();
+			st.executeUpdate(sql);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		sql = "INSERT INTO Jugador values ('Salah', 92, 1, 'imagenes/salah.gif');";
+		try {
+			Statement st = con.createStatement();
+			st.executeUpdate(sql);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		sql = "INSERT INTO Portero values ('Buffon', 89, 1, 'imagenes/buffon.gif');";
+		try {
+			Statement st = con.createStatement();
+			st.executeUpdate(sql);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		sql = "INSERT INTO Jugador values ('Koke', 85, 1, 'imagenes/koke.gif');";
+		try {
+			Statement st = con.createStatement();
+			st.executeUpdate(sql);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		sql = "INSERT INTO Jugador values ('Haland', 82, 1, 'imagenes/haland.gif');";
+		try {
+			Statement st = con.createStatement();
+			st.executeUpdate(sql);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+
+		
+
+		
+
 		
 		sql = "INSERT INTO Jugador values ('Gavi', 86, 17, 'imagenes/gavi.png');";
 		try {
 			Statement st = con.createStatement();
-			ResultSet rs = st.executeQuery(sql);
+			st.executeUpdate(sql);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
