@@ -208,7 +208,7 @@ public class BD {
 	
 	//PARA METER EN VENTANACARTA
 	
-	public Set<Jugador> cargarJugadores(Connection con){
+	public static Set<Jugador> cargarJugadores(Connection con){
 		String sql = "SELECT * FROM Carta";
 		HashSet<Jugador> jugadorSet = new HashSet<>();
 		try {
@@ -236,7 +236,7 @@ public class BD {
 		
 	}	
 	
-	public Set<Portero> cargarPorteros(Connection con){
+	public static Set<Portero> cargarPorteros(Connection con){
 		String sql = "SELECT * FROM Carta";
 		HashSet<Portero> porteroSet = new HashSet<>();
 		try {
@@ -262,7 +262,7 @@ public class BD {
 	}
 	
 	
-	public Set<Carta> cargarCartas(Connection con){
+	public static Set<Carta> cargarCartas(Connection con){
 		String sql = "SELECT * FROM Carta";
 		HashSet<Carta> cartaSet = new HashSet<>();
 		try {
@@ -297,7 +297,7 @@ public class BD {
 	//PARA METER Y SACAR ALINEACION
 	
 	
-	public List<Carta> cargarAlineacion(Connection con){
+	public static List<Carta> cargarAlineacion(Connection con){
 		String sql = "SELECT * FROM Alineacion";
 		List<Carta> listaCarta = new ArrayList<>();
 
