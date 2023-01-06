@@ -219,7 +219,35 @@ public class BD {
 		return usuario;
 	}
 	
+	public boolean existeUsuario(Usuario usr) {
+		String sql = "SELECT nick, password, nombre, apellidos, telefono, fechaUltimoLogin, listaEmails FROM usuarios WHERE usuario = ?" ;
+		boolean resultado = false;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		//Se abre la conexión y se crea el PreparedStatement con la sentencia SQL
+		try (Connection con = DriverManager.getConnection(connectionString);
+				PreparedStatement pStmt = con.prepareStatement(sql)){
+			ps = con.prepareStatement(sql);
+			ps.setString(1, usr.getNick());
+			rs = ps.executeQuery();
+			if (rs.next()) 
+			{
+				if(usr.getPassword().equals(rs.getString(2))) {
+					return resultado = true;
+				} else {
+					return resultado = false;
+				}
+					
+			}
+			
+		} catch (Exception e) {
+			System.out.println("Algo esta mal");
+			return resultado = false;
+			
+		}
+		return resultado;
 	
+	}
 	
 	
 	

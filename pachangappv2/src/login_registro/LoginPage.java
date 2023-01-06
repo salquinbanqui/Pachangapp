@@ -46,11 +46,7 @@ public class LoginPage implements ActionListener{
 
 	LoginPage(HashMap<String,String> loginInfoOriginal){
 
-		
-
 		logininfo = loginInfoOriginal;
-
-		
 
 		userIDLabel.setBounds(50,100,75,25);
 
@@ -134,7 +130,11 @@ public class LoginPage implements ActionListener{
 	@Override
 
 	public void actionPerformed(ActionEvent e) {
-
+		//Se crea la BBDD
+		BD.crearBBDD();
+		//Se cargan los datos y se inicializa la BBDD
+		BD.initilizeFromCSV();
+		
 		String erContrasenia = "[a-zA-Z0-9?¿!¡]{4,15}";	//expresion regular para la contraseña, entre 4 y 15 letras (mayusculas o minusculas) o numeros o ?¿!¡
 		//Ejemplos de contraseña válida: 000!!¿00, 0¿a0a0, A1??b3fq2T, abHc¿djp, po1s¡duebcisd5...
 		String erNombreUsu = "[a-zA-Z]";				//expresion regular para el nombre de usuario
@@ -174,8 +174,6 @@ public class LoginPage implements ActionListener{
 		
 
 		if(e.getSource()==loginButton) {
-
-			
 
 			String userID = userIDField.getText();
 
