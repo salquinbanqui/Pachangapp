@@ -105,52 +105,52 @@ public class BD {
 	
 	////PARTE DE LEER INFO DE USUARIO
 	
-	
-	public static void crearTablaUsuario(Connection con) {
-		String sql = "CREATE TABLE IF NOT EXISTS Usuario (nick String, pass String, nombre String, apellido String, tlf String, fechaUltimoLogin String)";
-		try {
-			Statement st = con.createStatement();
-			st.executeUpdate(sql);
-			st.close();
-		} catch (SQLException e) {
+//	
+//	public static void crearTablaUsuario(Connection con) {
+//		String sql = "CREATE TABLE IF NOT EXISTS Usuario (nick String, pass String, nombre String, apellido String, tlf String, fechaUltimoLogin String)";
+	//		try {
+	//			Statement st = con.createStatement();
+	//			st.executeUpdate(sql);
+	//			st.close();
+			//		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
+	//			e.printStackTrace();
+	//		}
+	//	}
 	
-	public static void insertarUsuario(Connection con, String nick, String pass, String nombre, String apellido, String telefono, String fechaUltimoLogIn) {
-		String sql = "INSERT INTO Usuario VALUES('"+nick+"','"+pass+"','"+nombre+"','"+apellido+"',"+telefono+",'"+fechaUltimoLogIn+"')";
-		try {
-			Statement st = con.createStatement();
-			st.executeUpdate(sql);
-			st.close();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
+//	public static void insertarUsuario(Connection con, String nick, String pass, String nombre, String apellido, String telefono, String fechaUltimoLogIn) {
+	//		String sql = "INSERT INTO Usuario VALUES('"+nick+"','"+pass+"','"+nombre+"','"+apellido+"',"+telefono+",'"+fechaUltimoLogIn+"')";
+	//		try {
+	//			Statement st = con.createStatement();
+	//			st.executeUpdate(sql);
+	//			st.close();
+	//		} catch (SQLException e) {
+			//			// TODO Auto-generated catch block
+	//			e.printStackTrace();
+	//		}
+	//	}
 	
-	public static Usuario obtenerDatosUsuario(Connection con, String nick) {
-		String sql = "SELECT * FROM Usuario WHERE nick='"+nick+"'";
-		Usuario u = null;
-		try {
-			Statement st = con.createStatement();
-			ResultSet rs = st.executeQuery(sql);
-			if(rs.next()) {
-				String n = rs.getString("nick");
-				String pass = rs.getString("pass");
-				String nom = rs.getString("nombre");
-				String a = rs.getString("apellido");
-				String tlf = rs.getString("telefono");
-				String fuli = rs.getString("fechaUltimoLogIn");
-				u = new Usuario(n, pass, nom, a, tlf, fuli);
-			}
-		} catch (SQLException e) {
+//	public static Usuario obtenerDatosUsuario(Connection con, String nick) {
+	//		String sql = "SELECT * FROM Usuario WHERE nick='"+nick+"'";
+	//		Usuario u = null;
+	//		try {
+	//			Statement st = con.createStatement();
+	//			ResultSet rs = st.executeQuery(sql);
+	//			if(rs.next()) {
+	//				String n = rs.getString("nick");
+				//				String pass = rs.getString("pass");
+	//				String nom = rs.getString("nombre");
+	//				String a = rs.getString("apellido");
+	//				String tlf = rs.getString("telefono");
+	//				String fuli = rs.getString("fechaUltimoLogIn");
+				//				u = new Usuario(n, pass, nom, a, tlf, fuli);
+	//			}
+	//		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return u;
-	}
+	//			e.printStackTrace();
+	//		}
+	//		return u;
+	//	}
 	
 	
 	//PARTE DE CARTAS
@@ -658,6 +658,41 @@ public class BD {
 		}
 		return p;
 	}*/
+/////////////////////////////////////////////////////////7
+//PARTE DE BD DE INICIO DE SESION Y REGISTRAR
 	
+	//INSERTAR UN NUEVO OBJETO
+		public void insertarUsuario(Usuario... usuarios) {
+			//Se define la plantilla de la sentencia SQL
+			String sql = "INSERT INTO Usuario (editorial, nombre, email) VALUES (?, ?, ?);";
+			
+			//Se abre la conexión y se crea el PreparedStatement con la sentencia SQL
+			try (Connection con = DriverManager.getConnection("jdbc:sqlite:db/usuarios.db");
+				 PreparedStatement pStmt = con.prepareStatement(sql)) {
+										
+				//Se recorren los clientes y se insertan uno a uno
+				for (Personaje p : usuarios) {
+					//Se definen los parámetros de la sentencia SQL
+					pStmt.setString(1, p.getEditorial().toString());
+					pStmt.setString(2, p.getNombre());
+					pStmt.setString(3, p.getEmail());
+					
+					if (pStmt.executeUpdate() != 1) {					
+						logger.warning(String.format("No se ha insertado el Personaje: %s", p));
+					} else {
+						//Se actualiza el ID del personaje haciendo un Select					
+						p.setId(this.getPersonajeByNombre(p.getNombre()).getId());					
+						logger.info(String.format("Se ha insertado el Personaje: %s", p));
+					}
+				}
+				
+				logger.info(String.format("%d Personajes insertados en la BBDD", personajes.length));
+			} catch (Exception ex) {
+				logger.warning(String.format("Error al insertar personajes: %s", ex.getMessage()));
+			}			
+		}
 
 }
+
+
+
