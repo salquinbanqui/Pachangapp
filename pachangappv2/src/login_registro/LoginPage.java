@@ -131,9 +131,9 @@ public class LoginPage implements ActionListener{
 
 	public void actionPerformed(ActionEvent e) {
 		//Se crea la BBDD
-		BD.crearBBDD();
+		//BD.crearBBDD();
 		//Se cargan los datos y se inicializa la BBDD
-		BD.initilizeFromCSV();
+		//BD.initilizeFromCSV();
 		
 		String erContrasenia = "[a-zA-Z0-9?¿!¡]{4,15}";	//expresion regular para la contraseña, entre 4 y 15 letras (mayusculas o minusculas) o numeros o ?¿!¡
 		//Ejemplos de contraseña válida: 000!!¿00, 0¿a0a0, A1??b3fq2T, abHc¿djp, po1s¡duebcisd5...
@@ -179,7 +179,6 @@ public class LoginPage implements ActionListener{
 
 			String password = String.valueOf(userPasswordField.getPassword());
 
-			
 
 			if(logininfo.containsKey(userID)) {
 
