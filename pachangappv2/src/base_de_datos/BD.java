@@ -3,10 +3,12 @@ package base_de_datos;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.Image;
+import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileReader;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -57,6 +59,169 @@ public class BD {
 			logger.warning(String.format("Error al cargar el driver de BBDD: %s", ex.getMessage()));
 		}
 	}
+/////////////////////////////////////////////////////////7
+//PARTE DE BD DE INICIO DE SESION Y REGISTRAR (USUARIOS)
+
+	
+	 //Inicializa la BBDD leyendo los datos de los ficheros CSV 
+	
+	public void initilizeFromCSV() {
+		//Sólo se inicializa la BBDD si la propiedad initBBDD es true.
+		if (properties.get("loadCSV").equals("true")) {
+			//Se borran los datos, si existía alguno
+			this.borrarDatos();
+			
+			//Se leen los personajes del CSV
+			List<Usuario> usuarios = this.loadCSVUsuarios();
+			//Se insertan los personajes en la BBDD
+			this.insertarUsuario(usuarios.toArray(new Usuario[usuarios.size()]));				
+		}
+	}
+	
+	private List<Usuario> loadCSVUsuarios() {
+		List<Usuario> usuarios = new ArrayList<>();
+		try (BufferedReader in = new BufferedReader(new FileReader(CSV_USUARIOS))) {
+			String linea = null;
+			
+			//Omitir la cabecera
+			in.readLine();			
+			
+			while ((linea = in.readLine()) != null) {
+				usuarios.add(Usuario.parseCSV(linea));
+			}			
+			
+		} catch (Exception ex) {
+			logger.warning(String.format("Error leyendo personajes del CSV: %s", ex.getMessage()));
+		}
+		
+		return usuarios;
+	}
+	public void crearBBDD() {
+		//Sólo se crea la BBDD si la propiedad initBBDD es true.
+		if (properties.get("createBBDD").equals("true")) {
+			String sql1 = "CREATE TABLE IF NOT EXISTS Personaje (\n"
+	                + " id INTEGER PRIMARY KEY AUTOINCREMENT,\n"
+	                + " nick TEXT NOT NULL,\n"
+	                + " password TEXT NOT NULL,\n"
+	                + " nombre TEXT NOT NULL\n"
+	                + " apellidos TEXT NOT NULL,\n"
+	                + " telefono TEXT NOT NULL,\n"
+	                + " fechaUltimoLogin TEXT NOT NULL\n"
+	                + " listaEmails TEXT NOT NULL,\n"
+	                + ");";
+	
+	        //Se abre la conexión y se crea un PreparedStatement para cada tabla
+			//Al abrir la conexión, si no existía el fichero, se crea la base de datos
+			try (Connection con = DriverManager.getConnection(connectionString);
+			     PreparedStatement pStmt1 = con.prepareStatement(sql1)) {
+				
+				//Se ejecutan las sentencias de creación de las tablas
+		        if (!pStmt1.execute()) {
+		        	logger.info("Se ha creado las tablas");
+		        }
+			} catch (Exception ex) {
+				logger.warning(String.format("Error al crear las tablas: %s", ex.getMessage()));
+			}
+		}
+	}
+	public void borrarDatos() {
+		//Sólo se borran los datos si la propiedad cleanBBDD es true
+		if (properties.get("cleanBBDD").equals("true")) {	
+			String sql1 = "DELETE FROM Usuario;";
+
+			
+	        //Se abre la conexión y se crea un PreparedStatement para cada tabla
+			//Al abrir la conexión, si no existía el fichero, se crea la base de datos
+			try (Connection con = DriverManager.getConnection(connectionString);
+			     PreparedStatement pStmt1 = con.prepareStatement(sql1)) {
+				
+				//Se ejecutan las sentencias de borrado de las tablas
+		        if (!pStmt1.execute()) {
+		        	logger.info("Se han borrado los datos");
+		        }
+			} catch (Exception ex) {
+				logger.warning(String.format("Error al borrar los datos: %s", ex.getMessage()));
+			}
+		}
+	}
+	
+	public void insertarUsuario(Usuario... usuarios) {
+		//Se define la plantilla de la sentencia SQL
+		String sql = "INSERT INTO Usuario (nick, password, nombre, apellidos, telefono, fechaUltimoLogin, listaEmails) VALUES (?, ?, ?, ?, ?, ?, ?);";
+		
+		//Se abre la conexión y se crea el PreparedStatement con la sentencia SQL
+		try (Connection con = DriverManager.getConnection(connectionString);
+			 PreparedStatement pStmt = con.prepareStatement(sql)) {
+									
+			//Se recorren los clientes y se insertan uno a uno
+			for (Usuario p : usuarios) {
+				//Se definen los parámetros de la sentencia SQL
+				pStmt.setString(1, p.getNick());
+				pStmt.setString(2, p.getPassword());
+				pStmt.setString(1, p.getNombre());
+				pStmt.setString(2, p.getApellidos());
+				pStmt.setString(1, p.getTelefono());
+				pStmt.setString(2, p.getFechaUltimoLogin());
+				pStmt.setString(1, p.getListaEmails());
+				
+				if (pStmt.executeUpdate() != 1) {					
+					logger.warning(String.format("No se ha insertado el Personaje: %s", p));
+				} else {
+					//Se actualiza el ID del personaje haciendo un Select					
+					p.setId(this.getUsuarioByNombre(p.getNombre()).getId());					
+					logger.info(String.format("Se ha insertado el Personaje: %s", p));
+				}
+			}
+			
+			logger.info(String.format("%d Personajes insertados en la BBDD", usuarios.length));
+		} catch (Exception ex) {
+			logger.warning(String.format("Error al insertar personajes: %s", ex.getMessage()));
+		}			
+	}
+	
+	
+	public Usuario getUsuarioByNombre(String nombre) {
+		Usuario usuario = null;
+		String sql = "SELECT * FROM Usuario WHERE nombre = ? LIMIT 1";
+		
+		//Se abre la conexión y se crea el PreparedStatement con la sentencia SQL
+		try (Connection con = DriverManager.getConnection(connectionString);
+		     PreparedStatement pStmt = con.prepareStatement(sql)) {			
+			
+			//Se definen los parámetros de la sentencia SQL
+			pStmt.setString(1, nombre);
+			
+			//Se ejecuta la sentencia y se obtiene el ResultSet con los resutlados
+			ResultSet rs = pStmt.executeQuery();			
+
+			//Se procesa el único resultado
+			if (rs.next()) {
+				usuario = new Usuario();
+				
+				usuario.setId(rs.getInt("id"));
+				usuario.setNick(rs.getString("nick"));
+				usuario.setPassword(rs.getString("password"));	
+				usuario.setNombre(rs.getString("nombre"));
+				usuario.setApellidos(rs.getString("apellidos"));
+				usuario.setTelefono(rs.getString("telefono"));
+				usuario.setFechaUltimoLogin(rs.getString("fechaUltimoLogin"));
+				usuario.setListaEmails(rs.getString("listaEmails"));
+			}
+			
+			//Se cierra el ResultSet
+			rs.close();
+			
+			logger.info(String.format("Se ha recuperado el personaje %s", usuario));			
+		} catch (Exception ex) {
+			logger.warning(String.format("Error recuperar el personaje con nombre %s: %s", nombre, ex.getMessage()));						
+		}		
+		
+		return usuario;
+	}
+	
+	
+	
+	
 	
 	public static void main(String[] args) throws ClassNotFoundException {
 // rec
@@ -689,39 +854,6 @@ public class BD {
 		}
 		return p;
 	}*/
-/////////////////////////////////////////////////////////7
-//PARTE DE BD DE INICIO DE SESION Y REGISTRAR
-	
-	//INSERTAR UN NUEVO OBJETO
-		public void insertarUsuario(Usuario... usuarios) {
-			//Se define la plantilla de la sentencia SQL
-			String sql = "INSERT INTO Usuario (editorial, nombre, email) VALUES (?, ?, ?);";
-			
-			//Se abre la conexión y se crea el PreparedStatement con la sentencia SQL
-			try (Connection con = DriverManager.getConnection("jdbc:sqlite:db/usuarios.db");
-				 PreparedStatement pStmt = con.prepareStatement(sql)) {
-										
-				//Se recorren los clientes y se insertan uno a uno
-				for (Personaje p : usuarios) {
-					//Se definen los parámetros de la sentencia SQL
-					pStmt.setString(1, p.getEditorial().toString());
-					pStmt.setString(2, p.getNombre());
-					pStmt.setString(3, p.getEmail());
-					
-					if (pStmt.executeUpdate() != 1) {					
-						logger.warning(String.format("No se ha insertado el Personaje: %s", p));
-					} else {
-						//Se actualiza el ID del personaje haciendo un Select					
-						p.setId(this.getPersonajeByNombre(p.getNombre()).getId());					
-						logger.info(String.format("Se ha insertado el Personaje: %s", p));
-					}
-				}
-				
-				logger.info(String.format("%d Personajes insertados en la BBDD", personajes.length));
-			} catch (Exception ex) {
-				logger.warning(String.format("Error al insertar personajes: %s", ex.getMessage()));
-			}			
-		}
 
 }
 

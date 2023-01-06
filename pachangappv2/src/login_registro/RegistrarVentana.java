@@ -142,7 +142,7 @@ public class RegistrarVentana {
 					if(Pattern.matches(erContrasenia, contra)) {
 						if(Pattern.matches(erTelefono, telefono)) {
 							//inserta el usuario y te lleva a iniciar sesion
-							BD.insertarUsuario(con, nick, contra, nombre, apellido, telefono, fechaActual);
+							//BD.insertarUsuario(con, nick, contra, nombre, apellido, telefono, fechaActual);
 							JOptionPane.showMessageDialog(null, "Usuario registrado correctamente");
 							frame.dispose();
 							//LogInVentana.main(null);
