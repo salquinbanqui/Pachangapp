@@ -3,6 +3,8 @@ package base_de_datos;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.Image;
+import java.io.FileInputStream;
+import java.io.FileReader;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -12,7 +14,8 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
+import java.util.logging.Logger;
+import java.util.Properties;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -26,6 +29,34 @@ import dominioConHerencia.Portero;
 import dominioConHerencia.Portero;
 
 public class BD {
+	private final String PROPERTIES_FILE = "conf/app.properties";
+	private final String CSV_USUARIOS = "data/usuarios.csv";
+	
+	private Properties properties;
+	private String driverName;
+	private String databaseFile;
+	private String connectionString;
+	
+	private static Logger logger = Logger.getLogger(BD.class.getName());
+	public BD() {
+		try (FileInputStream fis = new FileInputStream("conf/logger.properties")) {
+			//Inicialización del Logger
+			//LogManager.getLogManager().readConfiguration(fis);
+			
+			//Lectura del fichero properties
+			properties = new Properties();
+			properties.load(new FileReader(PROPERTIES_FILE));
+			
+			driverName = properties.getProperty("driver");
+			databaseFile = properties.getProperty("file");
+			connectionString = properties.getProperty("connection");
+			
+			//Cargar el diver SQLite
+			Class.forName(driverName);
+		} catch (Exception ex) {
+			logger.warning(String.format("Error al cargar el driver de BBDD: %s", ex.getMessage()));
+		}
+	}
 	
 	public static void main(String[] args) throws ClassNotFoundException {
 // rec
