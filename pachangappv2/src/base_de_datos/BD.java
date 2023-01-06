@@ -31,13 +31,13 @@ import dominioConHerencia.Portero;
 import dominioConHerencia.Portero;
 
 public class BD {
-	private final String PROPERTIES_FILE = "conf/app.properties";
-	private final String CSV_USUARIOS = "data/usuarios.csv";
+	private final static String PROPERTIES_FILE = "conf/app.properties";
+	private final static String CSV_USUARIOS = "data/usuarios.csv";
 	
-	private Properties properties;
-	private String driverName;
-	private String databaseFile;
-	private String connectionString;
+	private static Properties properties;
+	private static String driverName;
+	private static String databaseFile;
+	private static String connectionString;
 	
 	private static Logger logger = Logger.getLogger(BD.class.getName());
 	public BD() {
@@ -65,20 +65,23 @@ public class BD {
 	
 	 //Inicializa la BBDD leyendo los datos de los ficheros CSV 
 	
-	public void initilizeFromCSV() {
+	public static void initilizeFromCSV() {
 		//Sólo se inicializa la BBDD si la propiedad initBBDD es true.
 		if (properties.get("loadCSV").equals("true")) {
 			//Se borran los datos, si existía alguno
-			this.borrarDatos();
+			//this.borrarDatos();
+			borrarDatos();
 			
 			//Se leen los personajes del CSV
-			List<Usuario> usuarios = this.loadCSVUsuarios();
+			List<Usuario> usuarios = loadCSVUsuarios();
+			//this.loadCSVUsuarios();
 			//Se insertan los personajes en la BBDD
-			this.insertarUsuario(usuarios.toArray(new Usuario[usuarios.size()]));				
+			insertarUsuario(usuarios.toArray(new Usuario[usuarios.size()]));				
+			//this.insertarUsuario
 		}
 	}
 	
-	private List<Usuario> loadCSVUsuarios() {
+	private static List<Usuario> loadCSVUsuarios() {
 		List<Usuario> usuarios = new ArrayList<>();
 		try (BufferedReader in = new BufferedReader(new FileReader(CSV_USUARIOS))) {
 			String linea = null;
@@ -96,7 +99,7 @@ public class BD {
 		
 		return usuarios;
 	}
-	public void crearBBDD() {
+	public static void crearBBDD() {
 		//Sólo se crea la BBDD si la propiedad initBBDD es true.
 		if (properties.get("createBBDD").equals("true")) {
 			String sql1 = "CREATE TABLE IF NOT EXISTS Personaje (\n"
@@ -124,7 +127,8 @@ public class BD {
 			}
 		}
 	}
-	public void borrarDatos() {
+	
+	public static void borrarDatos() {
 		//Sólo se borran los datos si la propiedad cleanBBDD es true
 		if (properties.get("cleanBBDD").equals("true")) {	
 			String sql1 = "DELETE FROM Usuario;";
@@ -145,7 +149,7 @@ public class BD {
 		}
 	}
 	
-	public void insertarUsuario(Usuario... usuarios) {
+	public static void insertarUsuario(Usuario... usuarios) {
 		//Se define la plantilla de la sentencia SQL
 		String sql = "INSERT INTO Usuario (nick, password, nombre, apellidos, telefono, fechaUltimoLogin, listaEmails) VALUES (?, ?, ?, ?, ?, ?, ?);";
 		
@@ -168,7 +172,8 @@ public class BD {
 					logger.warning(String.format("No se ha insertado el Personaje: %s", p));
 				} else {
 					//Se actualiza el ID del personaje haciendo un Select					
-					p.setId(this.getUsuarioByNombre(p.getNombre()).getId());					
+					p.setId(getUsuarioByNombre(p.getNombre()).getId());	
+					//this.getUsuarioByNombre
 					logger.info(String.format("Se ha insertado el Personaje: %s", p));
 				}
 			}
@@ -180,7 +185,7 @@ public class BD {
 	}
 	
 	
-	public Usuario getUsuarioByNombre(String nombre) {
+	public static Usuario getUsuarioByNombre(String nombre) {
 		Usuario usuario = null;
 		String sql = "SELECT * FROM Usuario WHERE nombre = ? LIMIT 1";
 		
@@ -219,7 +224,7 @@ public class BD {
 		return usuario;
 	}
 	
-	public boolean existeUsuario(Usuario usr) {
+	public static boolean existeUsuario(Usuario usr) {
 		String sql = "SELECT nick, password, nombre, apellidos, telefono, fechaUltimoLogin, listaEmails FROM usuarios WHERE usuario = ?" ;
 		boolean resultado = false;
 		PreparedStatement ps = null;
