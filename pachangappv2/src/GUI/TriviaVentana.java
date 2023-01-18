@@ -617,11 +617,35 @@ public class TriviaVentana extends JFrame implements ActionListener {
 						
 						switch (variablePosiciones) {
 						case PORTERO: {
-							
-							lblEquipoPortero.setIcon(new ImageIcon(parametros[4]));
-							cartasFicheros.put(variablePosiciones, new Portero(parametros[1], Integer.parseInt(parametros[2]), Integer.parseInt(parametros[3]), parametros[1]));
-						}
 						
+							lblEquipoPortero.setIcon(new ImageIcon(new ImageIcon(parametros[4]).getImage().getScaledInstance(lblEquipoDelanteroArriba.getWidth(), lblEquipoDelanteroArriba.getHeight(), Image.SCALE_DEFAULT)));
+							cartasFicheros.put(variablePosiciones, new Portero(parametros[1], Integer.parseInt(parametros[2]), Integer.parseInt(parametros[3]), parametros[1]));
+							break;
+						}
+						case DEFENSA_ABAJO: {
+
+							lblEquipoDefensaDebajo.setIcon(new ImageIcon(new ImageIcon(parametros[4]).getImage().getScaledInstance(lblEquipoDelanteroArriba.getWidth(), lblEquipoDelanteroArriba.getHeight(), Image.SCALE_DEFAULT)));
+							cartasFicheros.put(variablePosiciones, new Jugador(parametros[1], Integer.parseInt(parametros[2]), Integer.parseInt(parametros[3]), parametros[1]));
+							break;
+						}
+						case DEFENSA_ARRIBA: {
+							
+							lblEquipoDefArriba.setIcon(new ImageIcon(new ImageIcon(parametros[4]).getImage().getScaledInstance(lblEquipoDelanteroArriba.getWidth(), lblEquipoDelanteroArriba.getHeight(), Image.SCALE_DEFAULT)));
+							cartasFicheros.put(variablePosiciones, new Jugador(parametros[1], Integer.parseInt(parametros[2]), Integer.parseInt(parametros[3]), parametros[1]));
+							break;
+						}
+						case DELANTERO_ARRIBA: {
+							
+							lblEquipoDelanteroArriba.setIcon(new ImageIcon(new ImageIcon(parametros[4]).getImage().getScaledInstance(lblEquipoDelanteroArriba.getWidth(), lblEquipoDelanteroArriba.getHeight(), Image.SCALE_DEFAULT)));
+							cartasFicheros.put(variablePosiciones, new Jugador(parametros[1], Integer.parseInt(parametros[2]), Integer.parseInt(parametros[3]), parametros[1]));
+							break;
+						}
+						case DELANTERO_ABAJO: {
+							
+							lblEquipoDelanteroDebajo.setIcon(new ImageIcon(new ImageIcon(parametros[4]).getImage().getScaledInstance(lblEquipoDelanteroArriba.getWidth(), lblEquipoDelanteroArriba.getHeight(), Image.SCALE_DEFAULT)));
+							cartasFicheros.put(variablePosiciones, new Jugador(parametros[1], Integer.parseInt(parametros[2]), Integer.parseInt(parametros[3]), parametros[1]));
+							break;
+						}
 						
 						default:
 							throw new IllegalArgumentException("Unexpected value: " + variablePosiciones);
@@ -649,13 +673,20 @@ public class TriviaVentana extends JFrame implements ActionListener {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				
+				try {
+					File fichero = new File("data/Personas.txt");
+					fichero.delete();
+					fichero.createNewFile();
+				} catch (IOException e2) {
+					// TODO Auto-generated catch block
+					e2.printStackTrace();
+				}
 				try {
 					//Crear un documento en blanco
 					//PrintWriter pw = new PrintWriter("Personas.txt");
 					//Crear un documento para añadir al final
 					PrintWriter pw = new PrintWriter(new FileOutputStream("data/Personas.txt", true));
-					
+					pw.print("");
 					
 					//Escribo los datos en el documento
 					
@@ -672,17 +703,10 @@ public class TriviaVentana extends JFrame implements ActionListener {
 					
 					
 					//Cerrar el fichero
-					pw.flush();
 					pw.close();
 				} catch (FileNotFoundException e1) {
 					// TODO Auto-generated catch block
-					try {
-						new File("data/Personas.txt").createNewFile();
-						actionPerformed(e);
-					} catch (IOException e2) {
-						// TODO Auto-generated catch block
-						e2.printStackTrace();
-					}
+					
 				}
 				
 			}
