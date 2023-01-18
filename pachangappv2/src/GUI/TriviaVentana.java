@@ -81,8 +81,8 @@ public class TriviaVentana extends JFrame implements ActionListener {
 		//BD.crearTablaPortero(con);
 		//BD.crearTablaUsuario(con);
 		//BD.cargarCartas(con);
-		Jugador cart = (Jugador) BD.obtenerDatosCarta(con, "Salah");
-		System.out.println(cart);
+		//Jugador cart = (Jugador) BD.obtenerDatosCarta(con, "Salah");
+		//System.out.println(cart);
 		
 		
 		
@@ -369,7 +369,7 @@ public class TriviaVentana extends JFrame implements ActionListener {
 			}
 		});
 		
-		System.out.println(im3.getDescription().toString());
+		//System.out.println(im3.getDescription().toString());
 
 		JLabel lblEquipoDelanteroDebajo = new JLabel();
 		lblEquipoDelanteroDebajo.setSize(102, 164);
@@ -721,7 +721,6 @@ public class TriviaVentana extends JFrame implements ActionListener {
 				//System.out.println("el portero" + listaPortero.get(0).getNombre());
 				System.out.println(listaJugador.size());
 				
-				//He dejado los comentarios para que se entienda mejor la movida esta, cuando os ubiqueis los podeis quitar
 				System.out.println("portero size " + listaPortero.size());
 				System.out.println("jugador size " + listaJugador.size());
 				

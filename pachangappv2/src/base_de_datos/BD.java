@@ -59,7 +59,7 @@ public class BD {
 			logger.warning(String.format("Error al cargar el driver de BBDD: %s", ex.getMessage()));
 		}
 	}
-/////////////////////////////////////////////////////////7
+/////////////////////////////////////////////////////////
 //PARTE DE BD DE INICIO DE SESION Y REGISTRAR (USUARIOS)
 
 	
@@ -334,52 +334,53 @@ public class BD {
 	
 	////PARTE DE LEER INFO DE USUARIO
 	
-//	
-//	public static void crearTablaUsuario(Connection con) {
-//		String sql = "CREATE TABLE IF NOT EXISTS Usuario (nick String, pass String, nombre String, apellido String, tlf String, fechaUltimoLogin String)";
-	//		try {
-	//			Statement st = con.createStatement();
-	//			st.executeUpdate(sql);
-	//			st.close();
-			//		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-	//			e.printStackTrace();
-	//		}
-	//	}
+	//no se porque pero toda la parte de usuario (estos 3 metodos) estaban comentados, los acabo de descomentar	
 	
-//	public static void insertarUsuario(Connection con, String nick, String pass, String nombre, String apellido, String telefono, String fechaUltimoLogIn) {
-	//		String sql = "INSERT INTO Usuario VALUES('"+nick+"','"+pass+"','"+nombre+"','"+apellido+"',"+telefono+",'"+fechaUltimoLogIn+"')";
-	//		try {
-	//			Statement st = con.createStatement();
-	//			st.executeUpdate(sql);
-	//			st.close();
-	//		} catch (SQLException e) {
-			//			// TODO Auto-generated catch block
-	//			e.printStackTrace();
-	//		}
-	//	}
+	public static void crearTablaUsuario(Connection con) {
+		String sql = "CREATE TABLE IF NOT EXISTS Usuario (nick String, pass String, nombre String, apellido String, tlf String, fechaUltimoLogin String)";
+			try {
+				Statement st = con.createStatement();
+				st.executeUpdate(sql);
+				st.close();
+					} catch (SQLException e) {
+			 //TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	
-//	public static Usuario obtenerDatosUsuario(Connection con, String nick) {
-	//		String sql = "SELECT * FROM Usuario WHERE nick='"+nick+"'";
-	//		Usuario u = null;
-	//		try {
-	//			Statement st = con.createStatement();
-	//			ResultSet rs = st.executeQuery(sql);
-	//			if(rs.next()) {
-	//				String n = rs.getString("nick");
-				//				String pass = rs.getString("pass");
-	//				String nom = rs.getString("nombre");
-	//				String a = rs.getString("apellido");
-	//				String tlf = rs.getString("telefono");
-	//				String fuli = rs.getString("fechaUltimoLogIn");
-				//				u = new Usuario(n, pass, nom, a, tlf, fuli);
-	//			}
-	//		} catch (SQLException e) {
+	public static void insertarUsuario(Connection con, String nick, String pass, String nombre, String apellido, String telefono, String fechaUltimoLogIn) {
+			String sql = "INSERT INTO Usuario VALUES('"+nick+"','"+pass+"','"+nombre+"','"+apellido+"',"+telefono+",'"+fechaUltimoLogIn+"')";
+			try {
+				Statement st = con.createStatement();
+				st.executeUpdate(sql);
+				st.close();
+			} catch (SQLException e) {
+						// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	
+	public static Usuario obtenerDatosUsuario(Connection con, String nick) {
+			String sql = "SELECT * FROM Usuario WHERE nick='"+nick+"'";
+			Usuario u = null;
+			try {
+				Statement st = con.createStatement();
+				ResultSet rs = st.executeQuery(sql);
+				if(rs.next()) {
+					String n = rs.getString("nick");
+					String pass = rs.getString("pass");
+					String nom = rs.getString("nombre");
+					String a = rs.getString("apellido");
+					String tlf = rs.getString("telefono");
+					String fuli = rs.getString("fechaUltimoLogIn");
+					u = new Usuario(n, pass, nom, a, tlf, fuli);
+				}
+			} catch (SQLException e) {
 			// TODO Auto-generated catch block
-	//			e.printStackTrace();
-	//		}
-	//		return u;
-	//	}
+				e.printStackTrace();
+			}
+			return u;
+		}
 	
 	
 	//PARTE DE CARTAS
