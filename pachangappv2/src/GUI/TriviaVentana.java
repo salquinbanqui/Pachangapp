@@ -49,6 +49,7 @@ import dominioConHerencia.Jugador;
 import dominioConHerencia.Portero;
 import login_registro.RegistrarVentana;
 import quiz.Quiz;
+import quiz.Quiz2;
 
 import java.awt.Insets;
 import java.awt.Font;
@@ -877,7 +878,7 @@ public class TriviaVentana extends JFrame implements ActionListener {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Quiz quiz = new Quiz();
+				Quiz2 quiz = new Quiz2();
 				//frmTriviafut.dispose();
 				
 			}
