@@ -454,7 +454,6 @@ public class BD {
 				Integer coste = Integer.parseInt(rs.getString("coste"));
 				String rutaFoto = rs.getString("rutaFoto");
 				String esPortero = rs.getString("esPortero");
-				System.out.println("esPortero jug = " + esPortero);	//todo el false
 				
 				if ( esPortero.equals("FALSE") ) { 
 					c = new Jugador(nombre, puntos, coste, rutaFoto);
@@ -485,9 +484,7 @@ public class BD {
 				Integer coste = Integer.parseInt(rs.getString("coste"));
 				String rutaFoto = rs.getString("rutaFoto");
 				String esPortero = rs.getString("esPortero");
-				
-				System.out.println("esPortero port = " + esPortero); //todo el false
-				
+								
 				if ( esPortero.equals("TRUE") ) { 
 					c = new Portero(nombre, puntos, coste, rutaFoto);
 				}

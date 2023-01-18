@@ -352,7 +352,6 @@ public class TriviaVentana extends JFrame implements ActionListener {
 					}
 				}
 				
-				System.out.println(porterosDisponibles.size());
 				JComboBox<Portero> combo = new JComboBox<>();
 				
 				for (Portero portero : porterosDisponibles) {
@@ -725,15 +724,22 @@ public class TriviaVentana extends JFrame implements ActionListener {
 				listaCartas.add(c);
 				listaCartas.add(d);
 				*/
+				
+				//uso la lista de soporte esta para eliminar las cartas que sean null
+				List<Carta> listaPorteroSupport = new ArrayList<>();
+				listaPorteroSupport.addAll(BD.cargarPorteros(con));
+				
 				List<Carta> listaPortero = new ArrayList<>();
-				listaPortero.addAll(BD.cargarPorteros(con));
+				for (Carta carta : listaPorteroSupport) {
+					if (carta != null) {
+						listaPortero.add(carta);
+					}
+				}
 				
 				List<Carta> listaJugador = new ArrayList<>();
 				listaJugador.addAll(BD.cargarJugadores(con));
 				
-				System.out.println(listaPortero.size());
 				//System.out.println("el portero" + listaPortero.get(0).getNombre());
-				System.out.println(listaJugador.size());
 				
 				System.out.println("portero size " + listaPortero.size());
 				System.out.println("jugador size " + listaJugador.size());
