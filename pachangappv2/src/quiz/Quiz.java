@@ -130,7 +130,7 @@ public class Quiz implements ActionListener{
 			seconds_left.setText(String.valueOf(seconds));
 
 			if(seconds<=0) {
-				seconds = 1000;
+				seconds = 500;
 				frame.dispose();
 				EventQueue.invokeLater(new Runnable() {
 					public void run() {
@@ -613,22 +613,23 @@ public class Quiz implements ActionListener{
 		timer2.start();
 		
 			
-		//Thread.sleep(1000);
+		Thread.sleep(1000);
 		
-		//Thread t = new Thread() {
-	     //   public void run() {
-	    //       synchronized(lock) {
-	    //            while (frame.isVisible())
-	    //                try {
-	    //                    lock.wait();
-	    //                } catch (InterruptedException e) {
-	    //                    e.printStackTrace();
-	    //                }
-	    //            System.out.println("Working now");
-	    //        }
-	    //    }
-	    //};
-	    //t.start();
+		Thread t = new Thread() {
+	        public void run() {
+	           Object lock;
+			synchronized(lock) {
+	                while (frame.isVisible())
+	                    try {
+	                        lock.wait();
+	                    } catch (InterruptedException e) {
+	                        e.printStackTrace();
+	                    }
+	                System.out.println("Working now");
+	            }
+	        }
+	    };
+	    t.start();
 		
 
 	}
