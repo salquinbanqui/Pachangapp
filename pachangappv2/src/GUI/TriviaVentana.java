@@ -122,9 +122,30 @@ public class TriviaVentana extends JFrame implements ActionListener {
 		
 		// SECCIÓN DE CARTAS (INVENTARIO)
 
-		JPanel panelCartaJugador = new JPanel(new GridLayout(0, 2));
-		
-		JScrollPane panelCartasScroll = new JScrollPane(panelCartaJugador);
+		JPanel panelCartasJugador = new JPanel(new GridLayout(0, 2));
+		List<Carta> cartasInventario = new ArrayList<>();
+		//Jugador Messi = new Jugador("Messi", 96, 20, "imagenes/messi.gif");
+		//cartasInventario.add(Messi);
+		System.out.println("Cartas inventario Size: " + cartasInventario.size());
+
+		for (Carta carta : cartasInventario) {
+			JLabel lblTiendaJugador = new JLabel();
+			//lblTiendaJugador.setSize(102, 164);
+			lblTiendaJugador.setSize(120, 193);
+			ImageIcon imTienda = new ImageIcon(carta.getRutaFoto());
+			ImageIcon imcdTienda= new ImageIcon(imTienda.getImage().getScaledInstance(lblTiendaJugador.getWidth(), lblTiendaJugador.getHeight(), Image.SCALE_DEFAULT));
+			lblTiendaJugador.setIcon(imcdTienda);
+			JPanel p = new JPanel(new BorderLayout());
+			JPanel pw = new JPanel();
+			JLabel l = new JLabel("          ");
+			pw.add(l);
+			p.add(pw, BorderLayout.WEST);
+			p.add(lblTiendaJugador,BorderLayout.CENTER);
+			panelCartasJugador.add(p);
+
+		}
+
+		JScrollPane panelCartasScroll = new JScrollPane(panelCartasJugador);
 		panelCartasScroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		panelGeneral.add(panelCartasScroll);
 
@@ -152,8 +173,74 @@ public class TriviaVentana extends JFrame implements ActionListener {
 		}
 		JScrollPane panelTiendaScroll = new JScrollPane(panelTiendaJugador);
 		panelTiendaScroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		panelTiendaJugador.addMouseListener(new MouseListener() {
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				for (Carta carta : tiendaD) {
+					System.out.println(carta.getNombre());
+				}
+
+				System.out.println("---------------------------");
+
+				System.out.println(cartasInventario.size());
+				for (Carta carta : cartasInventario) {
+					System.out.println(carta);
+				}
+
+
+				String comprarJugador = JOptionPane.showInputDialog("Escribe el nombre del jugador a comprar: \n*Los nombres empiezan por mayúscula*");
+
+				for (Carta carta : tiendaD) { //iteramos x todas las cartas e¡en la tienda
+					System.out.println("1");
+					if (carta.getNombre().equals(comprarJugador)) { //si la carta existe
+						System.out.println("2");
+						if (cartasInventario.contains(carta)) {
+							JOptionPane.showMessageDialog(null, "Ya tienes a " + carta.getNombre() + " en el inventario.");
+						}else {
+
+							int compraResult = JOptionPane.showConfirmDialog(null, "Seguro que quieres comprar a " + carta.getNombre() + " por " + carta.getCoste() + " monedas?", "Confirmar compra", JOptionPane.YES_NO_OPTION);
+
+							if (compraResult == 0) { //0 == Yes, 1 == No
+								cartasInventario.add(carta);
+								System.out.println("carta añadida: " + carta.getNombre());
+							}
+							System.out.println("cartas inventario: " + cartasInventario.size());
+						}
+					}
+				}
+
+			}
+
+
+		});
+
 		panelGeneral.add(panelTiendaScroll);
-		
+
 
 		// SECCIÓN DE EQUIPO
 
@@ -938,6 +1025,23 @@ public class TriviaVentana extends JFrame implements ActionListener {
 				panelGeneral.revalidate();
 				// pone el nuevo panel
 				panelGeneral.add(panelCartasScroll);
+                panelCartasJugador.removeAll();
+                for (Carta carta : cartasInventario) {
+                        JLabel lblTiendaJugador = new JLabel();
+                        //lblTiendaJugador.setSize(102, 164);
+                        lblTiendaJugador.setSize(120, 193);
+                        ImageIcon imTienda = new ImageIcon(carta.getRutaFoto());
+                        ImageIcon imcdTienda= new ImageIcon(imTienda.getImage().getScaledInstance(lblTiendaJugador.getWidth(), lblTiendaJugador.getHeight(), Image.SCALE_DEFAULT));
+                        lblTiendaJugador.setIcon(imcdTienda);
+                        JPanel p = new JPanel(new BorderLayout());
+                        JPanel pw = new JPanel();
+                        JLabel l = new JLabel("          ");
+                        pw.add(l);
+                        p.add(pw, BorderLayout.WEST);
+                        p.add(lblTiendaJugador,BorderLayout.CENTER);
+                        panelCartasJugador.add(p);
+                }
+                System.out.println("Cartas inventario Size: " + cartasInventario.size());
 				panelGeneral.repaint();
 				panelGeneral.revalidate();
 
