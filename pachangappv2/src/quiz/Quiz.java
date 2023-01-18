@@ -16,25 +16,25 @@ public class Quiz implements ActionListener{
 
 	String[] questions = 	{
 
-								"Which is the best football player?",
+								" ¿Quién fue el primer futbolista profesional?",
 
-								"Which year was Aitor born?",
+								"A qué país pertenece el equipo Besiktas",
 
-								"What was Messi originally called?",
+								"A qué selección de fútbol anima La torcida",
 
-								"Who invented the football?"
+								"Qué equipo de fútbol español tiene más Ligas"
 
 							};
 
 	String[][] options = 	{
 
-								{"Messi","Ronaldo","Maradona","El menda"},
+								{"Fergus Suter","Peter Shilton","Kevin Poole","Cristiano Ronaldo"},
 
-								{"2000","2002","2004","2005"},
+								{"Egipto","Turquía","Bulgaria","Alemania"},
 
-								{"Apple","Crack","GOD","Super"},
+								{"Argentina","Perú","Brasil","España"},
 
-								{"NO one knows","Bill Gates","James Gosling","Mark Zuckerburg"}
+								{"Barcelona","Sevilla","Real Madrid","Ninguna de las anteriores"}
 
 							};
 
@@ -56,12 +56,16 @@ public class Quiz implements ActionListener{
 	int index;
 
 	int correct_guesses =0;
+	
+	int MONEDAS = 0;
 
 	int total_questions = questions.length;
 
 	int result;
+	
+	int cuenta_banco;
 
-	int seconds=10;
+	int seconds=5;
 
 	
 
@@ -94,6 +98,8 @@ public class Quiz implements ActionListener{
 	JTextField number_right = new JTextField();
 
 	JTextField percentage = new JTextField();
+	
+	JTextField cuenta  = new JTextField();
 
 	
 
@@ -130,7 +136,7 @@ public class Quiz implements ActionListener{
 			seconds_left.setText(String.valueOf(seconds));
 
 			if(seconds<=0) {
-				seconds = 500;
+				seconds = 1000;
 				frame.dispose();
 				EventQueue.invokeLater(new Runnable() {
 					public void run() {
@@ -153,7 +159,7 @@ public class Quiz implements ActionListener{
 
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		frame.setSize(650,650);
+		frame.setSize(700,700);
 
 		frame.getContentPane().setBackground(new Color(50,50,50));
 
@@ -163,7 +169,7 @@ public class Quiz implements ActionListener{
 
 		
 
-		textfield.setBounds(0,0,650,50);
+		textfield.setBounds(0,0,700,50);
 
 		textfield.setBackground(new Color(25,25,25));
 
@@ -179,7 +185,7 @@ public class Quiz implements ActionListener{
 
 		
 
-		textarea.setBounds(0,50,650,50);
+		textarea.setBounds(0,50,700,50);
 
 		textarea.setLineWrap(true);
 
@@ -346,6 +352,21 @@ public class Quiz implements ActionListener{
 		percentage.setHorizontalAlignment(JTextField.CENTER);
 
 		percentage.setEditable(false);
+		
+		
+		cuenta.setBounds(225,425,200,100);
+
+		cuenta.setBackground(new Color(25,25,25));
+
+		cuenta.setForeground(new Color(25,255,0));
+
+		cuenta.setFont(new Font("Ink Free",Font.BOLD,50));
+
+		cuenta.setBorder(BorderFactory.createBevelBorder(1));
+
+		cuenta.setHorizontalAlignment(JTextField.CENTER);
+
+		cuenta.setEditable(false);
 
 		
 
@@ -439,6 +460,8 @@ public class Quiz implements ActionListener{
 				if(answer == answers[index]) {
 
 					correct_guesses++;
+					
+					MONEDAS++;
 
 				}
 
@@ -451,6 +474,8 @@ public class Quiz implements ActionListener{
 				if(answer == answers[index]) {
 
 					correct_guesses++;
+					
+					MONEDAS++;
 
 				}
 
@@ -463,6 +488,8 @@ public class Quiz implements ActionListener{
 				if(answer == answers[index]) {
 
 					correct_guesses++;
+					
+					MONEDAS++;
 
 				}
 
@@ -475,6 +502,8 @@ public class Quiz implements ActionListener{
 				if(answer == answers[index]) {
 
 					correct_guesses++;
+					
+					MONEDAS++;
 
 				}
 
@@ -542,7 +571,7 @@ public class Quiz implements ActionListener{
 
 				answer = ' ';
 
-				seconds=10;
+				seconds=5;
 
 				seconds_left.setText(String.valueOf(seconds));
 
@@ -583,6 +612,8 @@ public class Quiz implements ActionListener{
 		
 
 		result = (int)((correct_guesses/(double)total_questions)*100);
+		
+		cuenta_banco =  MONEDAS;
 
 		
 
@@ -603,6 +634,8 @@ public class Quiz implements ActionListener{
 		number_right.setText("("+correct_guesses+"/"+total_questions+")");
 
 		percentage.setText(result+"%");
+		
+		cuenta.setText(cuenta_banco+"$");
 
 		
 
@@ -610,26 +643,10 @@ public class Quiz implements ActionListener{
 
 		frame.add(percentage);
 		
+		frame.add(cuenta);
+		
 		timer2.start();
 		
-			
-		Thread.sleep(1000);
-		
-		Thread t = new Thread() {
-	        public void run() {
-	           Object lock;
-			synchronized(lock) {
-	                while (frame.isVisible())
-	                    try {
-	                        lock.wait();
-	                    } catch (InterruptedException e) {
-	                        e.printStackTrace();
-	                    }
-	                System.out.println("Working now");
-	            }
-	        }
-	    };
-	    t.start();
 		
 
 	}
