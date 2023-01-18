@@ -741,6 +741,8 @@ public class TriviaVentana extends JFrame implements ActionListener {
 				
 				//System.out.println("el portero" + listaPortero.get(0).getNombre());
 				
+				//DESCOMENTAR EN CASO DE ERROR
+				/*
 				System.out.println("portero size " + listaPortero.size());
 				System.out.println("jugador size " + listaJugador.size());
 				
@@ -751,7 +753,8 @@ public class TriviaVentana extends JFrame implements ActionListener {
 				for (Carta carta : listaJugador) {
 					System.out.println("Jugador: " + carta.getNombre());
 				}
-
+				*/
+				
 				//se crea la listaMejorEquipo, que ira almacenando las mejores cartas de cada posicion
 				List<Carta> listaMejorEquipo = new ArrayList<>();
 				
@@ -760,22 +763,35 @@ public class TriviaVentana extends JFrame implements ActionListener {
 				
 				//llamamos al metodo recursivo para hallar al portero con mayor valoración
 				listaPortero = mejorEquipoR(listaPortero, listaTemporal, 1);
+				
+				//DESCOMENTAR EN CASO DE ERROR
+				/*
 				System.out.println("size listaPortero: "+listaPortero.size());
 				System.out.println("size listaMejorequipo: "+listaMejorEquipo.size());
+				*/
 				
 				//añadimos el mejor portero a la lista de mejor equipos
 				for (Carta carta : listaPortero) {
 					listaMejorEquipo.add(carta);
-					System.out.println("a listaMejorEquipo: "+carta.getNombre());
+					
+					//DESCOMENTAR EN CASO DE ERROR
+					//System.out.println("a listaMejorEquipo: "+carta.getNombre());
 				}
+				//DESCOMENTAR EN CASO DE ERROR
+				/*
 				System.out.println("lista listaMejorequipo: "+listaMejorEquipo.size());
 				
 				System.out.println("size listaTemporal: "+listaTemporal.size());
+				*/
 				
 				//vaciamos la lista temporal para volver a usarla en la llamada recursiva para los jugadores
 				listaTemporal.clear();
+				
+				//DESCOMENTAR EN CASO DE ERROR
+				/*
 				System.out.println("size listaTemporal, deberia ser 0: "+listaTemporal.size());
 				System.out.println("ahora toca lista rcursiva a Juador");
+				*/
 				
 				//llamada recursiva para hallar a los 4 jugadores con mayor valoración
 				listaJugador = mejorEquipoR(listaJugador, listaTemporal, 4);
@@ -783,10 +799,13 @@ public class TriviaVentana extends JFrame implements ActionListener {
 				//añadimos los mejores 4 jugadores a la lista de mejor equipo
 				for (Carta carta : listaJugador) {
 					listaMejorEquipo.add(carta);
-					System.out.println("a listaMejorEquipo: "+carta.getNombre());
+					
+					//DESCOMENTAR EN CASO DE ERROR
+					//System.out.println("a listaMejorEquipo: "+carta.getNombre());
 				}
 				
-				System.out.println("size listaMejorEquipo, deberia ser 5: "+listaMejorEquipo.size());
+				//DESCOMENTAR EN CASO DE ERROR
+				//System.out.println("size listaMejorEquipo, deberia ser 5: "+listaMejorEquipo.size());
 				
 				//se vacia la listaTemporal porsiaca, no esestrictamente necesario
 				listaTemporal.clear();
@@ -954,19 +973,22 @@ public class TriviaVentana extends JFrame implements ActionListener {
 	public static List<Carta> mejorEquipoR(List<Carta> listaCartas, List<Carta> mejoresCartasRec, int numStop) {
 		 
 		//los prints es para entender mejor el proceso, se pueden borrar sin problema
+		//DESCOMENTAR EN CASO DE ERROR
+		/*
 		System.out.println("Lista cartas size: " + listaCartas.size());
 		for (Carta carta : listaCartas) {
 			System.out.println(carta.getPuntos());
 		}
 		System.out.println("Mejores cartas size: " + mejoresCartasRec.size());
-		
+		*/
 		
 		//caso base, si la lista ya tiene los elementos que se piden por parametro return mejoresCartasRec
 		if(mejoresCartasRec.size() == numStop) {
 			
-			System.out.println("despues de esto deberia acabar, ns pq sigue");
+			//System.out.println("despues de esto deberia acabar, ns pq sigue");
 			
 			//NO ENTINEDO PORQUE EL METODO NO ACABA AL LLEGAR A ESTE RETURN, YA LO MIRARÉ
+			//PARA QUE ESTE MAS LIMPIO DEBERÍA HABER HECHO OTRO METODO DE SOPORTE QUE LLAME A ESTE
 			return mejoresCartasRec;
 			
 		}else { //caso recursivo, si la lista tiene menos elementos de los que se piden por parametro
@@ -979,13 +1001,17 @@ public class TriviaVentana extends JFrame implements ActionListener {
 				if(jugador.getPuntos() > num) {
 					num = jugador.getPuntos();
 					jugadorMaxValoracion = jugador;
-					System.out.println("puntos del jugador max valoracion: " + jugadorMaxValoracion.getPuntos());
+					
+					//DESCOMENTAR EN CASO DE ERROR
+					//System.out.println("puntos del jugador max valoracion: " + jugadorMaxValoracion.getPuntos());
 				}
 			}
 			
 			//se añade la carta con mayor valoracion en la lista mejoresCartasRec y se elimina de listaCartas
 			mejoresCartasRec.add(jugadorMaxValoracion);
-			System.out.println("se ha añadido " + jugadorMaxValoracion.getNombre());
+			
+			//DESCOMENTAR EN CASO DE ERROR
+			//System.out.println("se ha añadido " + jugadorMaxValoracion.getNombre());
 			listaCartas.remove(jugadorMaxValoracion);
 			
 			//se repite el proceso de forma recursiva hasta que el tamaño de cartas almacenadas en mejoresCartasRec sea el especificado por parametro
@@ -993,7 +1019,6 @@ public class TriviaVentana extends JFrame implements ActionListener {
 			
 			
 		}
-		System.out.println("hola");
 		return mejoresCartasRec;
 		
 	}
