@@ -65,6 +65,14 @@ public class Quiz implements ActionListener{
 	
 	int cuenta_banco;
 
+	public int getCuenta_banco() {
+		return cuenta_banco;
+	}
+
+	public void setCuenta_banco(int cuenta_banco) {
+		this.cuenta_banco = cuenta_banco;
+	}
+
 	int seconds=5;
 
 	
