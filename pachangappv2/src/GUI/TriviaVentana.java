@@ -118,11 +118,14 @@ public class TriviaVentana extends JFrame implements ActionListener {
 		//SECCIÓN DE TIENDA
 		
 		JPanel panelTiendaJugador = new JPanel(new GridLayout(0, 2));
-		for(int i=0;i<50;i++) {
+		
+		List<Carta> tiendaD = new ArrayList<>();
+		tiendaD.addAll(BD.cargarJugadores(con));
+		for (Carta carta : tiendaD) {
 			JLabel lblTiendaJugador = new JLabel();
 			//lblTiendaJugador.setSize(102, 164);
 			lblTiendaJugador.setSize(120, 193);
-			ImageIcon imTienda = new ImageIcon("imagenes/lewan.gif");
+			ImageIcon imTienda = new ImageIcon(carta.getRutaFoto());
 			ImageIcon imcdTienda= new ImageIcon(imTienda.getImage().getScaledInstance(lblTiendaJugador.getWidth(), lblTiendaJugador.getHeight(), Image.SCALE_DEFAULT));
 			lblTiendaJugador.setIcon(imcdTienda);
 			JPanel p = new JPanel(new BorderLayout());
