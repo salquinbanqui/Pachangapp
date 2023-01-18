@@ -453,10 +453,10 @@ public class BD {
 				Integer puntos = Integer.parseInt(rs.getString("puntos"));
 				Integer coste = Integer.parseInt(rs.getString("coste"));
 				String rutaFoto = rs.getString("rutaFoto");
-				boolean esPortero = rs.getBoolean("esPortero");
+				String esPortero = rs.getString("esPortero");
 				System.out.println("esPortero jug = " + esPortero);	//todo el false
 				
-				if ( esPortero == false ) { 
+				if ( esPortero.equals("FALSE") ) { 
 					c = new Jugador(nombre, puntos, coste, rutaFoto);
 				}
 				
@@ -484,11 +484,11 @@ public class BD {
 				Integer puntos = Integer.parseInt(rs.getString("puntos"));
 				Integer coste = Integer.parseInt(rs.getString("coste"));
 				String rutaFoto = rs.getString("rutaFoto");
-				boolean esPortero = rs.getBoolean("esPortero");
+				String esPortero = rs.getString("esPortero");
 				
 				System.out.println("esPortero port = " + esPortero); //todo el false
 				
-				if ( esPortero == true ) { 
+				if ( esPortero.equals("TRUE") ) { 
 					c = new Portero(nombre, puntos, coste, rutaFoto);
 				}
 				porteroSet.add(c);

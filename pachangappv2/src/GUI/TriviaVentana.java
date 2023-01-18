@@ -120,7 +120,7 @@ public class TriviaVentana extends JFrame implements ActionListener {
 		JPanel panelTiendaJugador = new JPanel(new GridLayout(0, 2));
 		
 		List<Carta> tiendaD = new ArrayList<>();
-		tiendaD.addAll(BD.cargarJugadores(con));
+		tiendaD.addAll(BD.cargarCartas(con));
 		for (Carta carta : tiendaD) {
 			JLabel lblTiendaJugador = new JLabel();
 			//lblTiendaJugador.setSize(102, 164);
@@ -340,15 +340,26 @@ public class TriviaVentana extends JFrame implements ActionListener {
 			
 				//creamos una lista para almacenar los porteros
 				HashSet<Portero> porterosDisponibles = new HashSet<>();
+				porterosDisponibles.clear();
 				porterosDisponibles.addAll(BD.cargarPorteros(con));
 				
+				//el iterator lo hago pq ns pq el primer portero que entraba era null y daba errores
+				Iterator<Portero> it = porterosDisponibles.iterator();
+				
+				while(it.hasNext()) {
+					if (it.next() == null) {
+						it.remove();
+					}
+				}
+				
+				System.out.println(porterosDisponibles.size());
 				JComboBox<Portero> combo = new JComboBox<>();
 				
 				for (Portero portero : porterosDisponibles) {
 					combo.addItem(portero);
 				}
 				
-				JOptionPane.showMessageDialog(null, combo, "Reservas", JOptionPane.QUESTION_MESSAGE);
+				JOptionPane.showMessageDialog(null, combo, "Porteros", JOptionPane.QUESTION_MESSAGE);
 				
 				
 				for (Portero portero : porterosDisponibles) {
