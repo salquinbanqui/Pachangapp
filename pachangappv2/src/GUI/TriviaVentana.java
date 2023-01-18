@@ -12,9 +12,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.Inet4Address;
@@ -51,6 +53,7 @@ import quiz.Quiz;
 import java.awt.Insets;
 import java.awt.Font;
 import java.awt.Frame;
+import java.awt.Graphics;
 
 public class TriviaVentana extends JFrame implements ActionListener {
 
@@ -587,7 +590,7 @@ public class TriviaVentana extends JFrame implements ActionListener {
 		btnEquipoCargar.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		
 		
-		/*
+		
 		btnEquipoCargar.addActionListener(new ActionListener() {
 			
 			@Override
@@ -595,68 +598,47 @@ public class TriviaVentana extends JFrame implements ActionListener {
 				// TODO Auto-generated method stub
 				
 				
+				
+				
 				try {
-					BD.cargarJugadores(null);
-				}
-				*/
-				
-				
-				
-				/*
-				try {
-					BufferedReader br = new BufferedReader(new FileReader("Personas.csv")); //Hemos abierto el fichero
-					String linea = br.readLine(); //Leo la línea de títulos del fichero
-					String [] titulos = linea.split(";");
+					BufferedReader br = new BufferedReader(new FileReader("data/Personas.txt")); //Hemos abierto el fichero
+					String linea = ""; //Leo la línea de títulos del fichero
+					
 					//Leemos la línea del fichero
-					linea = br.readLine();
-					if(linea != null) { //solo sera una linea asi que no me hace falta hacer un while
-						//Tratamos la línea
-						//linea = Portero;DefArriba;DefensaDebajo;DelanteroArriba;DelanteroDebajo
-						//Dividimos la línea en columnas
-						String [] datos = linea.split(";");
+					
+					while((linea = br.readLine()) != null) {
+						
+						String [] parametros = linea.split("¿");
 												
 						//fila 1
 						
+						Posiciones variablePosiciones = Posiciones.valueOf(parametros[0]);
 						
 						
-						panelEquipoCentro[0][2] = (Portero)datos[0];
+						switch (variablePosiciones) {
+						case PORTERO: {
+							
+							lblEquipoPortero.setIcon(new ImageIcon(parametros[4]));
+							cartasFicheros.put(variablePosiciones, new Portero(parametros[1], Integer.parseInt(parametros[2]), Integer.parseInt(parametros[3]), parametros[1]));
+						}
 						
 						
-						
-						
-						String p1 = (String) panelEquipoCentro.getValueAt(0, 0);
-						String Portero = (String) panelEquipoCentro.getValueAt(0, 1);
-						String p2 = (String) panelEquipoCentro.getValueAt(0, 2);
-						
-						//fila 2
-						String DefArriba = (String) panelEquipoCentro.getValueAt(1, 0);
-						String p3 = (String) panelEquipoCentro.getValueAt(1, 1);
-						String DefensaDebajo = (String) panelEquipoCentro.getValueAt(1, 2);
-						
-						//fila 2
-						String DelanteroArriba = (String) panelEquipoCentro.getValueAt(2, 0);
-						String p4 = (String) panelEquipoCentro.getValueAt(2, 1);
-						String DelanteroDebajo = (String) panelEquipoCentro.getValueAt(2, 2);
+						default:
+							throw new IllegalArgumentException("Unexpected value: " + variablePosiciones);
+						}
 						
 					}
 					br.close();
-				} catch (FileNotFoundException e) {
+				} catch (FileNotFoundException e1) {
 					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (IOException e) {
+					e1.printStackTrace();
+				} catch (IOException e1) {
 					// TODO Auto-generated catch block
-					e.printStackTrace();
+					e1.printStackTrace();
 				}
 				
-				//3- Creo la JTable a partir del modelo
-				tablaAlumnos = new JTable(modeloAlumnos);
-				//4- Le añado el scroll a la tabla
-				scrollTablaAlumnos = new JScrollPane(tablaAlumnos);
-				//5- Añado el scroll que contiene la tabla a la ventana
-				contentPane.add(scrollTablaAlumnos, BorderLayout.CENTER);
-				
 			}
-		});*/
+		});
 		btnEquipoCargar.setPreferredSize(new Dimension(120, 40));
 		panelEquipoBot.add(btnEquipoCargar);
 
@@ -672,7 +654,7 @@ public class TriviaVentana extends JFrame implements ActionListener {
 					//Crear un documento en blanco
 					//PrintWriter pw = new PrintWriter("Personas.txt");
 					//Crear un documento para añadir al final
-					PrintWriter pw = new PrintWriter(new FileOutputStream("Personas.txt", true));
+					PrintWriter pw = new PrintWriter(new FileOutputStream("data/Personas.txt", true));
 					
 					
 					//Escribo los datos en el documento
@@ -695,7 +677,7 @@ public class TriviaVentana extends JFrame implements ActionListener {
 				} catch (FileNotFoundException e1) {
 					// TODO Auto-generated catch block
 					try {
-						new File("Personas.txt").createNewFile();
+						new File("data/Personas.txt").createNewFile();
 						actionPerformed(e);
 					} catch (IOException e2) {
 						// TODO Auto-generated catch block
