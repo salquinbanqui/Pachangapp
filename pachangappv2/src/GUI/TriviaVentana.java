@@ -159,7 +159,7 @@ public class TriviaVentana extends JFrame implements ActionListener {
 		//crea los labels de los jugadores del campo reescalados
 		JLabel lblEquipoDefArriba = new JLabel();
 		lblEquipoDefArriba.setSize(102, 164);
-		ImageIcon im = new ImageIcon("imagenes\\lewan.gif");
+		ImageIcon im = new ImageIcon("imagenes\\chiellini.gif");
 		ImageIcon imcd = new ImageIcon(
 				im.getImage().getScaledInstance(lblEquipoDefArriba.getWidth(), lblEquipoDefArriba.getHeight(), Image.SCALE_DEFAULT));
 		lblEquipoDefArriba.setIcon(imcd);
@@ -457,7 +457,7 @@ public class TriviaVentana extends JFrame implements ActionListener {
 
 		JLabel lblEquipoDefensaDebajo = new JLabel();
 		lblEquipoDefensaDebajo.setSize(102, 164);
-		ImageIcon im5 = new ImageIcon("imagenes\\neuer.gif");
+		ImageIcon im5 = new ImageIcon("imagenes\\pique.gif");
 		ImageIcon imcd5 = new ImageIcon(
 				im5.getImage().getScaledInstance(lblEquipoDefensaDebajo.getWidth(), lblEquipoDefensaDebajo.getHeight(), Image.SCALE_DEFAULT));
 		lblEquipoDefensaDebajo.setIcon(imcd5);
