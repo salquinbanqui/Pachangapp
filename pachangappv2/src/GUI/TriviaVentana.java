@@ -1004,7 +1004,7 @@ public class TriviaVentana extends JFrame implements ActionListener {
 			getContentPane().add(panelTop, BorderLayout.NORTH);
 			panelTop.setLayout(new BorderLayout(0, 0));
 
-			JLabel labelDinero = new JLabel("520💰");
+			JLabel labelDinero = new JLabel("500💰");
 			labelDinero.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 			labelDinero.setPreferredSize(new Dimension(150, 14));
 			panelTop.add(labelDinero, BorderLayout.EAST);

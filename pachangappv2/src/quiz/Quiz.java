@@ -469,7 +469,7 @@ public class Quiz implements ActionListener{
 
 					correct_guesses++;
 					
-					MONEDAS++;
+					MONEDAS = MONEDAS + 125;
 
 				}
 
@@ -483,7 +483,7 @@ public class Quiz implements ActionListener{
 
 					correct_guesses++;
 					
-					MONEDAS++;
+					MONEDAS = MONEDAS + 125;
 
 				}
 
@@ -497,7 +497,7 @@ public class Quiz implements ActionListener{
 
 					correct_guesses++;
 					
-					MONEDAS++;
+					MONEDAS = MONEDAS + 125;
 
 				}
 
@@ -511,7 +511,7 @@ public class Quiz implements ActionListener{
 
 					correct_guesses++;
 					
-					MONEDAS++;
+					MONEDAS = MONEDAS + 125;
 
 				}
 
