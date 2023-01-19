@@ -120,6 +120,7 @@ public class TriviaVentana extends JFrame implements ActionListener {
 		//Jugador cart = (Jugador) BD.obtenerDatosCarta(con, "Salah");
 		//System.out.println(cart);
 		
+		
 		Map<Posiciones,Carta> cartasFicheros = new HashMap<>();
 		
 		ImageIcon fondo = new ImageIcon("imagenes/fondo.jpg");
