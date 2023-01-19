@@ -99,8 +99,18 @@ public class TriviaVentana extends JFrame implements ActionListener {
 
 
 		public TriviaVentana() {
-
-			List<Carta> cartasInventario = new ArrayList<>();
+			con = BD.initBD("data//DBTrivia.db");
+			//BD.crearTablaJugador(con);
+			//BD.crearTablaPortero(con);
+			//BD.crearTablaUsuario(con);
+			//BD.crearTablaInventario(con);
+			//BD.cargarCartas(con);
+			//Jugador cart = (Jugador) BD.obtenerDatosCarta(con, "Salah");
+			//System.out.println(cart);
+			
+			
+			List<Carta> cartasInventario = BD.cargarInventario(con);
+			
 
 			this.addWindowListener(new WindowListener() {
 
@@ -158,15 +168,6 @@ public class TriviaVentana extends JFrame implements ActionListener {
 
 				}
 			});
-
-			con = BD.initBD("data//DBTrivia.db");
-			//BD.crearTablaJugador(con);
-			//BD.crearTablaPortero(con);
-			//BD.crearTablaUsuario(con);
-			//BD.crearTablaInventario(con);
-			//BD.cargarCartas(con);
-			//Jugador cart = (Jugador) BD.obtenerDatosCarta(con, "Salah");
-			//System.out.println(cart);
 
 
 			Map<Posiciones,Carta> cartasFicheros = new HashMap<>();

@@ -883,7 +883,7 @@ public class BD {
 			ResultSet rs = st.executeQuery(sql);
 			Carta c = null;
 			while(rs.next()) {
-				String tipo = rs.getString("tipoBienPuesto");
+				String tipo = rs.getString("tipo");
 				String nombre = rs.getString("nombre");
 				Integer puntos = Integer.parseInt(rs.getString("puntos"));
 				Integer coste = Integer.parseInt(rs.getString("coste"));
