@@ -855,11 +855,6 @@ public class BD {
 			if (carta.getNombre().equals("Buffon") || carta.getNombre().equals("Casillas") || carta.getNombre().equals("Neuer")) {
 				tipoBienPuesto = "Portero";
 			}
-			System.out.println(tipoBienPuesto);
-			System.out.println(carta.getNombre());
-			System.out.println(carta.getPuntos());
-			System.out.println(carta.getCoste());
-			System.out.println(carta.getRutaFoto());
 			String sql = "INSERT INTO Inventario VALUES('"+tipoBienPuesto+"','"+carta.getNombre()+"',"+carta.getPuntos()+", "+carta.getCoste()+", '"+carta.getRutaFoto()+"')";
 			
 		try {
