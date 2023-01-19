@@ -848,7 +848,34 @@ public class BD {
 
 	//PARA GUARDAR EN INVENTARIO
 	
-	public static void guardarInventario(Connection con, HashMap<String, Carta> mapaInventario){
+	public static void guardarInventario(Connection con, ArrayList<Carta> cartasInventario){
+		
+		for(Carta carta :cartasInventario) {
+			String tipoBienPuesto = "Jugador";
+			if (carta.getNombre().equals("Buffon") || carta.getNombre().equals("Casillas") || carta.getNombre().equals("Neuer")) {
+				tipoBienPuesto = "Portero";
+			}
+			System.out.println(tipoBienPuesto);
+			System.out.println(carta.getNombre());
+			System.out.println(carta.getPuntos());
+			System.out.println(carta.getCoste());
+			System.out.println(carta.getRutaFoto());
+			String sql = "INSERT INTO Inventario VALUES('"+tipoBienPuesto+"','"+carta.getNombre()+"',"+carta.getPuntos()+", "+carta.getCoste()+", '"+carta.getRutaFoto()+"')";
+			
+		try {
+			Statement stmt = con.createStatement();
+			stmt.executeUpdate(sql);
+			stmt.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		}
+	}
+	
+	/*
+	 * 	public static void guardarInventario(Connection con, HashMap<String, Carta> mapaInventario){
 		
 		for(Carta carta :mapaInventario.values()) {
 			
@@ -866,7 +893,7 @@ public class BD {
 		}
 		
 		}
-	}
+	}*/
 	
 
 /*
