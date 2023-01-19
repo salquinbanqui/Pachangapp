@@ -89,6 +89,11 @@ public class TriviaVentana extends JFrame implements ActionListener {
 		DELANTERO_ARRIBA, 
 		DELANTERO_ABAJO, 
 		PORTERO};
+		
+	//enum TipoCarta{
+	//	JUGADOR,
+	//	PORTERO
+	//}
 
 	/**
 	 * Create the application.

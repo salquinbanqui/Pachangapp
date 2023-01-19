@@ -824,9 +824,11 @@ public class BD {
 		DELANTERO_ARRIBA, 
 		DELANTERO_ABAJO, 
 		PORTERO};
+		
+	
 
 	//PARA GUARDAR EN INVENTARIO
-		
+	
 	public static void guardarInventario(Connection con, HashMap<Posiciones, Carta> mapaInventario){
 		
 		for(Posiciones pos :mapaInventario.keySet()) {
@@ -846,13 +848,36 @@ public class BD {
 		
 		}
 	}
+	
+	/*
+	
+	public static void guardarInventario(Connection con, HashMap<Posiciones, Carta> mapaInventario){
+		
+		for(Posiciones pos :mapaInventario.keySet()) {
+			
+			Carta valor = mapaInventario.get(pos);
+		
+			String sql = "INSERT INTO Inventario VALUES('"+pos+"','"+valor.getNombre()+"',"+valor.getPuntos()+", "+valor.getCoste()+", "+valor.getRutaFoto()+")";
+			
+		try {
+			Statement stmt = con.createStatement();
+			stmt.executeUpdate(sql);
+			stmt.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		}
+	}
+
+	*/
 		
 		
 	
 	//PARA METER EN INVENTARIO
 	
-/*
-	
+	/*
 	public static HashMap<Posiciones, Carta> cargarInventario(Connection con){
 		String sql = "SELECT * FROM Inventario";
 		//HashSet<Portero> porteroSet = new HashSet<>();
@@ -882,10 +907,32 @@ public class BD {
 		return mapaInventario;
 		
 	}
-	
-
-
 	*/
+	
+	/*
+	 * EJEMPLO QUE HAY QUE BORRAR
+	 * 
+	public static Persona obtenerDatosPersona(Connection con, String dni) {
+		String sql = "SELECT * FROM Persona WHERE dni='"+dni+"'";
+		Persona p = null;
+		try {
+			Statement st = con.createStatement();
+			ResultSet rs = st.executeQuery(sql);
+			if(rs.next()) {
+				String d = rs.getString("dni");
+				String n = rs.getString("nom");
+				String fn = rs.getString("fechaNacimiento");
+				String c = rs.getString("con");
+				p = new Persona(d, n, fn, c);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return p;
+	}
+	*/
+	
 	
 	
 	//devolver lista cartas de inventario (cartas)
