@@ -13,7 +13,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import java.util.logging.Logger;
@@ -816,9 +818,73 @@ public class BD {
 		
 	}
 	
+	enum Posiciones{
+		DEFENSA_ABAJO, 
+		DEFENSA_ARRIBA, 
+		DELANTERO_ARRIBA, 
+		DELANTERO_ABAJO, 
+		PORTERO};
+
+	//PARA GUARDAR EN INVENTARIO
+		
+	public static void guardarInventario(Connection con, HashMap<Posiciones, Carta> mapaInventario){
+		
+		for(Posiciones pos :mapaInventario.keySet()) {
+			
+			Carta valor = mapaInventario.get(pos);
+		
+			String sql = "INSERT INTO Inventario VALUES('"+pos+"','"+valor.getNombre()+"',"+valor.getPuntos()+", "+valor.getCoste()+", "+valor.getRutaFoto()+")";
+			
+		try {
+			Statement stmt = con.createStatement();
+			stmt.executeUpdate(sql);
+			stmt.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		}
+	}
+		
+		
+	
+	//PARA METER EN INVENTARIO
+	
+/*
+	
+	public static HashMap<Posiciones, Carta> cargarInventario(Connection con){
+		String sql = "SELECT * FROM Inventario";
+		//HashSet<Portero> porteroSet = new HashSet<>();
+		HashMap<Posiciones, Carta> mapaInventario = new HashMap<>();
+		Portero c = null;
+		try {
+			Statement st = con.createStatement();
+			ResultSet rs = st.executeQuery(sql);
+			while(rs.next()) {
+				String nombre = rs.getString("nombre");
+				Integer puntos = Integer.parseInt(rs.getString("puntos"));
+				Integer coste = Integer.parseInt(rs.getString("coste"));
+				String rutaFoto = rs.getString("rutaFoto");
+				String esPortero = rs.getString("esPortero");
+								
+				if ( esPortero.equals("TRUE") ) { 
+					c = new Portero(nombre, puntos, coste, rutaFoto);
+				}
+				mapaInventario.put(po, c)
+			}
+			rs.close();
+			st.close();
+		}catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return mapaInventario;
+		
+	}
 	
 
-	
+	*/
 	
 	
 	//devolver lista cartas de inventario (cartas)

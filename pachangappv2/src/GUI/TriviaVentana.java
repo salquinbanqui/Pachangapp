@@ -12,6 +12,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -78,6 +81,8 @@ public class TriviaVentana extends JFrame implements ActionListener {
 		});
 	}
 	
+	
+	
 	enum Posiciones{
 		DEFENSA_ABAJO, 
 		DEFENSA_ARRIBA, 
@@ -88,8 +93,25 @@ public class TriviaVentana extends JFrame implements ActionListener {
 	/**
 	 * Create the application.
 	 */
+		
+		
 	
 	public TriviaVentana() {
+		/*
+		this.addWindowListener(new WindowAdapter() {
+        
+	        @Override
+	        public void windowClosing(WindowEvent arg0) {
+	             
+	        	System.out.println("funciona");
+	        }
+	        
+        
+        
+        
+	    });
+		*/
+		
 		con = BD.initBD("data//DBTrivia.db");
 		//BD.crearTablaJugador(con);
 		//BD.crearTablaPortero(con);
@@ -239,6 +261,7 @@ public class TriviaVentana extends JFrame implements ActionListener {
 
 		});
 
+		
 		panelGeneral.add(panelTiendaScroll);
 
 
@@ -1175,6 +1198,8 @@ public class TriviaVentana extends JFrame implements ActionListener {
 		return arrayCartasInventario;
 		
 	}
+	
+	
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
