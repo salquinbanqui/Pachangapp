@@ -133,8 +133,6 @@ public class TriviaVentana extends JFrame implements ActionListener {
 					// TODO Auto-generated method stub
 
 					if(cartasInventario.size() != 0) {
-						System.out.println("por la cara");
-
 						//HashMap<String, Carta> mapaGuardarInventario = new HashMap<>();
                         //
 						//for (Carta c : cartasInventario) {
@@ -199,7 +197,6 @@ public class TriviaVentana extends JFrame implements ActionListener {
 
 			//Jugador Messi = new Jugador("Messi", 96, 20, "imagenes/messi.gif");
 			//cartasInventario.add(Messi);
-			System.out.println("Cartas inventario Size: " + cartasInventario.size());
 
 			for (Carta carta : cartasInventario) {
 				JLabel lblTiendaJugador = new JLabel();
@@ -274,24 +271,12 @@ public class TriviaVentana extends JFrame implements ActionListener {
 
 				@Override
 				public void mouseClicked(MouseEvent e) {
-					for (Carta carta : tiendaD) {
-						System.out.println(carta.getNombre());
-					}
-
-					System.out.println("---------------------------");
-
-					System.out.println(cartasInventario.size());
-					for (Carta carta : cartasInventario) {
-						System.out.println(carta);
-					}
 
 
 					String comprarJugador = JOptionPane.showInputDialog("Escribe el nombre del jugador a comprar: \n*Los nombres empiezan por mayúscula*");
 
 					for (Carta carta : tiendaD) { //iteramos x todas las cartas e¡en la tienda
-						System.out.println("1");
 						if (carta.getNombre().equals(comprarJugador)) { //si la carta existe
-							System.out.println("2");
 							if (cartasInventario.contains(carta)) {
 								JOptionPane.showMessageDialog(null, "Ya tienes a " + carta.getNombre() + " en el inventario.");
 							}else {
@@ -300,9 +285,8 @@ public class TriviaVentana extends JFrame implements ActionListener {
 
 								if (compraResult == 0) { //0 == Yes, 1 == No
 									cartasInventario.add(carta);
-									System.out.println("carta añadida: " + carta.getNombre());
+									JOptionPane.showMessageDialog(null, "Carta añadida: " + carta.getNombre() + "\nCartas en el inventario: " + cartasInventario.size());
 								}
-								System.out.println("cartas inventario: " + cartasInventario.size());
 							}
 						}
 					}
@@ -1115,7 +1099,7 @@ public class TriviaVentana extends JFrame implements ActionListener {
 						p.add(lblTiendaJugador,BorderLayout.CENTER);
 						panelCartasJugador.add(p);
 					}
-					System.out.println("Cartas inventario Size: " + cartasInventario.size());
+					//System.out.println("Cartas inventario Size: " + cartasInventario.size());
 					panelGeneral.repaint();
 					panelGeneral.revalidate();
 
