@@ -144,7 +144,7 @@ public class RegistrarVentana {
 							//inserta el usuario y te lleva a iniciar sesion
 							//BD.insertarUsuario(con, nick, contra, nombre, apellido, telefono, fechaActual);
 							JOptionPane.showMessageDialog(null, "Usuario registrado correctamente");
-							frame.dispose();
+							//frame.dispose();
 							//LoginPage page = new LoginPage(null);
 							//LogInVentana.main(null);
 						}else {

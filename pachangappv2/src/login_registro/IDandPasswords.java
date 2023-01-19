@@ -13,7 +13,7 @@ public class IDandPasswords {
 
 		
 
-		logininfo.put("Aitor","123");
+		logininfo.put("Aitor","1234");
 
 
 	}
