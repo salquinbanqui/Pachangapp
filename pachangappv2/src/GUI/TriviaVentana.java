@@ -90,10 +90,7 @@ public class TriviaVentana extends JFrame implements ActionListener {
 		DELANTERO_ABAJO, 
 		PORTERO};
 		
-	//enum TipoCarta{
-	//	JUGADOR,
-	//	PORTERO
-	//}
+	
 
 	/**
 	 * Create the application.
@@ -102,25 +99,73 @@ public class TriviaVentana extends JFrame implements ActionListener {
 		
 	
 	public TriviaVentana() {
-		/*
-		this.addWindowListener(new WindowAdapter() {
-        
-	        @Override
-	        public void windowClosing(WindowEvent arg0) {
-	             
-	        	System.out.println("funciona");
-	        }
-	        
-        
-        
-        
-	    });
-		*/
+		
+		List<Carta> cartasInventario = new ArrayList<>();
+		
+this.addWindowListener(new WindowListener() {
+			
+			@Override
+			public void windowOpened(WindowEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void windowIconified(WindowEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void windowDeiconified(WindowEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void windowDeactivated(WindowEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void windowClosing(WindowEvent e) {
+				// TODO Auto-generated method stub
+				
+				if(cartasInventario.size() != 0) {
+					System.out.println("por la cara");
+					
+					HashMap<String, Carta> mapaGuardarInventario = new HashMap<>();
+
+					for (Carta c : cartasInventario) {
+						mapaGuardarInventario.put(c.getNombre(), c);
+					}
+					
+					BD.guardarInventario(con, mapaGuardarInventario);
+				}
+				
+				
+				
+			}
+			
+			@Override
+			public void windowClosed(WindowEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void windowActivated(WindowEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
 		
 		con = BD.initBD("data//DBTrivia.db");
 		//BD.crearTablaJugador(con);
 		//BD.crearTablaPortero(con);
 		//BD.crearTablaUsuario(con);
+		//BD.crearTablaInventario(con);
 		//BD.cargarCartas(con);
 		//Jugador cart = (Jugador) BD.obtenerDatosCarta(con, "Salah");
 		//System.out.println(cart);
@@ -151,7 +196,7 @@ public class TriviaVentana extends JFrame implements ActionListener {
 		// SECCIÓN DE CARTAS (INVENTARIO)
 
 		JPanel panelCartasJugador = new JPanel(new GridLayout(0, 2));
-		List<Carta> cartasInventario = new ArrayList<>();
+		
 		//Jugador Messi = new Jugador("Messi", 96, 20, "imagenes/messi.gif");
 		//cartasInventario.add(Messi);
 		System.out.println("Cartas inventario Size: " + cartasInventario.size());
@@ -1120,6 +1165,8 @@ public class TriviaVentana extends JFrame implements ActionListener {
     
     
     
+    
+    
     //listaCartas: una lista que contiene todas las cartas de un tipoconcreto (Portero o Jugador) que tiene el usuario
     //mejoresCartasRec: una lista donde se guardan las mejores "numStop" cartas contenidas en listaCartas
     //numStop: un int que representa el numero de cartas que deberian estar almacenadas en la lista mejoresCartasRec
@@ -1176,6 +1223,8 @@ public class TriviaVentana extends JFrame implements ActionListener {
 		
 	}
 	
+	
+	
 	public static List<Carta> listaCartasInventario(){
 		List<Carta> arrayCartasInventario = new ArrayList<>();
 		
@@ -1202,6 +1251,10 @@ public class TriviaVentana extends JFrame implements ActionListener {
 		arrayCartasInventario.add(d);
 		
 		return arrayCartasInventario;
+		
+		
+		
+		
 		
 	}
 	

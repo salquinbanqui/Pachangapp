@@ -825,17 +825,36 @@ public class BD {
 		DELANTERO_ABAJO, 
 		PORTERO};
 		
+		
+	//enum TipoCarta{
+	//	JUGADOR,
+	//	PORTERO
+	//}
+		
+	
+	public static void crearTablaInventario(Connection con) {
+		String sql = "CREATE TABLE IF NOT EXISTS Inventario (tipo String, nombre String, puntos String, coste String, rutaFoto String)";
+		try {
+			Statement st = con.createStatement();
+			st.executeUpdate(sql);
+			st.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
 	
 
 	//PARA GUARDAR EN INVENTARIO
 	
-	public static void guardarInventario(Connection con, HashMap<Posiciones, Carta> mapaInventario){
+	public static void guardarInventario(Connection con, HashMap<String, Carta> mapaInventario){
 		
-		for(Posiciones pos :mapaInventario.keySet()) {
+		for(Carta carta :mapaInventario.values()) {
 			
-			Carta valor = mapaInventario.get(pos);
-		
-			String sql = "INSERT INTO Inventario VALUES('"+pos+"','"+valor.getNombre()+"',"+valor.getPuntos()+", "+valor.getCoste()+", "+valor.getRutaFoto()+")";
+			
+			String tipoBienPuesto = carta.getClass().toString().substring(25);
+			String sql = "INSERT INTO Inventario VALUES('"+tipoBienPuesto+"','"+carta.getNombre()+"',"+carta.getPuntos()+", "+carta.getCoste()+", "+carta.getRutaFoto()+")";
 			
 		try {
 			Statement stmt = con.createStatement();
@@ -848,6 +867,31 @@ public class BD {
 		
 		}
 	}
+	
+
+/*
+	public static void guardarInventario(Connection con, HashMap<TipoCarta, Carta> mapaInventario){
+		
+		for(TipoCarta tipo :mapaInventario.keySet()) {
+			
+			Carta valor = mapaInventario.get(tipo);
+		
+			String sql = "INSERT INTO Inventario VALUES('"+tipo+"','"+valor.getNombre()+"',"+valor.getPuntos()+", "+valor.getCoste()+", "+valor.getRutaFoto()+")";
+			
+		try {
+			Statement stmt = con.createStatement();
+			stmt.executeUpdate(sql);
+			stmt.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		}
+	}
+	*/
+	
+	
 	
 	/*
 	
