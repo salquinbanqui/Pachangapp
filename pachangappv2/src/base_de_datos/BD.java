@@ -552,9 +552,9 @@ public class BD {
 				Integer coste = Integer.parseInt(rs.getString("coste"));
 				String rutaFoto = rs.getString("rutaFoto");
 				
-				boolean esPortero = rs.getBoolean("esPortero");
+				String esPortero = rs.getString("esPortero");
 				
-				if ( esPortero == false ) { 
+				if ( esPortero.equals("FALSE") ) { 
 					c = new Jugador(nombre, puntos, coste, rutaFoto);
 				}else {
 					c = new Portero(nombre, puntos, coste, rutaFoto);
@@ -873,6 +873,42 @@ public class BD {
 		
 		}
 	}
+	
+	public static List<Carta> cargarInventario(Connection con){
+		String sql = "SELECT * FROM Inventario";
+		List<Carta> listaCarta = new ArrayList<>();
+
+		try {
+			Statement st = con.createStatement();
+			ResultSet rs = st.executeQuery(sql);
+			Carta c = null;
+			while(rs.next()) {
+				String tipo = rs.getString("tipoBienPuesto");
+				String nombre = rs.getString("nombre");
+				Integer puntos = Integer.parseInt(rs.getString("puntos"));
+				Integer coste = Integer.parseInt(rs.getString("coste"));
+				String rutaFoto = rs.getString("rutaFoto");
+				
+				if ( tipo.equals("Jugador") ) { 
+					c = new Jugador(nombre, puntos, coste, rutaFoto);
+				}else {
+					c = new Portero(nombre, puntos, coste, rutaFoto);
+				}
+				
+				listaCarta.add(c);
+			}
+			rs.close();
+			st.close();
+		}catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+
+		
+		return listaCarta;
+		
+	}
+
 	
 	/*
 	 * 	public static void guardarInventario(Connection con, HashMap<String, Carta> mapaInventario){
