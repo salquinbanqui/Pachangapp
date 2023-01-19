@@ -145,6 +145,7 @@ public class RegistrarVentana {
 							//BD.insertarUsuario(con, nick, contra, nombre, apellido, telefono, fechaActual);
 							JOptionPane.showMessageDialog(null, "Usuario registrado correctamente");
 							frame.dispose();
+							//LoginPage page = new LoginPage(null);
 							//LogInVentana.main(null);
 						}else {
 							JOptionPane.showMessageDialog(null, "El telefono solo deberia contener números", "ERROR", JOptionPane.ERROR_MESSAGE);
